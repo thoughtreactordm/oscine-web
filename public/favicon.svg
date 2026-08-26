@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="oscine-badge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb900" />
+      <stop offset="1" stop-color="#e17100" />
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="8" fill="url(#oscine-badge)" />
+  <g transform="translate(4 4)" fill="none" stroke="#451a03" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12h-2c-.894 0-1.662-.857-1.761-2c-.296-3.45-.749-6-2.749-6s-2.5 3.582-2.5 8s-.5 8-2.5 8s-2.452-2.547-2.749-6c-.1-1.147-.867-2-1.763-2h-2" />
+  </g>
+</svg>

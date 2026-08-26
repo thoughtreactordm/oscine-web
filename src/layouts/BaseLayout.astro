@@ -1,0 +1,45 @@
+---
+import '../styles/global.css'
+import AppMain from '../components/AppMain.vue'
+import SiteFooter from '../components/SiteFooter.vue'
+import SiteHeader from '../components/SiteHeader.vue'
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = 'Oscine — a local player for the library you already own',
+  description = 'Oscine is a free local music player for Windows and Linux. Power-user control, a modern interface, and the files already on your disk.'
+} = Astro.props
+
+const canonical = new URL(Astro.url.pathname, Astro.site)
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0c0a09" />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icon.png" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={new URL('/icon.png', Astro.site).href} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-dvh bg-default text-default antialiased">
+    <div class="isolate">
+      <SiteHeader client:load currentPath={Astro.url.pathname} />
+      <AppMain>
+        <slot />
+      </AppMain>
+      <SiteFooter />
+    </div>
+  </body>
+</html>
