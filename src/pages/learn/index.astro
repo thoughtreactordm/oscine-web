@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content'
+import LearnIndex from '../../components/LearnIndex.vue'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const pages = (await getCollection('learn'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((page) => ({
+    id: page.id,
+    title: page.data.title,
+    description: page.data.description,
+    section: page.data.section
+  }))
+---
+
+<BaseLayout
+  title="Learn Oscine"
+  description="How to use Oscine — getting started, Library, Tunedeck, themes, podcasts, and more."
+>
+  <LearnIndex pages={pages} />
+</BaseLayout>
