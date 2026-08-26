@@ -1,0 +1,14 @@
+---
+import HomeLanding from '../components/HomeLanding.vue'
+import PlayerFrame from '../components/PlayerFrame.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { getLatestRelease } from '../data/release'
+
+const release = await getLatestRelease()
+---
+
+<BaseLayout>
+  <HomeLanding release={release}>
+    <PlayerFrame />
+  </HomeLanding>
+</BaseLayout>

@@ -1,0 +1,95 @@
+---
+import { mockAlbums, mockArtists, mockNowPlaying } from '../data/mock-library'
+import Mark from './Mark.vue'
+
+/**
+ * A decorative stand-in for the Oscine shell — enough chrome to feel like the
+ * product until real screenshots land. Not interactive; marketing, not a demo.
+ *
+ * Catalogue is fictional (see mock-library.ts). Covers are Unsplash abstracts.
+ */
+const selectedArtist = mockArtists[0]
+---
+
+<div
+  class="overflow-hidden rounded-2xl border border-default bg-elevated shadow-2xl shadow-black/40"
+  aria-hidden="true"
+>
+  <div class="flex items-center gap-2 border-b border-default px-3 py-2">
+    <div class="flex gap-1.5">
+      <span class="size-2.5 rounded-full bg-neutral-700"></span>
+      <span class="size-2.5 rounded-full bg-neutral-700"></span>
+      <span class="size-2.5 rounded-full bg-neutral-700"></span>
+    </div>
+    <div class="ml-2 flex items-center gap-2">
+      <Mark size="size-5 rounded-md" />
+      <span class="wordmark text-xs text-highlighted">oscine</span>
+    </div>
+    <div class="ml-4 hidden items-center gap-1 text-[11px] font-medium text-muted sm:flex">
+      <span class="rounded-md bg-default px-2 py-0.5 text-highlighted">Library</span>
+      <span class="px-2 py-0.5">Curate</span>
+      <span class="px-2 py-0.5">Podcasts</span>
+    </div>
+    <div class="ml-auto h-6 w-32 rounded-md bg-default/80 text-[10px] leading-6 text-dimmed sm:w-44">
+      <span class="pl-2">Ctrl K</span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-[7rem_1fr] sm:grid-cols-[9rem_1fr]">
+    <aside class="border-r border-default p-3 text-xs">
+      <p class="mb-2 text-[10px] font-semibold uppercase tracking-wider text-dimmed">Artists</p>
+      <ul class="space-y-1 text-muted">
+        {
+          mockArtists.map((artist) => (
+            <li
+              class:list={[
+                'truncate px-2 py-1',
+                artist === selectedArtist && 'rounded-md bg-default text-highlighted'
+              ]}
+            >
+              {artist}
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
+    <div class="p-4">
+      <div class="grid grid-cols-3 gap-3">
+        {
+          mockAlbums.map((album) => (
+            <div class="flex flex-col gap-1.5">
+              <img
+                src={album.cover}
+                alt=""
+                width="200"
+                height="200"
+                class="aspect-square w-full rounded-lg object-cover"
+              />
+              <p class="truncate text-[11px] font-medium text-highlighted">{album.title}</p>
+              <p class="truncate text-[10px] text-muted">{album.artist}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-3 border-t border-default px-3 py-2">
+    <img
+      src={mockNowPlaying.cover}
+      alt=""
+      width="36"
+      height="36"
+      class="size-9 shrink-0 rounded-md object-cover"
+    />
+    <div class="min-w-0 flex-1">
+      <p class="truncate text-xs font-medium text-highlighted">{mockNowPlaying.title}</p>
+      <p class="truncate text-[10px] text-muted">
+        {mockNowPlaying.artist} · {mockNowPlaying.album}
+      </p>
+    </div>
+    <div class="hidden h-1 w-24 rounded-full bg-default sm:block">
+      <div class="h-1 w-2/5 rounded-full bg-primary"></div>
+    </div>
+  </div>
+</div>
