@@ -1,0 +1,18 @@
+---
+description: Consult Nuxt UI MCP before using U* components; one UApp only
+alwaysApply: true
+---
+
+# Nuxt UI
+
+This site uses `@nuxt/ui` as a Vue library (Astro owns routing; `ui({ router: false })`).
+
+Before adding or changing any `U*` component, composable, or App wrapper, query the **Nuxt UI MCP** (`nuxt-ui` in Cursor, `nuxt-ui-remote` in Claude). Do not guess props, slots, or whether a wrapper is required.
+
+## UApp
+
+There is one `UApp`. It wraps the Vue app root — the same pattern as Oscine (`App.vue` → `<UApp><RouterView /></UApp>`).
+
+Never wrap `UApp` inside a leaf island (`SiteHeader`, `DownloadButtons`, page sections). Nested `UApp` is an anti-pattern: duplicate toast/overlay/portal providers.
+
+If an island needs Nuxt UI, it sits under the single root `UApp`, or it uses the Vue plugin from `src/vue-app.ts` without introducing a second App.
