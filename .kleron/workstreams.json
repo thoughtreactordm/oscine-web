@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "workstreams": [
+    {
+      "tag": "W1",
+      "name": "Capture & screenshots",
+      "description": "Reproducible screenshot pipeline under tools/capture/: fictional playable library, CDP shoot script, 2× masters for the 19-shot list, contact sheet for review. Gates the visual content in the other streams.",
+      "color": "amber",
+      "order": 0,
+      "cardCounter": 5
+    },
+    {
+      "tag": "W2",
+      "name": "Site design & pages",
+      "description": "Layout and structure work on oscine.app: Home rewrite, new Features page, Download extensions (real asset model, checksums, requirements), Changelog page, nav/footer, sitemap and OG. Layout can start on placeholder frames; final shots come from the Capture stream.",
+      "color": "sky",
+      "order": 1,
+      "cardCounter": 6
+    },
+    {
+      "tag": "W3",
+      "name": "Learn & documentation",
+      "description": "How-to content: drift pass on the eight existing Learn articles against the app at rc.3, two new articles (Tools: editing tags; Keyboard & shortcuts), release-notes post-processing and the hand-written 1.0.0 notes. Runs in parallel with the design stream; only screenshot slots depend on Capture.",
+      "color": "green",
+      "order": 2,
+      "cardCounter": 5
+    },
+    {
+      "tag": "W4",
+      "name": "Release & polish",
+      "description": "Everything that lands after the pages exist: drift fixes from the design doc §6, American-spelling sweep, retire PlayerFrame/mock-library, Vercel deploy hook from the app's release workflow, voice pass against the tells list, final read-through of every page.",
+      "color": "rose",
+      "order": 3,
+      "cardCounter": 6
+    }
+  ],
+  "config": {
+    "typeName": "Workstream",
+    "typeInitial": "W",
+    "numberingModel": "integer",
+    "forceAssignment": true
+  }
+}
