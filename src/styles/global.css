@@ -2,6 +2,7 @@
 @import '@fontsource-variable/roboto';
 @import 'tailwindcss';
 @import '@nuxt/ui';
+@import './ui-colors.css';
 
 @source '../**/*.{astro,vue,ts,md}';
 
@@ -15,6 +16,15 @@ html.dark {
 
 body {
   font-family: 'Roboto Variable', system-ui, sans-serif;
+}
+
+/* Mark.vue — kept here so the fills are in the CSS bundle, not the island's JS. */
+.oscine-mark__disc {
+  fill: var(--ui-primary);
+}
+
+.oscine-mark__wave {
+  fill: var(--ui-text-inverted);
 }
 
 .wordmark {

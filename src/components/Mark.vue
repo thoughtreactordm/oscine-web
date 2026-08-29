@@ -8,6 +8,10 @@
  * disc takes `--ui-primary` and the wave `--ui-text-inverted`, exactly as the
  * app themes it. The disc fills the square, so the mark is a full circle at any
  * size; size it from the outside with the `size` prop.
+ *
+ * The fills live in `styles/global.css`, not a scoped block: Astro ships an
+ * island's scoped styles inside its JS chunk, which left the mark black until
+ * the header hydrated.
  */
 withDefaults(
   defineProps<{
@@ -33,13 +37,3 @@ withDefaults(
     </g>
   </svg>
 </template>
-
-<style scoped>
-.oscine-mark__disc {
-  fill: var(--ui-primary);
-}
-
-.oscine-mark__wave {
-  fill: var(--ui-text-inverted);
-}
-</style>

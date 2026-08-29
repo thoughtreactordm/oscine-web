@@ -3,6 +3,10 @@ import '../styles/global.css'
 import AppMain from '../components/AppMain.vue'
 import SiteFooter from '../components/SiteFooter.vue'
 import SiteHeader from '../components/SiteHeader.vue'
+// Preload the latin faces so text does not paint in the fallback font first
+// (fontsource declares them with font-display: swap).
+import robotoLatin from '@fontsource-variable/roboto/files/roboto-latin-wght-normal.woff2?url'
+import soraLatin from '@fontsource-variable/sora/files/sora-latin-wght-normal.woff2?url'
 
 interface Props {
   title?: string
@@ -27,6 +31,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site)
     <link rel="canonical" href={canonical.href} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/icon.png" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={robotoLatin} />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={soraLatin} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
