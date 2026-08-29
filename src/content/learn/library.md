@@ -15,13 +15,13 @@ Edits you make in Oscine (tag corrections, favorites) live in Oscine. They do no
 
 ## Browsing
 
-Filter by folder, artist, or album. The song list can group by album, with cover art in the header — density and art size are Interface settings.
+Filter by folder, artist, or album. The song list can group by album, with cover art in the header; density and art size are Interface settings.
 
 Search is substring over title, artist, and album. The command palette is the faster jump when you know the name.
 
 ## Columns and selection
 
-The song list is sortable. Shift and Ctrl select the way a desktop list should. What a double-click does — play now, play next, queue, or add to the open playlist — is yours to set.
+The song list is sortable. Shift and Ctrl select the way a desktop list should. What a double-click does (play now, play next, queue, or add to the open playlist) is yours to set.
 
 ## Loudness and format
 

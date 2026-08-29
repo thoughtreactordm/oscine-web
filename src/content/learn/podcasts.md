@@ -1,6 +1,6 @@
 ---
 title: Podcasts
-description: Subscribe, download, then play — a separate library from your music.
+description: Subscribe, download, then play. A library separate from your music.
 order: 6
 section: App
 ---

@@ -1,6 +1,6 @@
 ---
 title: Tunedeck
-description: The right-hand drawer — artist, track, related, and what’s playing.
+description: The right-hand drawer for artist, track, related, and what’s playing.
 order: 4
 section: App
 ---
@@ -23,7 +23,7 @@ Listening totals for the song and the album, the file’s format, the ReplayGain
 
 ## Related
 
-The rest of the album, then looser connections — shared genre, year, or folder. Double-click queues. Nothing here interrupts what is already playing.
+The rest of the album, then looser connections: shared genre, year, or folder. Double-click queues. Nothing here interrupts what is already playing.
 
 ## Playing
 

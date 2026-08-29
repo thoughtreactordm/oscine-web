@@ -1,6 +1,6 @@
 ---
 title: Getting started
-description: Install Oscine, add a music folder, and put a record on.
+description: Install Oscine, add a music folder, and start listening.
 order: 1
 section: Start
 ---
@@ -19,14 +19,14 @@ A watcher keeps the library in step when you add or remove files outside the app
 
 ## Find something and play it
 
-The Library tab is artist, album, and song. Double-click a song to play it (that gesture is configurable). Double-click an artist or album to play the lot.
+The Library tab is artist, album, and song. Double-click a song to play it (that gesture is configurable). Double-click an artist or album to play all of it.
 
-**Ctrl+K** opens the command palette from anywhere — views, albums, artists, playlists, tracks, subscribed shows, and settings.
+**Ctrl+K** opens the command palette from anywhere: views, albums, artists, playlists, tracks, subscribed shows, and settings.
 
 ## Optional, later
 
 - **Online lookups** (Settings → Network) fetch artist biographies and relations for the Tunedeck, and let Podcast Discover browse Apple’s catalogue. Off by default.
 - **Last.fm / ListenBrainz** if you scrobble.
-- **Podcasts** if you want shows next to the library. They download, then play — they are not mixed into your music list.
+- **Podcasts** if you want shows next to the library. They download, then play, and are not mixed into your music list.
 
 More in [Library](/learn/library), [Tunedeck](/learn/tunedeck), and [Themes](/learn/themes).

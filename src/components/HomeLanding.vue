@@ -18,19 +18,19 @@ const alignStart = {
 
 const pillars = [
   {
-    title: 'A library, not a feed',
+    title: 'Your whole library',
     description:
-      'Point Oscine at your folders. Browse by artist, album, and song. Search is instant. It handles whatever library you throw at it.'
+      'Point Oscine at your folders and browse by artist, album, and song. Search is instant, and it stays fast no matter how large your collection gets.'
   },
   {
-    title: 'Queue like you mean it',
+    title: 'Playlists and a real queue',
     description:
-      'Playlists you keep, an up-next you can edit, shuffle that does not vandalise what you queued by hand. Gapless or crossfade — you pick, per album if you want.'
+      'Playlists you keep and an up-next you can edit. Shuffle leaves the tracks you queued by hand in place. Choose gapless or crossfade, per album if you want.'
   },
   {
-    title: 'Loudness that behaves',
+    title: 'Even loudness',
     description:
-      'ReplayGain when the tags are there, measured in the background when they are not. Records stay records. Playlists do not jump 8 dB between tracks.'
+      'ReplayGain is applied when the tags are there and measured in the background when they are not. Albums keep their dynamics, and playlists do not lurch in volume between tracks.'
   }
 ]
 
@@ -77,13 +77,13 @@ const features: PageFeatureProps[] = [
     icon: 'i-tabler-layout-sidebar-right',
     title: 'Tunedeck',
     description:
-      'Who made this, what the file actually is, what’s up next, and related music you already own. A drawer you open and leave open.'
+      'Who made this, what the file is, what’s up next, and related music you already own. A drawer you can open and leave open.'
   },
   {
     icon: 'i-tabler-palette',
     title: 'Themes you can author',
     description:
-      'Oscine, Nocturne, and High Contrast out of the box. A token editor for colour, type, and motion — plus an accent that can follow the cover.'
+      'Oscine, Nocturne, and High Contrast out of the box, plus a token editor for colour, type, and motion. The accent can follow the current cover.'
   },
   {
     icon: 'i-tabler-terminal-2',
@@ -95,19 +95,19 @@ const features: PageFeatureProps[] = [
     icon: 'i-tabler-sparkles',
     title: 'Discover you can explain',
     description:
-      'Shelves built from your library and what you actually listened to. Named recipes, not a model. Same day, same shelves — and a one-line why on every card.'
+      'Shelves built from your library and your listening history. Named recipes instead of a black box, stable through the day, with a one-line reason on every card.'
   },
   {
     icon: 'i-tabler-microphone',
     title: 'Podcasts, on disk',
     description:
-      'Subscribe, download, then play. Episodes live beside your music without pretending they are tracks in the same library.'
+      'Subscribe, download, then play. Episodes live alongside your music without being mixed into the same library.'
   },
   {
     icon: 'i-tabler-chart-histogram',
     title: 'Stats that remember',
     description:
-      'A listening log that survives a folder reorganise. Top artists, albums, and the hours — for any range you ask.'
+      'A listening log that survives a folder reorganise. Top artists, albums, and hours for any range you choose.'
   }
 ]
 </script>
@@ -115,8 +115,8 @@ const features: PageFeatureProps[] = [
 <template>
   <UPageHero
     headline="Local music player"
-    title="Your library deserves a better player."
-    description="Oscine is for people who already keep a real collection — folders on disk, playlists that mean something, a player that still lets you drive. Power-user control. A modern interface."
+    title="A better player for the music you own."
+    description="Oscine is for people who already keep a real collection: folders on disk, playlists they built themselves, tags they care about. It gives you power-user control in a modern interface."
     orientation="horizontal"
     :ui="alignStart"
   >
@@ -139,7 +139,7 @@ const features: PageFeatureProps[] = [
 
   <UPageSection
     title="Built for the way you already listen."
-    description="If you came from foobar, fooyin, MusicBee, or a folder and a prayer, you already know what you want. Oscine keeps the control and drops the chrome from 2004."
+    description="If you came from foobar2000, fooyin, MusicBee, or a folder full of files, you already know what you want. Oscine keeps that control and gives it a modern interface."
     class="border-t border-default"
     :ui="alignStart"
   >
@@ -158,7 +158,7 @@ const features: PageFeatureProps[] = [
 
   <UPageSection
     headline="Tunedeck"
-    title="The drawer power users open and leave open."
+    title="One drawer for everything about what's playing."
     orientation="horizontal"
     class="border-t border-default bg-elevated/40"
     :ui="alignStart"
@@ -166,13 +166,12 @@ const features: PageFeatureProps[] = [
   >
     <template #description>
       <p>
-        Artist, track, related, playing. Biography and line-ups when you want them. Format,
-        ReplayGain, and the decode path when you are curious. Up next and a trail of what you just
-        heard. Related music is matched against <em>your</em> library — not a catalogue you do not
-        own.
+        Four tabs: artist, track, related, and playing. A biography and line-ups, the file's format
+        and ReplayGain, what's up next, and a trail of what you just heard. Related music is matched
+        against <em>your</em> library, not a catalogue you will never own.
       </p>
       <p class="mt-4 text-sm">
-        Online lookups are opt-in. Decline them and every local pane still works.
+        Online lookups are optional. Turn them off and every local pane still works.
       </p>
     </template>
 
@@ -202,9 +201,9 @@ const features: PageFeatureProps[] = [
         </div>
         <USeparator />
         <ul class="space-y-2 text-sm text-muted">
-          <li>In your library — {{ albumCountFor(mockNowPlaying.artist) }} albums</li>
+          <li>In your library: {{ albumCountFor(mockNowPlaying.artist) }} albums</li>
           <li>Members matched to artists you own</li>
-          <li>Up next — 12 in the queue</li>
+          <li>Up next: 12 in the queue</li>
         </ul>
       </div>
     </UPageCard>
@@ -212,7 +211,7 @@ const features: PageFeatureProps[] = [
 
   <UPageSection
     title="Make it look like yours."
-    description="Three shipped themes, each with light and dark. A token editor when you want to go further. Reactive colour pulls an accent from whatever is playing — until you set one yourself."
+    description="Three built-in themes, each with a light and dark variant, and a token editor when you want to go further. Reactive colour pulls an accent from the current cover until you set one yourself."
     class="border-t border-default"
     :ui="alignStart"
     :links="themeLinks"
@@ -241,21 +240,20 @@ const features: PageFeatureProps[] = [
   >
     <div class="space-y-4 text-muted">
       <p>
-        A streaming catalogue is a lease. Tracks vanish overnight. Playlists you spent years on rot
-        when a label pulls a master. The artist on the other end of that stream sees a fraction of a
-        cent.
+        A streaming catalogue is a lease. Tracks disappear overnight, and playlists you spent years
+        on break when a label pulls a master. The artist on the other end sees a fraction of a cent.
       </p>
       <p>
-        If you bought the record, ripped the CD, or paid the Bandcamp total, that library is already
-        paid for. Oscine plays those files. No account. No disappearing catalogue. No cut of a listen
-        that already belongs to you.
+        If you bought the record, ripped the CD, or paid for the Bandcamp download, that music is
+        already yours. Oscine plays those files, with no account and no catalogue that can vanish out
+        from under you.
       </p>
     </div>
   </UPageSection>
 
   <UPageSection
-    title="Everything in reach."
-    description="Quick Menu on Now Playing for favorite playlists, recent additions, and favorite artists. Last.fm and ListenBrainz when you want the scrobble. A settings surface you can search."
+    title="Everything within reach."
+    description="A Quick Menu on Now Playing for your favorite playlists, recent additions, and favorite artists. Last.fm and ListenBrainz for scrobbling. Settings you can search."
     class="border-t border-default bg-elevated/40"
     :ui="alignStart"
     :features="features"
@@ -265,7 +263,7 @@ const features: PageFeatureProps[] = [
     variant="naked"
     class="rounded-none border-t border-default"
     title="Get Oscine."
-    description="Free for Windows and Linux. Oscine is new — download it, point it at a folder, and put a record on."
+    description="Free for Windows and Linux. Download it, point it at a folder, and start playing."
     :ui="alignStart"
   >
     <template #body>

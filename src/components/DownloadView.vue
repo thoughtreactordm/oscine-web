@@ -34,10 +34,7 @@ defineProps<{
       </UPageGrid>
 
       <div class="space-y-4 text-sm text-muted">
-        <p>
-          macOS is not a target. Oscine is new — if something is rough, that is the honest version of
-          “we just shipped this,” not a warning that it is a toy.
-        </p>
+        <p>macOS is not a target. Oscine is built for Windows and Linux.</p>
         <p>
           Checksums and previous versions live on
           <ULink :to="RELEASES_URL" target="_blank">GitHub Releases</ULink>.
