@@ -3,9 +3,6 @@
     "nuxt-ui": {
       "type": "http",
       "url": "https://ui.nuxt.com/mcp"
-    },
-    "kleron": {
-      "url": "http://127.0.0.1:38965/mcp/88ca7fe7-b6aa-47cc-b4f5-0cf20c2c201a"
     }
   }
 }
