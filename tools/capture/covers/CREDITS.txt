@@ -2,9 +2,11 @@ Mock album art. Unsplash License: https://unsplash.com/license
 Downloaded and hosted here (not hotlinked). Attribution is not required;
 listed so we can replace a file without losing provenance.
 
-owned-until-revoked.jpg     Milad Fakurian   https://unsplash.com/photos/E8Ufcyxz514
-catalogue-of-absences.jpg   Unsplash         https://images.unsplash.com/photo-1579546929518-9e396f3cc809
-premium-silence.jpg         Luke Chesser     https://unsplash.com/photos/eICUFSeirc0
-shuffle-never-ends.jpg      Unsplash         https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d
-the-long-tail.jpg           Unsplash         https://images.unsplash.com/photo-1620641788421-7a1c342ea42e
-files-we-used-to-have.jpg   Unsplash         https://images.unsplash.com/photo-1557683316-973673baf926
+Every album and podcast cover is a 1000×1000 crop derived from
+covers/sources.json (photographs — landscapes, architecture, textures;
+no 3D/gradient abstracts and no identifiable people). Raw downloads
+cache in covers/sources/ (gitignored). Photographer and page for each
+source live in that catalog.
+
+The six named JPEG files in this folder are leftovers from the site's
+mock-library fixture and are not used by make-library.mjs.

@@ -14,12 +14,17 @@
  *   DIR/podcasts/<slug>/{feed.xml,cover.jpg,NN-slug.mp3}  → serve with serve.mjs
  *   DIR/manifest.json                        (what was generated; used by shoot.mjs)
  *
+ * Covers: every album and podcast gets a 1000×1000 crop from
+ * covers/sources.json (photographic Unsplash). A generated gradient is only
+ * the last-resort fallback if a download fails. Oscine prefers embedded art,
+ * so a cover refresh re-embeds into existing FLAC/MP3 without re-encoding audio.
+ *
  * Requires ffmpeg (flac, libmp3lame, libopus, libvorbis) and metaflac. Existing
- * files are skipped unless --force, so re-runs are cheap.
+ * audio files are skipped unless --force, so re-runs are cheap.
  */
 import { spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { access, copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises'
+import { access, mkdir, readFile, rename, stat, writeFile } from 'node:fs/promises'
 import { cpus, homedir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -39,6 +44,9 @@ const HOST = `http://127.0.0.1:${PORT}`
 const FEED_ANCHOR = Date.UTC(2026, 7, 1) // episodes dated weekly back from 1 Aug 2026
 
 const lib = JSON.parse(await readFile(join(here, 'library.json'), 'utf8'))
+const sourceCatalog = JSON.parse(await readFile(join(here, 'covers/sources.json'), 'utf8'))
+const sourceDir = join(here, 'covers', 'sources')
+const usedPhotos = new Set()
 
 // ---------------------------------------------------------------- helpers
 
@@ -115,15 +123,42 @@ function mixFilter(r, extra = '') {
 
 // ------------------------------------------------------------------ covers
 
-async function makeCover(dest, key, label) {
-  if (!FORCE && await exists(dest)) return 'kept'
+function pickPhoto(key, used) {
+  const photos = sourceCatalog.photos
+  if (!photos?.length) return null
+  const h = hashBytes('source/' + key)
+  const start = h.readUInt16BE(0) % photos.length
+  for (let i = 0; i < photos.length; i++) {
+    const photo = photos[(start + i) % photos.length]
+    if (!used.has(photo.id)) {
+      used.add(photo.id)
+      return photo
+    }
+  }
+  return photos[start]
+}
+
+async function downloadTo(url, dest) {
+  const res = await fetch(url, { headers: { 'User-Agent': 'oscine-web-capture/1.0' }, redirect: 'follow' })
+  if (!res.ok) throw new Error(`GET ${url} → HTTP ${res.status}`)
+  await writeFile(dest, Buffer.from(await res.arrayBuffer()))
+}
+
+async function ensureSource(photo) {
+  await mkdir(sourceDir, { recursive: true })
+  const dest = join(sourceDir, `${photo.id}.jpg`)
+  if (await exists(dest)) return dest
+  await downloadTo(`https://unsplash.com/photos/${photo.id}/download?force=true&w=1400`, dest)
+  return dest
+}
+
+async function gradientCover(dest, key, label) {
   const h = hashBytes('cover/' + key)
   const hue = h[0] * 360 / 255
   const type = ['linear', 'radial', 'circular', 'spiral'][h[1] % 4]
   const c0 = hsl(hue, 0.55 + (h[2] % 30) / 100, 0.18 + (h[3] % 15) / 100)
   const c1 = hsl((hue + 30 + h[4] % 60) % 360, 0.6, 0.45 + (h[5] % 20) / 100)
   const c2 = hsl((hue + 180 + h[6] % 40) % 360, 0.5, 0.3 + (h[7] % 25) / 100)
-  // coordinates stay inside the 1000px canvas: 0–800 for the start, 200–1000 for the end
   const pt = (b) => (b % 201) * 4
   const src = `gradients=s=1000x1000:c0=${c0}:c1=${c1}:c2=${c2}:nb_colors=3:type=${type}:seed=${h.readUInt16BE(8)}:x0=${pt(h[10])}:y0=${pt(h[11])}:x1=${1000 - pt(h[12])}:y1=${1000 - pt(h[13])}`
   const grain = 12 + (h[14] % 18)
@@ -132,6 +167,50 @@ async function makeCover(dest, key, label) {
     '-vf', `noise=alls=${grain}:allf=u,vignette=PI/${4 + h[15] % 3},format=yuvj420p`,
     '-frames:v', '1', '-q:v', '3', dest])
   return 'generated'
+}
+
+async function deriveCover(dest, sourcePath, key) {
+  const h = hashBytes('cover/' + key)
+  const contrast = (1.04 + (h[0] % 8) / 100).toFixed(2)
+  const sat = (1.04 + (h[1] % 12) / 100).toFixed(2)
+  const vf = `scale=1000:1000:force_original_aspect_ratio=increase,crop=1000:1000,eq=contrast=${contrast}:saturation=${sat},vignette=PI/6,format=yuvj420p`
+  if (DRY) return 'would derive'
+  await run('ffmpeg', ['-y', '-loglevel', 'error', '-i', sourcePath,
+    '-vf', vf, '-frames:v', '1', '-q:v', '3', dest])
+  return 'derived'
+}
+
+async function makeCover(dest, key, label, photo) {
+  if (photo) {
+    if (DRY) return 'would derive'
+    try {
+      const sourcePath = await ensureSource(photo)
+      return await deriveCover(dest, sourcePath, key)
+    } catch (error) {
+      console.warn(`cover source ${photo.id} failed (${error.message}); falling back to a generated abstract`)
+    }
+  }
+  if (!FORCE && await exists(dest)) return 'kept'
+  return gradientCover(dest, key, label)
+}
+
+async function reembedCover(file, coverPath, fmt) {
+  if (fmt === 'flac') {
+    try { await run('metaflac', ['--remove', '--block-type=PICTURE', file]) } catch { /* no existing picture */ }
+    await run('metaflac', [`--import-picture-from=3||Album cover||${coverPath}`, file])
+    return
+  }
+  if (fmt === 'mp3') {
+    const tmp = `${file}.new.mp3`
+    await run('ffmpeg', [
+      '-y', '-loglevel', 'error', '-i', file, '-i', coverPath,
+      '-map', '0:a', '-map', '1:v', '-c', 'copy', '-map_metadata', '0',
+      '-id3v2_version', '3', '-disposition:v', 'attached_pic',
+      '-metadata:s:v', 'title=Album cover', '-metadata:s:v', 'comment=Cover (front)',
+      tmp
+    ])
+    await rename(tmp, file)
+  }
 }
 
 // ------------------------------------------------------------------ tracks
@@ -146,17 +225,26 @@ function tracksOf(album) {
   return out
 }
 
-async function encodeTrack({ artist, album, track, dir, coverPath }) {
+async function encodeTrack({ artist, album, track, dir, coverPath, coverRefreshed }) {
   const fmt = album.format || 'flac'
   const hires = !!album.hires
   const rate = hires ? 48000 : 44100
   const ext = { flac: 'flac', mp3: 'mp3', opus: 'opus', ogg: 'ogg' }[fmt]
   const prefix = track.discs > 1 ? `${track.disc}-${pad2(track.n)}` : pad2(track.n)
   const file = join(dir, `${prefix} ${safe(track.title)}.${ext}`)
-  if (!FORCE && await exists(file)) return { file, status: 'kept' }
+  if (!FORCE && await exists(file)) {
+    if (coverRefreshed && !DRY && (fmt === 'flac' || fmt === 'mp3')) {
+      await reembedCover(file, coverPath, fmt)
+      return { file, status: 're-covered' }
+    }
+    return { file, status: 'kept' }
+  }
   if (DRY) return { file, status: 'would encode' }
 
   const r = recipe(`${artist.name}/${album.title}/${track.disc}/${track.title}`)
+  // One designated capture lead is long enough for the agreed ~1:10 player
+  // state. Every ordinary library track keeps the 20–40 s fast-listen fixture.
+  if (Number.isFinite(track.duration) && track.duration > 0) r.dur = track.duration
   const meta = [
     ['title', track.title],
     ['artist', track.artist || artist.name],
@@ -202,7 +290,7 @@ async function makePodcast(show) {
   const dir = join(OUT, 'podcasts', show.slug)
   await mkdir(dir, { recursive: true })
   const cover = join(dir, 'cover.jpg')
-  const coverStatus = await makeCover(cover, `podcast/${show.slug}`, show.title)
+  const coverStatus = await makeCover(cover, `podcast/${show.slug}`, show.title, pickPhoto(`podcast/${show.slug}`, usedPhotos))
   const items = []
   for (const [i, ep] of show.episodes.entries()) {
     const file = join(dir, `${pad2(i + 1)}-${slug(ep.title)}.mp3`)
@@ -282,27 +370,27 @@ for (const artist of artists) {
 
 // covers first (tracks embed them), then tracks in parallel
 const failures = []
-const coverStats = { kept: 0, copied: 0, generated: 0 }
+const coverStats = { kept: 0, copied: 0, derived: 0, generated: 0 }
+const refreshedCovers = new Set()
 for (const { artist, album, dir, coverPath } of albums) {
   await mkdir(dir, { recursive: true })
-  if (album.cover) {
-    if (FORCE || !(await exists(coverPath))) { if (!DRY) await copyFile(join(here, 'covers', album.cover), coverPath); coverStats.copied++ } else coverStats.kept++
-  } else {
-    try {
-      const s = await makeCover(coverPath, `${artist.name}/${album.title}`, album.title)
-      coverStats[s === 'kept' ? 'kept' : 'generated']++
-    } catch (e) {
-      failures.push({ job: `${artist.name} / ${album.title} / cover`, error: e.message })
-    }
+  try {
+    const s = await makeCover(coverPath, `${artist.name}/${album.title}`, album.title, pickPhoto(`${artist.name}/${album.title}`, usedPhotos))
+    const bucket = s === 'kept' ? 'kept' : s === 'derived' || s === 'would derive' ? 'derived' : 'generated'
+    coverStats[bucket]++
+    if (bucket !== 'kept') refreshedCovers.add(coverPath)
+    if (bucket === 'derived') process.stdout.write(`cover ${coverStats.derived}: ${album.title}\r`)
+  } catch (e) {
+    failures.push({ job: `${artist.name} / ${album.title} / cover`, error: e.message })
   }
 }
-console.log(`covers: ${coverStats.copied} copied, ${coverStats.generated} generated, ${coverStats.kept} kept`)
+console.log(`covers: ${coverStats.copied} copied, ${coverStats.derived} derived, ${coverStats.generated} generated, ${coverStats.kept} kept`)
 
 let done = 0
-const trackStats = { kept: 0, encoded: 0, 'would encode': 0 }
+const trackStats = { kept: 0, encoded: 0, 'would encode': 0, 're-covered': 0 }
 const results = await pmap(jobs, JOBS, async (job) => {
   try {
-    const r = await encodeTrack(job)
+    const r = await encodeTrack({ ...job, coverRefreshed: refreshedCovers.has(job.coverPath) })
     trackStats[r.status]++
     if (++done % 25 === 0 || done === jobs.length) process.stdout.write(`tracks: ${done}/${jobs.length}\r`)
     return r
@@ -311,7 +399,7 @@ const results = await pmap(jobs, JOBS, async (job) => {
     return null
   }
 })
-console.log(`\ntracks: ${trackStats.encoded} encoded, ${trackStats.kept} kept${DRY ? `, ${trackStats['would encode']} would encode` : ''}`)
+console.log(`\ntracks: ${trackStats.encoded} encoded, ${trackStats['re-covered']} re-covered, ${trackStats.kept} kept${DRY ? `, ${trackStats['would encode']} would encode` : ''}`)
 
 // ReplayGain for flagged FLAC albums (album + track gain via metaflac)
 let rg = 0

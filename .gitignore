@@ -8,3 +8,4 @@ dist/
 Thumbs.db
 auto-imports.d.ts
 components.d.ts
+tools/capture/covers/sources/

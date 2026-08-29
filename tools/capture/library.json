@@ -1,5 +1,5 @@
 {
-  "$comment": "Fictional capture library for oscine.app screenshots. Names are invented and rib streaming-service tropes (see docs/1.0-site-release.md §5.1). No real bands, services, or trademarks. Formats: flac (default), mp3, opus, ogg. `hires` = 48 kHz / 24-bit. `replaygain` = tag with metaflac (FLAC only); untagged albums exercise the app's own scanner. `cover` names a file in tools/capture/covers/; albums without one get a generated abstract. Tracks may be strings or { title, artist } for compilations. `discs` splits tracks across discs.",
+  "$comment": "Fictional capture library for oscine.app screenshots. Names are invented and rib streaming-service tropes (see docs/1.0-site-release.md §5.1). No real bands, services, or trademarks. Formats: flac (default), mp3, opus, ogg. `hires` = 48 kHz / 24-bit. `replaygain` = tag with metaflac (FLAC only); untagged albums exercise the app's own scanner. Every album cover is a 1000×1000 crop from covers/sources.json (photographic Unsplash), falling back to a generated abstract only if a download fails. Tracks may be strings or { title, artist, duration }; the one 100-second capture lead supports the agreed 1:10 playhead while ordinary tracks remain 20–40 seconds. `discs` splits tracks across discs.",
   "artists": [
     {
       "name": "Residual Royalty",
@@ -9,9 +9,8 @@
           "title": "Owned Until Revoked",
           "year": 2019,
           "replaygain": true,
-          "cover": "owned-until-revoked.jpg",
           "tracks": [
-            "Now Playing (For Now)",
+            { "title": "Now Playing (For Now)", "duration": 100 },
             "Licensed, Not Sold",
             "Read-Only Heart",
             "Buy Button (Greyed Out)",
@@ -60,7 +59,6 @@
         {
           "title": "Premium Silence",
           "year": 2017,
-          "cover": "premium-silence.jpg",
           "tracks": [
             "Ad-Free",
             "Silence, Upgraded",
@@ -112,7 +110,6 @@
           "title": "A Catalogue of Absences",
           "year": 2018,
           "replaygain": true,
-          "cover": "catalogue-of-absences.jpg",
           "tracks": [
             "Not Available in Your Region",
             "Greyed Out",
@@ -150,7 +147,6 @@
           "title": "Shuffle Never Ends",
           "year": 2016,
           "format": "mp3",
-          "cover": "shuffle-never-ends.jpg",
           "tracks": [
             "Thirty Seconds",
             "Skip",
@@ -205,7 +201,6 @@
           "year": 2014,
           "hires": true,
           "replaygain": true,
-          "cover": "files-we-used-to-have.jpg",
           "tracks": [
             "Ripped From the Disc",
             "Track 01 (Unknown Artist)",
@@ -310,7 +305,6 @@
           "title": "The Long Tail",
           "year": 2021,
           "replaygain": true,
-          "cover": "the-long-tail.jpg",
           "tracks": [
             "The Long Tail",
             "Ten Streams a Year",

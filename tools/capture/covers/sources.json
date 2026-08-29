@@ -1,0 +1,361 @@
+{
+  "$comment": "Photographic Unsplash License sources for capture-library album art. No 3D/gradient abstracts and no identifiable people. make-library.mjs downloads each id to covers/sources/ and derives a 1000×1000 JPEG.",
+  "license": "https://unsplash.com/license",
+  "photos": [
+    {
+      "id": "3ra4vvMRD5g",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/3ra4vvMRD5g"
+    },
+    {
+      "id": "agpC2vc30kU",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/agpC2vc30kU"
+    },
+    {
+      "id": "c0Y6ZvYwSTE",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/c0Y6ZvYwSTE"
+    },
+    {
+      "id": "CyJNc0u4sS8",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/CyJNc0u4sS8"
+    },
+    {
+      "id": "DIn1sNe9G8A",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/DIn1sNe9G8A"
+    },
+    {
+      "id": "dLXMJnyyU5E",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/dLXMJnyyU5E"
+    },
+    {
+      "id": "DUJbdNmiFzQ",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/DUJbdNmiFzQ"
+    },
+    {
+      "id": "EOxjGrpq4is",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/EOxjGrpq4is"
+    },
+    {
+      "id": "EVeCOMn_TJo",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/EVeCOMn_TJo"
+    },
+    {
+      "id": "FZgG4TnC-vU",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/FZgG4TnC-vU"
+    },
+    {
+      "id": "GlZa6XiRJf4",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/GlZa6XiRJf4"
+    },
+    {
+      "id": "KJJ9tpsB-x8",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/KJJ9tpsB-x8"
+    },
+    {
+      "id": "lyLEiAIb9gI",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/lyLEiAIb9gI"
+    },
+    {
+      "id": "MJ5WfnujRec",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/MJ5WfnujRec"
+    },
+    {
+      "id": "nqvqYN1Jtvw",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/nqvqYN1Jtvw"
+    },
+    {
+      "id": "rAIykuPO5Gs",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/rAIykuPO5Gs"
+    },
+    {
+      "id": "wDapvZluc1w",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/wDapvZluc1w"
+    },
+    {
+      "id": "RwHv7LgeC7s",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/RwHv7LgeC7s"
+    },
+    {
+      "id": "X7RUQSjQv0k",
+      "photographer": "Johannes Plenio",
+      "page": "https://unsplash.com/photos/X7RUQSjQv0k"
+    },
+    {
+      "id": "01_igFr7hd4",
+      "photographer": "Qingbao Meng",
+      "page": "https://unsplash.com/photos/01_igFr7hd4"
+    },
+    {
+      "id": "4rDCa5hBlCs",
+      "photographer": "Casey Horner",
+      "page": "https://unsplash.com/photos/4rDCa5hBlCs"
+    },
+    {
+      "id": "1Z2niiBPg5A",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/1Z2niiBPg5A"
+    },
+    {
+      "id": "yC-Yzbqy7PY",
+      "photographer": "Alejandro Escamilla",
+      "page": "https://unsplash.com/photos/yC-Yzbqy7PY"
+    },
+    {
+      "id": "Q1p7bh3SHj8",
+      "photographer": "NASA",
+      "page": "https://unsplash.com/photos/Q1p7bh3SHj8"
+    },
+    {
+      "id": "hFzIoD0F_i8",
+      "photographer": "Luca Bravo",
+      "page": "https://unsplash.com/photos/hFzIoD0F_i8"
+    },
+    {
+      "id": "K2s_YE031CA",
+      "photographer": "Mark Harpur",
+      "page": "https://unsplash.com/photos/K2s_YE031CA"
+    },
+    {
+      "id": "TFyi0QOx08c",
+      "photographer": "Jay Mantri",
+      "page": "https://unsplash.com/photos/TFyi0QOx08c"
+    },
+    {
+      "id": "2Hzmz15wGik",
+      "photographer": "Pine Watt",
+      "page": "https://unsplash.com/photos/2Hzmz15wGik"
+    },
+    {
+      "id": "IicyiaPYGGI",
+      "photographer": "Enrico",
+      "page": "https://unsplash.com/photos/IicyiaPYGGI"
+    },
+    {
+      "id": "j3f1lwXBuAI",
+      "photographer": "Patrick Untersee",
+      "page": "https://unsplash.com/photos/j3f1lwXBuAI"
+    },
+    {
+      "id": "6a3nqQ1YwBw",
+      "photographer": "Annie Spratt",
+      "page": "https://unsplash.com/photos/6a3nqQ1YwBw"
+    },
+    {
+      "id": "DbwYNr8RPbg",
+      "photographer": "Resul Mentes",
+      "page": "https://unsplash.com/photos/DbwYNr8RPbg"
+    },
+    {
+      "id": "MS9Tnh3if1o",
+      "photographer": "Kiwihug",
+      "page": "https://unsplash.com/photos/MS9Tnh3if1o"
+    },
+    {
+      "id": "oKfcrzCM9og",
+      "photographer": "Marcel Strauss",
+      "page": "https://unsplash.com/photos/oKfcrzCM9og"
+    },
+    {
+      "id": "0ZPSX_mQ3xI",
+      "photographer": "Annie Spratt",
+      "page": "https://unsplash.com/photos/0ZPSX_mQ3xI"
+    },
+    {
+      "id": "75xPHEQBmvA",
+      "photographer": "Jean Philippe Delberghe",
+      "page": "https://unsplash.com/photos/75xPHEQBmvA"
+    },
+    {
+      "id": "15o6ehQKTlw",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/15o6ehQKTlw"
+    },
+    {
+      "id": "1xfpfBIlBqY",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/1xfpfBIlBqY"
+    },
+    {
+      "id": "75bLBh8ayLg",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/75bLBh8ayLg"
+    },
+    {
+      "id": "9nlHI2cP4mY",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/9nlHI2cP4mY"
+    },
+    {
+      "id": "aol4kOy14oA",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/aol4kOy14oA"
+    },
+    {
+      "id": "e7jH9TL9WcM",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/e7jH9TL9WcM"
+    },
+    {
+      "id": "fouPZ1vYrmw",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/fouPZ1vYrmw"
+    },
+    {
+      "id": "FWdg-4xVnPc",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/FWdg-4xVnPc"
+    },
+    {
+      "id": "I8xgaf3LKm0",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/I8xgaf3LKm0"
+    },
+    {
+      "id": "IHod8g3HgUs",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/IHod8g3HgUs"
+    },
+    {
+      "id": "ixg_Q1jceEA",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/ixg_Q1jceEA"
+    },
+    {
+      "id": "Lu8venMswmc",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/Lu8venMswmc"
+    },
+    {
+      "id": "mtEp8fyCnGQ",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/mtEp8fyCnGQ"
+    },
+    {
+      "id": "PPeWDIBQtmc",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/PPeWDIBQtmc"
+    },
+    {
+      "id": "rhC7JuUafeU",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/rhC7JuUafeU"
+    },
+    {
+      "id": "Tfx2oZ5wDGU",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/Tfx2oZ5wDGU"
+    },
+    {
+      "id": "UF2in0Qw1KI",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/UF2in0Qw1KI"
+    },
+    {
+      "id": "uFvlD-S-VO0",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/uFvlD-S-VO0"
+    },
+    {
+      "id": "vmzWWg4BXUw",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/vmzWWg4BXUw"
+    },
+    {
+      "id": "wy_nIN7ul_E",
+      "photographer": "v2osk",
+      "page": "https://unsplash.com/photos/wy_nIN7ul_E"
+    },
+    {
+      "id": "1ityuURfcQQ",
+      "photographer": "Luca Bravo",
+      "page": "https://unsplash.com/photos/1ityuURfcQQ"
+    },
+    {
+      "id": "5Rdwb97xdWQ",
+      "photographer": "Luca Bravo",
+      "page": "https://unsplash.com/photos/5Rdwb97xdWQ"
+    },
+    {
+      "id": "7U9BLceVAKM",
+      "photographer": "Luca Bravo",
+      "page": "https://unsplash.com/photos/7U9BLceVAKM"
+    },
+    {
+      "id": "9EjDoiLANUQ",
+      "photographer": "Luca Bravo",
+      "page": "https://unsplash.com/photos/9EjDoiLANUQ"
+    },
+    {
+      "id": "ahNC4J3WoLc",
+      "photographer": "Luca Bravo",
+      "page": "https://unsplash.com/photos/ahNC4J3WoLc"
+    },
+    {
+      "id": "0J3gIzEydXY",
+      "photographer": "Pine Watt",
+      "page": "https://unsplash.com/photos/0J3gIzEydXY"
+    },
+    {
+      "id": "1QeKUr4M9BY",
+      "photographer": "Pine Watt",
+      "page": "https://unsplash.com/photos/1QeKUr4M9BY"
+    },
+    {
+      "id": "25MNyn29hYA",
+      "photographer": "Pine Watt",
+      "page": "https://unsplash.com/photos/25MNyn29hYA"
+    },
+    {
+      "id": "1527pjeb6jg",
+      "photographer": "Sam Ferrara",
+      "page": "https://unsplash.com/photos/1527pjeb6jg"
+    },
+    {
+      "id": "3i5PHVp1Fkw",
+      "photographer": "Massimiliano Morosinotto",
+      "page": "https://unsplash.com/photos/3i5PHVp1Fkw"
+    },
+    {
+      "id": "19SC2oaVZW0",
+      "photographer": "Kazuend",
+      "page": "https://unsplash.com/photos/19SC2oaVZW0"
+    },
+    {
+      "id": "2mKYEVGA4jE",
+      "photographer": "Marissa Rodriguez",
+      "page": "https://unsplash.com/photos/2mKYEVGA4jE"
+    },
+    {
+      "id": "12IHVEFRacQ",
+      "photographer": "Giorgio Parravicini",
+      "page": "https://unsplash.com/photos/12IHVEFRacQ"
+    },
+    {
+      "id": "5cwigXmGWTo",
+      "photographer": "Ivan Bandura",
+      "page": "https://unsplash.com/photos/5cwigXmGWTo"
+    },
+    {
+      "id": "8Ogfqvw15Rg",
+      "photographer": "Joel Vodell",
+      "page": "https://unsplash.com/photos/8Ogfqvw15Rg"
+    }
+  ]
+}
