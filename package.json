@@ -19,5 +19,8 @@
     "astro": "^5.14.4",
     "tailwindcss": "^4.1.16",
     "vue": "^3.5.22"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.4"
   }
 }
