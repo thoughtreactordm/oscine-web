@@ -1,0 +1,812 @@
+{
+  "$comment": "Fictional capture library for oscine.app screenshots. Names are invented and rib streaming-service tropes (see docs/1.0-site-release.md §5.1). No real bands, services, or trademarks. Formats: flac (default), mp3, opus, ogg. `hires` = 48 kHz / 24-bit. `replaygain` = tag with metaflac (FLAC only); untagged albums exercise the app's own scanner. `cover` names a file in tools/capture/covers/; albums without one get a generated abstract. Tracks may be strings or { title, artist } for compilations. `discs` splits tracks across discs.",
+  "artists": [
+    {
+      "name": "Residual Royalty",
+      "genre": "Indie Rock",
+      "albums": [
+        {
+          "title": "Owned Until Revoked",
+          "year": 2019,
+          "replaygain": true,
+          "cover": "owned-until-revoked.jpg",
+          "tracks": [
+            "Now Playing (For Now)",
+            "Licensed, Not Sold",
+            "Read-Only Heart",
+            "Buy Button (Greyed Out)",
+            "Perpetual Until Otherwise",
+            "The Rights Holder",
+            "Ninety-Nine Cents of You",
+            "Clause Fourteen",
+            "Revoked",
+            "Mine (Terms Apply)"
+          ]
+        },
+        {
+          "title": "Terms Have Changed",
+          "year": 2022,
+          "tracks": [
+            "Effective Immediately",
+            "Grandfathered In",
+            "Price Hike Blues",
+            "Small Print, Big Room",
+            "Auto-Renew",
+            "Notice Period",
+            "Still Reading",
+            "Cancel Anytime (Menu, Settings, Account, Manage, Help)"
+          ]
+        },
+        {
+          "title": "Three Tenths of a Cent",
+          "year": 2024,
+          "format": "opus",
+          "tracks": [
+            "Per Stream",
+            "A Thousand Plays for a Coffee",
+            "Rounding Error",
+            "Payout Threshold",
+            "Quarterly Statement",
+            "The Middleman's Cut",
+            "Streams Don't Pay the Rent"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pennyweight",
+      "genre": "Ambient",
+      "albums": [
+        {
+          "title": "Premium Silence",
+          "year": 2017,
+          "cover": "premium-silence.jpg",
+          "tracks": [
+            "Ad-Free",
+            "Silence, Upgraded",
+            "The Quiet Tier",
+            "Thirty Days Free",
+            "Then 10.99",
+            "Uninterrupted",
+            "Studio Quality (Coming Soon)",
+            "Noise Floor",
+            "Lossless-ish"
+          ]
+        },
+        {
+          "title": "Free Tier",
+          "year": 2015,
+          "format": "mp3",
+          "tracks": [
+            "Every Third Song",
+            "Shuffle Only",
+            "Six Skips an Hour",
+            "Sponsored by Nothing",
+            "Lower Bitrate Lullaby",
+            "Upgrade Prompt",
+            "A Word From Our Sponsors",
+            "Limited Time"
+          ]
+        },
+        {
+          "title": "Family Plan",
+          "year": 2021,
+          "replaygain": true,
+          "tracks": [
+            "Six Accounts, One Address",
+            "Prove You Live Here",
+            "Shared Password",
+            "Kids Profile",
+            "Explicit Content Filter",
+            "Somebody Else Is Listening",
+            "Household"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "The Region Locks",
+      "genre": "Post-Punk",
+      "albums": [
+        {
+          "title": "A Catalogue of Absences",
+          "year": 2018,
+          "replaygain": true,
+          "cover": "catalogue-of-absences.jpg",
+          "tracks": [
+            "Not Available in Your Region",
+            "Greyed Out",
+            "This Title Has Been Removed",
+            "Licensing Dispute",
+            "Import Only",
+            "VPN Blues",
+            "Exclusive to Somewhere Else",
+            "The Missing Track Seven",
+            "A Catalogue of Absences"
+          ]
+        },
+        {
+          "title": "Not Available in Your Country",
+          "year": 2020,
+          "format": "ogg",
+          "tracks": [
+            "Border Control",
+            "Territory Rights",
+            "Released Everywhere but Here",
+            "Delayed Release",
+            "The Japanese Bonus Track",
+            "Locked Out",
+            "Rights Reverted",
+            "Postal Code"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ad Break",
+      "genre": "Hip-Hop",
+      "albums": [
+        {
+          "title": "Shuffle Never Ends",
+          "year": 2016,
+          "format": "mp3",
+          "cover": "shuffle-never-ends.jpg",
+          "tracks": [
+            "Thirty Seconds",
+            "Skip",
+            "Unskippable",
+            "Brought to You By",
+            "Back to the Music",
+            "Play Again After These Messages",
+            "Loud Then Quiet",
+            "Same Ad Twice",
+            "The Longer One",
+            "Unmute"
+          ]
+        },
+        {
+          "title": "Thirty Seconds Counts",
+          "year": 2019,
+          "replaygain": true,
+          "tracks": [
+            "Thirty-One Seconds",
+            "Counted",
+            "The Hook Comes First",
+            "Intro Cut",
+            "Skip Rate",
+            "Short on Purpose",
+            "Half a Song Is Still a Stream",
+            "Loop It"
+          ]
+        },
+        {
+          "title": "Sponsored Placement",
+          "year": 2023,
+          "tracks": [
+            "Editorial Playlist",
+            "Pay to Play",
+            "Discovery Mode",
+            "Reduced Royalty Rate",
+            "Featured",
+            "Algorithmic Lift",
+            "The Placement",
+            "Organic (Paid)",
+            "Above the Fold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Soft Paywall",
+      "genre": "Dream Pop",
+      "albums": [
+        {
+          "title": "Files We Used To Have",
+          "year": 2014,
+          "hires": true,
+          "replaygain": true,
+          "cover": "files-we-used-to-have.jpg",
+          "tracks": [
+            "Ripped From the Disc",
+            "Track 01 (Unknown Artist)",
+            "The Folder",
+            "Burned",
+            "192 Kilobits of You",
+            "Album Art Missing",
+            "Handwritten Tags",
+            "The Playlist Was an M3U",
+            "Copied to Your Device",
+            "Sort by Date Added"
+          ]
+        },
+        {
+          "title": "Try Premium",
+          "year": 2020,
+          "format": "opus",
+          "tracks": [
+            "Just One More Month",
+            "Seven-Day Trial",
+            "You've Been Selected",
+            "Reminder",
+            "Ends Soon",
+            "Nag Screen",
+            "Almost Paying",
+            "The Soft Paywall"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Autoplay",
+      "genre": "Synth-Pop",
+      "albums": [
+        {
+          "title": "Because You Listened To",
+          "year": 2021,
+          "tracks": [
+            "Because You Listened To",
+            "Similar Artists",
+            "You Might Also Like",
+            "Radio Based On",
+            "Based on Your Recent Listening",
+            "Handpicked by a Machine",
+            "Fans of You",
+            "The Song Before This One",
+            "We Thought You'd Like This"
+          ]
+        },
+        {
+          "title": "Up Next Forever",
+          "year": 2023,
+          "replaygain": true,
+          "tracks": [
+            "Up Next",
+            "Never Silent",
+            "The Queue That Fills Itself",
+            "Autoplay Is On",
+            "Seamless Into Nothing",
+            "Endless",
+            "Infinite Scroll (Audio Version)",
+            "Turn It Off",
+            "After the Last Song",
+            "Still Going"
+          ]
+        },
+        {
+          "title": "Fans Also Like",
+          "year": 2018,
+          "format": "mp3",
+          "tracks": [
+            "Fans Also Like",
+            "Adjacent",
+            "The Same Four Bands",
+            "Related Artist",
+            "Similar Vibes",
+            "Cluster",
+            "Neighbors"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ghost Artist",
+      "genre": "Downtempo",
+      "albums": [
+        {
+          "title": "Nobody's Playing This",
+          "year": 2020,
+          "tracks": [
+            "Zero Monthly Listeners",
+            "Uploaded Under a Name",
+            "Fake Name, Real Checks",
+            "Filler for the Mood Playlist",
+            "Ambient Nobody",
+            "Stock Track",
+            "Royalty-Free Feelings",
+            "Track 47"
+          ]
+        },
+        {
+          "title": "The Long Tail",
+          "year": 2021,
+          "replaygain": true,
+          "cover": "the-long-tail.jpg",
+          "tracks": [
+            "The Long Tail",
+            "Ten Streams a Year",
+            "Deep Cut",
+            "Nobody Asked",
+            "B-Side to Nothing",
+            "Obscurity",
+            "Buried",
+            "The Last Page of Results",
+            "Undiscovered"
+          ]
+        },
+        {
+          "title": "The Same Song Twelve Times",
+          "year": 2023,
+          "format": "ogg",
+          "tracks": [
+            "Version 1",
+            "Version 2 (Slowed)",
+            "Version 3 (Sped Up)",
+            "Version 4 (Reverb)",
+            "Version 5 (Instrumental)",
+            "Version 6 (Acoustic)",
+            "Version 7 (Sleep)",
+            "Version 8 (8D)",
+            "Version 9 (Extended)",
+            "Version 10 (Radio Edit)",
+            "Version 11 (Live)",
+            "Version 12 (Original)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "The Buffers",
+      "genre": "Post-Rock",
+      "albums": [
+        {
+          "title": "Please Wait",
+          "year": 1998,
+          "replaygain": true,
+          "tracks": [
+            "Loading",
+            "Spinning Wheel",
+            "Buffering at 2%",
+            "Please Wait",
+            "Connection Lost",
+            "Retry",
+            "Partial Download",
+            "Twelve Percent"
+          ]
+        },
+        {
+          "title": "Reconnecting",
+          "year": 2003,
+          "format": "mp3",
+          "tracks": [
+            "Reconnecting",
+            "Dial Tone",
+            "56k",
+            "Half a Song",
+            "Timeout",
+            "Weak Signal",
+            "Underground (No Service)",
+            "Tunnel"
+          ]
+        },
+        {
+          "title": "Offline Mode (Expires Soon)",
+          "year": 2011,
+          "tracks": [
+            "Downloaded (Sort Of)",
+            "Go Online to Keep Listening",
+            "Thirty Days Since Last Sync",
+            "Expires Soon",
+            "Cached",
+            "Airplane Mode",
+            "Not Actually Yours",
+            "Sync Required",
+            "Ghost Files"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Year in Review",
+      "genre": "Indie Pop",
+      "albums": [
+        {
+          "title": "Your Top Genre Was Sad",
+          "year": 2022,
+          "replaygain": true,
+          "tracks": [
+            "Your Top Genre Was Sad",
+            "Minutes Listened",
+            "You Were in the Top 0.5%",
+            "Your Audio Aura",
+            "Share This",
+            "Top Five",
+            "The Song You Played at 3am",
+            "December Recap",
+            "Personalized for You",
+            "Screenshot This"
+          ]
+        },
+        {
+          "title": "Minutes Listened",
+          "year": 2019,
+          "hires": true,
+          "tracks": [
+            "Forty Thousand Minutes",
+            "Mostly While Asleep",
+            "Left It On",
+            "Counting the Background",
+            "The Neighbor's Party",
+            "Repeat One",
+            "A Year in Numbers",
+            "Your Year, Summarized"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "The Remasters",
+      "genre": "Classic Rock",
+      "albums": [
+        {
+          "title": "Remastered (Again)",
+          "year": 1974,
+          "replaygain": true,
+          "tracks": [
+            "Louder",
+            "Brickwall",
+            "Clipped",
+            "The 2015 Remaster",
+            "The 2019 Remaster",
+            "The 2023 Remaster",
+            "Same Master, New Cover",
+            "Original Pressing (Rare)",
+            "Dynamic Range"
+          ]
+        },
+        {
+          "title": "Deluxe Expanded Anniversary",
+          "year": 1979,
+          "discs": [
+            [
+              "Side One",
+              "The Single",
+              "Album Cut",
+              "Deep Track",
+              "The One They Play Live",
+              "Closer"
+            ],
+            [
+              "Demo (Take 3)",
+              "Alternate Mix",
+              "Studio Outtake",
+              "Rehearsal",
+              "Live at the Anniversary",
+              "Interview Snippet",
+              "Hidden Track"
+            ]
+          ]
+        },
+        {
+          "title": "Original Mix, Removed",
+          "year": 1968,
+          "format": "mp3",
+          "tracks": [
+            "The Version You Remember",
+            "Replaced",
+            "Re-Recorded for Rights Reasons",
+            "Not the Same",
+            "Where Did It Go",
+            "Sounds Different Now",
+            "The Vinyl Had It"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Enhanced Shuffle",
+      "genre": "Techno",
+      "albums": [
+        {
+          "title": "Random Isn't",
+          "year": 2020,
+          "format": "ogg",
+          "tracks": [
+            "Random Isn't",
+            "Weighted",
+            "That Song Again",
+            "Same Three First",
+            "Predictable Chaos",
+            "Seeded",
+            "Smart Shuffle",
+            "It Knows"
+          ]
+        },
+        {
+          "title": "Recommended Interruptions",
+          "year": 2024,
+          "replaygain": true,
+          "tracks": [
+            "Recommended Interruption",
+            "Added to Your Queue",
+            "We Slipped One In",
+            "Not on the Playlist",
+            "Enhanced",
+            "Uninvited",
+            "Sponsored Shuffle",
+            "Your Playlist, Our Picks",
+            "Turn Off Enhance"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Exclusive Window",
+      "genre": "Soul",
+      "albums": [
+        {
+          "title": "Only Here (For Now)",
+          "year": 2021,
+          "format": "opus",
+          "tracks": [
+            "Only Here",
+            "Two-Week Exclusive",
+            "Timed Exclusive",
+            "Window",
+            "Then Everywhere",
+            "The Announcement",
+            "Available Now on Some Platforms"
+          ]
+        },
+        {
+          "title": "Gone From the Catalog",
+          "year": 2023,
+          "tracks": [
+            "Pulled",
+            "Delisted",
+            "The Artist Requested Removal",
+            "Contract Ended",
+            "Silently Gone",
+            "Your Playlist Has One Fewer Song",
+            "Greyed Out Forever",
+            "Gone From the Catalog"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Skip Rate",
+      "genre": "Pop-Punk",
+      "albums": [
+        {
+          "title": "First Ten Seconds",
+          "year": 2016,
+          "replaygain": true,
+          "tracks": [
+            "First Ten Seconds",
+            "No Intro",
+            "Hook",
+            "Chorus First",
+            "Skip Rate",
+            "Front-Loaded",
+            "Attention Span",
+            "Three Minutes Is Too Long",
+            "Short"
+          ]
+        },
+        {
+          "title": "Hook Before the Verse",
+          "year": 2019,
+          "format": "mp3",
+          "tracks": [
+            "Hook Before the Verse",
+            "Drop at 0-07",
+            "Fast Forward",
+            "Impatient",
+            "Under Two Minutes",
+            "Cut the Bridge",
+            "Too Long, Didn't Listen",
+            "Get to It"
+          ]
+        },
+        {
+          "title": "Intro Skipped",
+          "year": 2022,
+          "tracks": [
+            "Intro (Skipped)",
+            "Straight In",
+            "Fade-In Removed",
+            "No Ambient Opener",
+            "Second Verse Same as the First",
+            "Outro Cut",
+            "Clip",
+            "The Short Version",
+            "Done Already"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Terms of Service",
+      "genre": "Folk",
+      "albums": [
+        {
+          "title": "We've Updated Our Policy",
+          "year": 2013,
+          "replaygain": true,
+          "tracks": [
+            "We've Updated Our Policy",
+            "By Continuing",
+            "Your Data, Our Terms",
+            "Section 9.2",
+            "Arbitration",
+            "Opt Out (Hidden)",
+            "Effective Next Month",
+            "The Cookie Song"
+          ]
+        },
+        {
+          "title": "Continued Use Constitutes Consent",
+          "year": 2017,
+          "tracks": [
+            "Continued Use",
+            "Constitutes",
+            "Consent",
+            "Tick the Box",
+            "I Have Read and Agree",
+            "Forty Pages",
+            "Nobody Reads This",
+            "Binding"
+          ]
+        },
+        {
+          "title": "Scroll to Accept",
+          "year": 2020,
+          "format": "ogg",
+          "tracks": [
+            "Scroll to Accept",
+            "Page One of Sixty",
+            "Accept All",
+            "Manage Preferences",
+            "Legitimate Interest",
+            "Reject All (Two More Clicks)",
+            "Necessary Cookies Only",
+            "Done Scrolling"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cold Start Problem",
+      "genre": "Jazz",
+      "albums": [
+        {
+          "title": "No Data On You Yet",
+          "year": 2018,
+          "hires": true,
+          "replaygain": true,
+          "tracks": [
+            "No Data On You Yet",
+            "Pick Three Artists",
+            "Cold Start",
+            "Everyone Gets the Same Playlist",
+            "First Impressions",
+            "Learning You",
+            "Sparse Matrix",
+            "Guess"
+          ]
+        },
+        {
+          "title": "Tell Us What You Like",
+          "year": 2021,
+          "format": "opus",
+          "tracks": [
+            "Tell Us What You Like",
+            "Thumbs Up",
+            "Thumbs Down",
+            "Not Interested",
+            "Why This Song",
+            "Teach the Machine",
+            "Feedback Loop",
+            "You Like This Now",
+            "Taste Profile"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Content",
+      "genre": "Shoegaze",
+      "albums": [
+        {
+          "title": "Assets",
+          "year": 2024,
+          "replaygain": true,
+          "tracks": [
+            "Asset",
+            "Content",
+            "Deliverable",
+            "Engagement Metrics",
+            "Consumed",
+            "Units",
+            "Catalog Value",
+            "Inventory",
+            "Media Object"
+          ]
+        },
+        {
+          "title": "Engagement",
+          "year": 2022,
+          "tracks": [
+            "Engagement",
+            "Retention",
+            "Monthly Actives",
+            "Churn",
+            "Session Length",
+            "Conversion",
+            "Sticky",
+            "Growth Song",
+            "North Star"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Made For You",
+      "genre": "Electronic",
+      "albums": [
+        {
+          "title": "Assorted Moods",
+          "year": 2024,
+          "replaygain": true,
+          "compilation": true,
+          "tracks": [
+            { "title": "Focus (Slow)", "artist": "Ghost Artist" },
+            { "title": "Chill (Slower)", "artist": "Pennyweight" },
+            { "title": "Energy (Slightly Faster)", "artist": "Enhanced Shuffle" },
+            { "title": "Sleep (Quiet)", "artist": "Cold Start Problem" },
+            { "title": "Morning Commute (Rain Optional)", "artist": "The Buffers" },
+            { "title": "Deep Work", "artist": "Content" },
+            { "title": "Sad Bangers", "artist": "Year in Review" },
+            { "title": "Feel Good Friday", "artist": "Skip Rate" },
+            { "title": "Sunday Reset", "artist": "Autoplay" },
+            { "title": "Main Character", "artist": "Exclusive Window" }
+          ]
+        },
+        {
+          "title": "Beats to Renew Your Subscription To",
+          "year": 2023,
+          "format": "opus",
+          "tracks": [
+            "Study Beat 1",
+            "Study Beat 2",
+            "Rainy Window Loop",
+            "Cafe Ambience (No Cafe)",
+            "Chill Beat (Untitled)",
+            "Lo-Fi Renewal",
+            "Autopay",
+            "Loop Until Canceled"
+          ]
+        }
+      ]
+    }
+  ],
+  "podcasts": [
+    {
+      "title": "The Skip Button",
+      "slug": "the-skip-button",
+      "author": "Skip Rate",
+      "description": "Conversations about the songs nobody finishes, with the people who wrote the parts that got skipped.",
+      "episodes": [
+        { "title": "The Intro Problem", "description": "Why the first eleven seconds decide everything, and what that did to intros.", "minutes": 1.2 },
+        { "title": "Eleven Seconds In", "description": "A producer walks through a chorus that now arrives before the song does.", "minutes": 1.4 },
+        { "title": "A Bridge Too Long", "description": "The bridge used to be the best part. Then it became the part people left.", "minutes": 1.1 },
+        { "title": "The Outro Nobody Hears", "description": "On fade-outs, autoplay, and the final thirty seconds as a courtesy.", "minutes": 1.5 },
+        { "title": "Season Finale (Skipped)", "description": "We look back on a season that most listeners got halfway through.", "minutes": 1.0 }
+      ]
+    },
+    {
+      "title": "Please Hold",
+      "slug": "please-hold",
+      "author": "The Buffers",
+      "description": "A podcast about waiting for things to load.",
+      "episodes": [
+        { "title": "Spinning Wheels", "description": "A short history of the loading indicator, and why it lies.", "minutes": 1.3 },
+        { "title": "The 2% Problem", "description": "Nothing buffers like the last two percent.", "minutes": 1.0 },
+        { "title": "Reconnecting, Again", "description": "Stories from the tunnel between two stations.", "minutes": 1.4 },
+        { "title": "Offline Mode and Other Lies", "description": "Your downloads are not yours. A conversation about caches.", "minutes": 1.6 },
+        { "title": "Sync Required", "description": "Thirty days since your last connection. Please hold.", "minutes": 1.1 },
+        { "title": "Season Finale (Buffering)", "description": "We wrap the season, eventually.", "minutes": 1.2 }
+      ]
+    }
+  ]
+}
