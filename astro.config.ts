@@ -1,6 +1,6 @@
 import vue from '@astrojs/vue'
 import ui from '@nuxt/ui/vite'
-import vercel from '@astrojs/vercel/static'
+import vercel from '@astrojs/vercel'
 import { defineConfig } from 'astro/config'
 
 export default defineConfig({
