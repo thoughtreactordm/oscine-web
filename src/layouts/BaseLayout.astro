@@ -2,6 +2,7 @@
 import { getImage } from 'astro:assets'
 import type { ImageMetadata } from 'astro'
 import '../styles/global.css'
+import Analytics from '@vercel/analytics/astro'
 import AppMain from '../components/AppMain.vue'
 import SiteFooter from '../components/SiteFooter.vue'
 import SiteHeader from '../components/SiteHeader.vue'
@@ -61,6 +62,7 @@ const ogHeight = String(og.attributes.height ?? 630)
     <title>{title}</title>
   </head>
   <body class="min-h-dvh bg-default text-default antialiased">
+    <Analytics/>
     <div class="isolate">
       <SiteHeader client:load currentPath={Astro.url.pathname} />
       <AppMain>
