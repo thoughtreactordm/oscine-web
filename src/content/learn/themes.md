@@ -23,6 +23,8 @@ Turn it on and the accent follows the cover of whatever is playing. An accent yo
 
 This is the “make it mine” surface: colour roles, surfaces, type, shape, and motion. You can seed a ramp from one colour, pick a Tailwind palette, or hand-author the steps.
 
+<!-- shot: theme-editor -->
+
 Contrast warnings appear on the row that caused them. They never block a write. A deliberately low-contrast look is allowed; the editor just tells you.
 
 Overrides travel with a settings export to another machine. Shareable theme files are not supported yet; the editor is the authoring tool.

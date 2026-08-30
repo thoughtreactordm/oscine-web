@@ -7,6 +7,8 @@ section: Start
 
 Oscine is a local music player. It indexes folders on your disk and plays those files. There is no account and no streaming catalogue.
 
+<!-- shot: onboarding -->
+
 ## Install
 
 Download the [Windows installer](/download), the Linux AppImage, or the `.deb`. Launch Oscine.

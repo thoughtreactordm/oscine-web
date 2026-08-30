@@ -13,7 +13,7 @@ function active(href: string) {
 }
 
 const items = computed<NavigationMenuItem[]>(() => [
-  { label: 'Home', to: '/', active: active('/') },
+  { label: 'Features', to: '/features', active: active('/features') },
   { label: 'Learn', to: '/learn', active: active('/learn') },
   { label: 'Download', to: '/download', active: active('/download') }
 ])

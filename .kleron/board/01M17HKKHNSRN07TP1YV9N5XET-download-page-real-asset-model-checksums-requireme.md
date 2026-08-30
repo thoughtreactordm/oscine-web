@@ -1,7 +1,7 @@
 ---
 taskId: 01M17HKKHNSRN07TP1YV9N5XET
 title: 'Download page: real asset model, checksums, requirements, updates'
-status: todo
+status: in-review
 priority: urgent
 labels:
   - design
@@ -9,9 +9,9 @@ labels:
 workstream: W2
 workstreamId: W2-1
 effort: medium
-order: 4
+order: 0
 created: '2026-08-29T19:58:06.389Z'
-updated: '2026-08-29T19:58:06.389Z'
+updated: '2026-08-30T02:07:10.886Z'
 ---
 Spec: `docs/1.0-site-release.md` §3.4. The live page renders dead Linux buttons today — real releases carry exactly two assets: `Oscine.Setup.<ver>.exe` and `Oscine-v<ver>-linux.tar.gz` (AppImage + .deb inside).
 

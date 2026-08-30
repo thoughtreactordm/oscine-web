@@ -1,0 +1,40 @@
+---
+import { Picture } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+
+interface Props {
+  src: ImageMetadata
+  alt: string
+  class?: string
+  pictureClass?: string
+  widths?: number[]
+  sizes?: string
+  loading?: 'eager' | 'lazy'
+  fetchpriority?: 'high' | 'low' | 'auto'
+}
+
+const {
+  src,
+  alt,
+  class: className = 'h-auto w-full',
+  pictureClass = 'block w-full',
+  widths = [1280, 1920],
+  sizes = '(min-width: 80rem) 72rem, 100vw',
+  loading = 'lazy',
+  fetchpriority = 'auto'
+} = Astro.props
+---
+
+<Picture
+  src={src}
+  alt={alt}
+  widths={widths}
+  sizes={sizes}
+  formats={['avif', 'webp']}
+  fallbackFormat="webp"
+  class={className}
+  pictureAttributes={{ class: pictureClass }}
+  loading={loading}
+  fetchpriority={fetchpriority}
+  decoding="async"
+/>

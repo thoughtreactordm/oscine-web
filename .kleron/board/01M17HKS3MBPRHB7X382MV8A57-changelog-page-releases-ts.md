@@ -1,7 +1,7 @@
 ---
 taskId: 01M17HKS3MBPRHB7X382MV8A57
 title: Changelog page + releases.ts
-status: todo
+status: in-review
 priority: high
 labels:
   - design
@@ -9,9 +9,9 @@ labels:
 workstream: W2
 workstreamId: W2-2
 effort: medium
-order: 5
+order: 1
 created: '2026-08-29T19:58:12.084Z'
-updated: '2026-08-29T19:58:12.084Z'
+updated: '2026-08-30T02:17:53.112Z'
 ---
 Spec: `docs/1.0-site-release.md` §3.5.
 

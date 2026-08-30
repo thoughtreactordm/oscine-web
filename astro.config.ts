@@ -39,6 +39,11 @@ export default defineConfig({
             slots: {
               title: 'display font-semibold'
             }
+          },
+          changelogVersion: {
+            slots: {
+              title: 'display font-semibold'
+            }
           }
         },
         icon: {
@@ -46,11 +51,15 @@ export default defineConfig({
             scan: { globInclude: ['**/*.{vue,ts,astro}'] },
             icons: [
               'i-tabler-brand-windows',
+              'i-tabler-brand-lastfm',
+              'i-tabler-brain',
               'i-tabler-download',
               'i-tabler-terminal-2',
               'i-tabler-package',
-              'i-tabler-wave-sine',
+              'i-tabler-copy',
+              'i-tabler-check',
               'i-tabler-arrow-right',
+              'i-tabler-external-link',
               'i-lucide-menu',
               'i-lucide-x'
             ]

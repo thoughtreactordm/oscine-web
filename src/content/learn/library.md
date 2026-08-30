@@ -7,6 +7,8 @@ section: App
 
 The Library tab is the collection: a sidebar of sources (folders, artists, albums) and a song list that stays fast no matter how much you throw at it.
 
+<!-- shot: library-hero -->
+
 ## Folders on disk
 
 Oscine does not copy your files into a private store. It indexes paths relative to folders you named. Move the collection to another machine, remap the folder, and the library still makes sense.

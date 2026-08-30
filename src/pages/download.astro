@@ -10,5 +10,5 @@ const release = await getLatestRelease()
   title="Download Oscine"
   description="Download Oscine for Windows and Linux. A free local music player for the library you already own."
 >
-  <DownloadView release={release} />
+  <DownloadView client:load release={release} />
 </BaseLayout>
