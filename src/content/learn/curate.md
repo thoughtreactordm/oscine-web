@@ -19,6 +19,8 @@ Star a playlist or an artist to pin them in the Quick Menu on Now Playing.
 
 Discover is not a recommendation engine in the streaming sense. It is a page of named recipes over your files and your listening log: unplayed records, a discography you have barely started, something you loved and forgot.
 
+<!-- shot: curate-discover -->
+
 Each card has a one-line reason. A shelf is not a playlist until you save it as one, and nothing here leaves your machine.
 
 ## The queue

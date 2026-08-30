@@ -1,16 +1,16 @@
 ---
 taskId: 01M17HKZAD5SGEG26W31G54CJ9
 title: 'Header, footer, nav: Features + Changelog, Source + Issues, dead-icon cleanup'
-status: todo
+status: in-review
 priority: medium
 labels:
   - design
 workstream: W2
 workstreamId: W2-3
 effort: low
-order: 6
+order: 2
 created: '2026-08-29T19:58:18.445Z'
-updated: '2026-08-29T19:58:18.445Z'
+updated: '2026-08-30T02:29:45.312Z'
 ---
 Spec: `docs/1.0-site-release.md` §3 (intro paragraph after the route table).
 

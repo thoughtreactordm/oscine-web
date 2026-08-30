@@ -1,6 +1,7 @@
 ---
-import { getCollection, render } from 'astro:content'
+import { getCollection } from 'astro:content'
 import LearnArticle from '../../components/LearnArticle.vue'
+import LearnBody from '../../components/LearnBody.astro'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 
 export async function getStaticPaths() {
@@ -12,7 +13,9 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props
-const { Content } = await render(page)
+if (page.body === undefined) {
+  throw new Error(`Learn article "${page.id}" has no markdown body`)
+}
 const pages = (await getCollection('learn'))
   .sort((a, b) => a.data.order - b.data.order)
   .map((entry) => ({
@@ -29,6 +32,6 @@ const pages = (await getCollection('learn'))
     section={page.data.section}
     pages={pages}
   >
-    <Content />
+    <LearnBody body={page.body} />
   </LearnArticle>
 </BaseLayout>

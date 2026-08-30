@@ -1,0 +1,14 @@
+---
+import ChangelogView from '../components/ChangelogView.vue'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { getReleases } from '../data/releases'
+
+const releases = await getReleases()
+---
+
+<BaseLayout
+  title="Changelog · Oscine"
+  description="Release notes for every Oscine version. Download installers from the Download page."
+>
+  <ChangelogView releases={releases} />
+</BaseLayout>

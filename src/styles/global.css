@@ -45,8 +45,13 @@ body {
   color: var(--ui-text-highlighted);
 }
 
-.doc-body :where(h2:first-child) {
+.doc-body > :first-child,
+.doc-body > .contents:first-child > :first-child {
   margin-top: 0;
+}
+
+.doc-body :where(figure) {
+  margin-top: 1.5rem;
 }
 
 .doc-body :where(p, ul, ol, table) {

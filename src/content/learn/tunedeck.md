@@ -7,6 +7,8 @@ section: App
 
 Open the Tunedeck from Now Playing (or View → Tunedeck). It docks from the right and pushes the rest of the app rather than covering it, so you can browse with it open.
 
+<!-- shot: tunedeck-track -->
+
 Four tabs:
 
 ## Artist

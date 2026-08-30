@@ -18,6 +18,8 @@ Type freely, or narrow with a prefix:
 | `#` | Playlists |
 | `/` | Settings |
 
+<!-- shot: palette -->
+
 Simple settings toggle in place. Richer ones jump to the Settings row. Play, queue, and download fire and close the palette; progress lives on the panel that owns the work.
 
 The search box in the title bar opens the same palette. You can hide that affordance, or hide the tab bar and live on the palette, from Interface settings.

@@ -7,6 +7,8 @@ section: App
 
 Podcasts are their own tab. A show is a feed you subscribed to, not a folder Oscine scanned. Episodes are not mixed into the music library, search, or ReplayGain.
 
+<!-- shot: podcasts -->
+
 ## Subscribe
 
 Paste a feed URL, or use Discover to browse Apple’s catalogue (that path needs **Allow online lookups**). Subscribing is you naming a host; refreshing that feed does not wait on the lookups toggle.

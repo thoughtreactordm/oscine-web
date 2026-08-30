@@ -1,7 +1,7 @@
 ---
 taskId: 01M17HM88WD1FV5WG8QCS43Q1G
 title: 'Home rewrite: short page, hero + pillars + Tunedeck showcase + why + CTA'
-status: todo
+status: in-review
 priority: high
 labels:
   - design
@@ -10,9 +10,9 @@ labels:
 workstream: W2
 workstreamId: W2-4
 effort: high
-order: 7
+order: 2
 created: '2026-08-29T19:58:27.611Z'
-updated: '2026-08-29T19:58:27.611Z'
+updated: '2026-08-30T03:12:05.146Z'
 ---
 Spec: `docs/1.0-site-release.md` §3.1, voice §2 (read the "tells to avoid" list before writing a word), positioning §1.
 

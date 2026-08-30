@@ -1,14 +1,53 @@
 ---
 import HomeLanding from '../components/HomeLanding.vue'
-import PlayerFrame from '../components/PlayerFrame.astro'
+import Screenshot from '../components/Screenshot.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { getLatestRelease } from '../data/release'
+import { shotAlt } from '../data/learn-shots'
+import libraryHero from '../assets/screenshots/library-hero.png'
+import tunedeckTrack from '../assets/screenshots/tunedeck-track.png'
+import pillarColumns from '../assets/screenshots/crops/pillar-columns.png'
+import pillarStage from '../assets/screenshots/crops/pillar-stage.png'
+import pillarThemePicker from '../assets/screenshots/crops/pillar-theme-picker.png'
 
 const release = await getLatestRelease()
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="Oscine — Your library, taken seriously."
+  description="A local music player with foobar2000's control, an interface from this decade, and a shell you can make yours."
+>
   <HomeLanding release={release}>
-    <PlayerFrame />
+    <Screenshot
+      slot="hero"
+      src={libraryHero}
+      alt={shotAlt('library-hero')}
+      loading="eager"
+      fetchpriority="high"
+    />
+    <Screenshot
+      slot="pillar-columns"
+      src={pillarColumns}
+      alt={shotAlt('pillar-columns')}
+      sizes="(min-width: 1024px) 22rem, 100vw"
+    />
+    <Screenshot
+      slot="pillar-stage"
+      src={pillarStage}
+      alt={shotAlt('pillar-stage')}
+      sizes="(min-width: 1024px) 22rem, 100vw"
+    />
+    <Screenshot
+      slot="pillar-theme-picker"
+      src={pillarThemePicker}
+      alt={shotAlt('pillar-theme-picker')}
+      sizes="(min-width: 1024px) 22rem, 100vw"
+    />
+    <Screenshot
+      slot="tunedeck-track"
+      src={tunedeckTrack}
+      alt={shotAlt('tunedeck-track')}
+      sizes="(min-width: 1024px) 36rem, 100vw"
+    />
   </HomeLanding>
 </BaseLayout>

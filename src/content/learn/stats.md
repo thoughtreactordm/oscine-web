@@ -7,6 +7,8 @@ section: App
 
 Stats is the listening dashboard: top artists, albums, tracks, and time spent, scoped to a range.
 
+<!-- shot: stats -->
+
 A play counts once you have heard half the track or four minutes of it, whichever comes first. Paused and seeked-over time does not count. Totals follow the tags as they were when you listened, so a later rename does not rewrite last year.
 
 The log is local. It is meant to survive a folder reorganise. It is not a Wrapped-style retrospective; it is a dashboard you can keep open.

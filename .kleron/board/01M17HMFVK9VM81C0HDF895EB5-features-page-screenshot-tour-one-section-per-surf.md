@@ -1,7 +1,7 @@
 ---
 taskId: 01M17HMFVK9VM81C0HDF895EB5
 title: 'Features page: screenshot tour, one section per surface'
-status: todo
+status: in-review
 priority: high
 labels:
   - design
@@ -10,9 +10,9 @@ labels:
 workstream: W2
 workstreamId: W2-5
 effort: high
-order: 8
+order: 1
 created: '2026-08-29T19:58:35.379Z'
-updated: '2026-08-29T19:58:35.379Z'
+updated: '2026-08-30T03:38:34.652Z'
 ---
 Spec: `docs/1.0-site-release.md` §3.2 (section table with shot keys and what each covers), voice §2.
 

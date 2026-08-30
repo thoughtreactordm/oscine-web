@@ -1,0 +1,47 @@
+---
+import type { ImageMetadata } from 'astro'
+import Screenshot from './Screenshot.astro'
+import { parseLearnBody, renderLearnHtml, shotAlt } from '../data/learn-shots'
+
+const masters = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/screenshots/*.png',
+  { eager: true }
+)
+const crops = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/screenshots/crops/*.png',
+  { eager: true }
+)
+
+function resolveShot(key: string): ImageMetadata {
+  const master = masters[`../assets/screenshots/${key}.png`]
+  if (master) return master.default
+  const crop = crops[`../assets/screenshots/crops/${key}.png`]
+  if (crop) return crop.default
+  throw new Error(
+    `Unknown Learn screenshot key "${key}". Add a PNG under src/assets/screenshots/ or crops/.`
+  )
+}
+
+interface Props {
+  body: string
+}
+
+const { body } = Astro.props
+const segments = parseLearnBody(body)
+---
+
+{
+  segments.map((segment) =>
+    segment.type === 'shot' ? (
+      <figure class="mt-6 overflow-hidden rounded-xl ring ring-default shadow-xl shadow-black/30">
+        <Screenshot
+          src={resolveShot(segment.key)}
+          alt={shotAlt(segment.key)}
+          sizes="(min-width: 80rem) 42rem, 100vw"
+        />
+      </figure>
+    ) : (
+      <div class="contents" set:html={renderLearnHtml(segment.value)} />
+    )
+  )
+}
