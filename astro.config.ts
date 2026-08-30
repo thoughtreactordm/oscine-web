@@ -1,9 +1,16 @@
 import vue from '@astrojs/vue'
 import ui from '@nuxt/ui/vite'
+import vercel from '@astrojs/vercel/static'
 import { defineConfig } from 'astro/config'
 
 export default defineConfig({
   site: 'https://oscine.app',
+  output: 'static',
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true
+    }
+  }),
   integrations: [
     vue({
       appEntrypoint: './src/vue-app.ts'
