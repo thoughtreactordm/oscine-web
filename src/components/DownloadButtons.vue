@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { downloadTargets, type Release } from '../data/release'
+import { computed } from "vue";
+import { downloadTargets, type Release } from "../data/release";
 
 const props = defineProps<{
-  release: Release
-  size?: 'lg' | 'md'
-}>()
+  release: Release;
+  size?: "lg" | "md";
+}>();
 
-const targets = computed(() => downloadTargets(props.release))
+const targets = computed(() => downloadTargets(props.release));
 </script>
 
 <template>
-  <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+  <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap justify-center items-center">
     <UButton
       v-for="target in targets"
       :key="target.id"

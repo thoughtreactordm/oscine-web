@@ -31,6 +31,10 @@ body {
   fill: var(--ui-primary);
 }
 
+.oscine-mark__dimmed {
+  fill: var(--ui-text-dimmed);
+}
+
 .oscine-mark__wave {
   fill: var(--ui-text-inverted);
 }
@@ -108,6 +112,124 @@ body {
 .group:focus-within .shot-zoom {
   opacity: 1;
   transform: none;
+}
+
+/* --- Hero -----------------------------------------------------------------
+ *
+ * A flex column at least a viewport tall. The headline is pinned to the crown,
+ * so the app screenshot — in normal flow beneath it — rises up behind it and
+ * dissolves into the light at the top as the page scrolls. The download CTA is
+ * pinned to the floor and, being the last thing in flow right after the shot,
+ * unpins and scrolls away the instant the shot's trailing edge clears it. That
+ * release is native sticky behavior keyed to the shot's own geometry — no
+ * scroll math, no fixed travel to guess at, no observer. A short shot (tall or
+ * portrait windows) simply clears the CTA almost at once, so there is no dead
+ * air; a tall shot (wide windows) holds the CTA longer as it rises.
+ */
+
+.hero {
+  position: relative;
+  display: flex;
+  min-height: calc(100dvh - var(--ui-header-height));
+  flex-direction: column;
+  padding-inline: 1rem;
+}
+
+/* Headline + byline, pinned to the crown. Its ::before is the light the shot
+ * fades into: a wash of the page colour riding with the pinned copy, sitting
+ * above the shot (the whole copy is its own stacking context over it) but
+ * behind the text. */
+.hero-copy {
+  position: sticky;
+  top: calc(var(--ui-header-height) + clamp(1.5rem, 5vh, 3rem));
+  z-index: 30;
+  margin: clamp(2rem, 6vh, 4rem) auto 0;
+  max-width: 56rem;
+  text-align: center;
+}
+
+.hero-copy::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: calc(-1 * (var(--ui-header-height) + clamp(3.5rem, 11vh, 7rem)));
+  width: 100vw;
+  height: 24rem;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    var(--ui-bg) 0%,
+    var(--ui-bg) 22%,
+    color-mix(in oklab, var(--ui-bg) 55%, transparent) 54%,
+    transparent 100%
+  );
+}
+
+/* The whole app window and its bloom, in normal flow so its height drives the
+ * scroll and the CTA below can trail it. The auto bottom margin pushes the CTA
+ * to the floor when the shot is short; on a tall shot it collapses and the shot
+ * itself provides the travel. */
+.hero-shot-track {
+  position: relative;
+  z-index: 10;
+  margin: clamp(1.5rem, 5vh, 3rem) auto auto;
+  width: 100%;
+  max-width: 64rem;
+}
+
+.hero-bloom {
+  position: absolute;
+  /* Bleed out past the top and sides of the shot — a glow trapped inside the
+   * frame is hidden by the opaque screenshot. Pulling the bottom well up (and
+   * the top past the edge) weights the light high, so it reads as coming
+   * forward and gives the eye a direction into the page. */
+  top: -16%;
+  left: -8%;
+  right: -8%;
+  bottom: 24%;
+  z-index: 0;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  filter: blur(66px) saturate(1.7);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* The download CTA, pinned to the floor. It is the last element in flow after
+ * the shot, so native sticky unpins it the moment the shot's trailing edge
+ * clears it — and it then scrolls up in tandem with the shot. Its fade keeps
+ * the type legible wherever the shot drifts behind it, and lands on the page
+ * color so the seam into the next section stays clean. */
+.hero-cta {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  /* A tall, faded lead-in above the buttons. Doubles as the breathing room
+   * between the CTA and the byline once the shot has scrolled past and the two
+   * ride up together. */
+  padding-top: clamp(7rem, 16vh, 10rem);
+  padding-bottom: clamp(2.25rem, 4vh, 3rem);
+  text-align: center;
+  /* Solid page colour behind ALL of the copy and buttons, fading only through
+   * the tall top lead-in — so wherever the shot has risen behind the CTA, the
+   * text still sits on a clean, legible backing rather than the busy track
+   * list, and the top edge dissolves with nothing but the gradient (a blur here
+   * would draw a hard rectangular seam that defeats the fade). */
+  background: linear-gradient(
+    to top,
+    var(--ui-bg) 0%,
+    var(--ui-bg) 46%,
+    color-mix(in oklab, var(--ui-bg) 82%, transparent) 72%,
+    transparent 100%
+  );
 }
 
 /* --- Ambient warmth ------------------------------------------------------

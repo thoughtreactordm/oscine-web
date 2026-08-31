@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
-import Mark from './Mark.vue'
+import type { NavigationMenuItem } from "@nuxt/ui";
+import Mark from "./Mark.vue";
 
-const year = new Date().getFullYear()
+const year = new Date().getFullYear();
 
 const items: NavigationMenuItem[] = [
-  { label: 'Features', to: '/features' },
-  { label: 'Learn', to: '/learn' },
-  { label: 'Download', to: '/download' },
-  { label: 'Changelog', to: '/changelog' },
+  // { label: "Features", to: "/features" },
+  // { label: "Learn", to: "/learn" },
+  // { label: "Download", to: "/download" },
+  { label: "Changelog", to: "/changelog" },
   {
-    label: 'Source',
-    to: 'https://github.com/thoughtreactordm/oscine',
-    target: '_blank'
+    label: "Source",
+    to: "https://github.com/thoughtreactordm/oscine",
+    target: "_blank",
   },
   {
-    label: 'Issues',
-    to: 'https://github.com/thoughtreactordm/oscine/issues',
-    target: '_blank'
-  }
-]
+    label: "Issues",
+    to: "https://github.com/thoughtreactordm/oscine/issues",
+    target: "_blank",
+  },
+];
 </script>
 
 <template>
@@ -39,10 +39,9 @@ const items: NavigationMenuItem[] = [
           <Mark size="size-7" />
           <span class="wordmark text-highlighted">oscine</span>
         </ULink>
-        <p class="max-w-sm text-sm text-muted">
-          A local music player with real control and an interface from this decade.
+        <p class="text-xs text-muted max-w-64">
+          Future forward & customizeable desktop music player for enthusiasts and collectors.
         </p>
-        <p class="text-xs text-muted">Open source, MIT.</p>
       </div>
     </template>
 
@@ -53,7 +52,14 @@ const items: NavigationMenuItem[] = [
     />
 
     <template #right>
-      <p class="text-sm text-muted">Created with love by Michael DeLally · {{ year }}</p>
+      <section class="flex flex-col gap-1 text-center lg:text-right text-dimmed text-xs">
+        <p>
+          Oscine, the <Mark size="size-5" dimmed class="mx-1 mb-1" /> logo &copy;{{ year }}
+          Thought Reactor
+        </p>
+        <p>Created with ❤️ by Michael DeLally</p>
+        <p class="text-xs">Sotware code open source, MIT.</p>
+      </section>
     </template>
   </UFooter>
 </template>
