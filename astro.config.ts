@@ -85,6 +85,7 @@ export default defineConfig({
             scan: { globInclude: ['**/*.{vue,ts,astro}'] },
             icons: [
               'i-tabler-brand-windows',
+              'i-simple-icons-linux',
               'i-tabler-brand-lastfm',
               'i-tabler-brain',
               'i-tabler-download',

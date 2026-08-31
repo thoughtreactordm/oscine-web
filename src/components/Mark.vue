@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from "vue";
 /*
  * The Oscine mark: a songbird traced by a sound wave, on a filled disc.
  *
@@ -13,12 +14,13 @@
  * island's scoped styles inside its JS chunk, which left the mark black until
  * the header hydrated.
  */
-withDefaults(
-  defineProps<{
-    size?: string
-  }>(),
-  { size: 'size-8' }
-)
+const { dimmed = false, size = "size-8" } = defineProps<{
+  size?: string;
+  dimmed?: boolean;
+}>();
+const discClass = computed(() => {
+  return dimmed ? "oscine-mark__dimmed" : "oscine-mark__disc";
+});
 </script>
 
 <template>
@@ -28,7 +30,7 @@ withDefaults(
     aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle class="oscine-mark__disc" cx="677.2335" cy="677.2335" r="677.2335" />
+    <circle :class="discClass" cx="677.2335" cy="677.2335" r="677.2335" />
     <g transform="translate(-598.58913,-19.030152)">
       <path
         class="oscine-mark__wave"

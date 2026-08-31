@@ -1,4 +1,6 @@
 ---
+import FaqAccordion from '../components/FaqAccordion.vue'
+import HeroByline from '../components/HeroByline.vue'
 import HomeLanding from '../components/HomeLanding.vue'
 import Screenshot from '../components/Screenshot.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
@@ -27,6 +29,7 @@ const blooms = {
   zoom
 >
   <HomeLanding release={release} blooms={blooms}>
+    <HeroByline slot="hero-byline" client:load />
     <Screenshot
       slot="hero"
       src={libraryHero}
@@ -58,5 +61,43 @@ const blooms = {
       alt={shotAlt('tunedeck-track')}
       sizes="(min-width: 1024px) 36rem, 100vw"
     />
+    <FaqAccordion slot="faqs" client:visible />
   </HomeLanding>
 </BaseLayout>
+
+<script>
+  // Hold the pinned headline while the screenshot rises behind it, then slide it
+  // up to follow the shot off the top. Native sticky keeps the headline planted
+  // at the crown for free; the moment the shot's trailing edge dissolves past
+  // the header line we mirror the shot's continued rise onto the headline as an
+  // upward transform, so it leaves with the shot instead of sitting frozen for a
+  // viewport after everything else has gone. Transform-only — no reflow, no jump
+  // — and the trigger is read from the shot itself, never a guessed distance.
+  const hero = document.querySelector('.hero')
+  const copy = hero?.querySelector('.hero-copy') as HTMLElement | null
+  const shot = hero?.querySelector('.hero-shot-track') as HTMLElement | null
+  const header = document.querySelector('header')
+
+  if (hero && copy && shot) {
+    let ticking = false
+
+    const sync = () => {
+      ticking = false
+      // The line the shot fades into: the bottom of the sticky header.
+      const line = header ? header.getBoundingClientRect().bottom : 64
+      const lift = Math.max(0, line - shot.getBoundingClientRect().bottom)
+      copy.style.transform = lift ? `translateY(${-lift}px)` : ''
+    }
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true
+        requestAnimationFrame(sync)
+      }
+    }
+
+    addEventListener('scroll', onScroll, { passive: true })
+    addEventListener('resize', onScroll, { passive: true })
+    sync()
+  }
+</script>
