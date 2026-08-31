@@ -5,6 +5,7 @@ import FeaturesTour from '../components/FeaturesTour.vue'
 import type { TourShotAsset } from '../components/TourShot.vue'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { getLatestRelease } from '../data/release'
+import { bloom } from '../data/bloom'
 import libraryHero from '../assets/screenshots/library-hero.png'
 import columnChooser from '../assets/screenshots/crops/column-chooser.png'
 import tunedeckArtist from '../assets/screenshots/tunedeck-artist.png'
@@ -25,7 +26,8 @@ import quickMenu from '../assets/screenshots/quick-menu.png'
 
 const SHOT_WIDTHS = [1280, 1920] as const
 
-async function tourShot(src: ImageMetadata): Promise<TourShotAsset> {
+/** `key` is the shot's path under src/assets/screenshots, minus the extension. */
+async function tourShot(src: ImageMetadata, key: string): Promise<TourShotAsset> {
   const [webp, avif] = await Promise.all([
     getImage({ src, widths: [...SHOT_WIDTHS], format: 'webp' }),
     getImage({ src, widths: [...SHOT_WIDTHS], format: 'avif' })
@@ -34,6 +36,7 @@ async function tourShot(src: ImageMetadata): Promise<TourShotAsset> {
     src: webp.src,
     srcSet: webp.srcSet.attribute,
     avifSrcSet: avif.srcSet.attribute,
+    bloom: bloom(key),
     width: Number(webp.attributes.width) || SHOT_WIDTHS[0],
     height: Number(webp.attributes.height) || Math.round(SHOT_WIDTHS[0] * (src.height / src.width))
   }
@@ -41,29 +44,30 @@ async function tourShot(src: ImageMetadata): Promise<TourShotAsset> {
 
 const release = await getLatestRelease()
 const shots = {
-  libraryHero: await tourShot(libraryHero),
-  columnChooser: await tourShot(columnChooser),
-  tunedeckArtist: await tourShot(tunedeckArtist),
-  tunedeckRelated: await tourShot(tunedeckRelated),
-  themeOscineDark: await tourShot(themeOscineDark),
-  themeOscineLight: await tourShot(themeOscineLight),
-  themeNocturne: await tourShot(themeNocturne),
-  themeEditor: await tourShot(themeEditor),
-  curateDiscover: await tourShot(curateDiscover),
-  stage: await tourShot(stage),
-  zen: await tourShot(zen),
-  trackInfo: await tourShot(trackInfo),
-  stats: await tourShot(stats),
-  podcasts: await tourShot(podcasts),
-  toolsWriteback: await tourShot(toolsWriteback),
-  palette: await tourShot(palette),
-  quickMenu: await tourShot(quickMenu)
+  libraryHero: await tourShot(libraryHero, 'library-hero'),
+  columnChooser: await tourShot(columnChooser, 'crops/column-chooser'),
+  tunedeckArtist: await tourShot(tunedeckArtist, 'tunedeck-artist'),
+  tunedeckRelated: await tourShot(tunedeckRelated, 'tunedeck-related'),
+  themeOscineDark: await tourShot(themeOscineDark, 'theme-oscine-dark'),
+  themeOscineLight: await tourShot(themeOscineLight, 'theme-oscine-light'),
+  themeNocturne: await tourShot(themeNocturne, 'theme-nocturne'),
+  themeEditor: await tourShot(themeEditor, 'theme-editor'),
+  curateDiscover: await tourShot(curateDiscover, 'curate-discover'),
+  stage: await tourShot(stage, 'stage'),
+  zen: await tourShot(zen, 'zen'),
+  trackInfo: await tourShot(trackInfo, 'crops/track-info'),
+  stats: await tourShot(stats, 'stats'),
+  podcasts: await tourShot(podcasts, 'podcasts'),
+  toolsWriteback: await tourShot(toolsWriteback, 'tools-writeback'),
+  palette: await tourShot(palette, 'palette'),
+  quickMenu: await tourShot(quickMenu, 'quick-menu')
 }
 ---
 
 <BaseLayout
   title="Features · Oscine"
   description="A screenshot tour of Oscine: library, Tunedeck, themes, Discover, Stage, playback, and the rest of the surfaces."
+  zoom
 >
   <FeaturesTour release={release} shots={shots} />
 </BaseLayout>

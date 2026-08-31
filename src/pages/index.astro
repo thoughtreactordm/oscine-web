@@ -4,6 +4,7 @@ import Screenshot from '../components/Screenshot.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { getLatestRelease } from '../data/release'
 import { shotAlt } from '../data/learn-shots'
+import { bloom } from '../data/bloom'
 import libraryHero from '../assets/screenshots/library-hero.png'
 import tunedeckTrack from '../assets/screenshots/tunedeck-track.png'
 import pillarColumns from '../assets/screenshots/crops/pillar-columns.png'
@@ -11,13 +12,21 @@ import pillarStage from '../assets/screenshots/crops/pillar-stage.png'
 import pillarThemePicker from '../assets/screenshots/crops/pillar-theme-picker.png'
 
 const release = await getLatestRelease()
+const blooms = {
+  hero: bloom('library-hero'),
+  pillarColumns: bloom('crops/pillar-columns'),
+  pillarStage: bloom('crops/pillar-stage'),
+  pillarThemePicker: bloom('crops/pillar-theme-picker'),
+  tunedeckTrack: bloom('tunedeck-track')
+}
 ---
 
 <BaseLayout
   title="Oscine — Your library, taken seriously."
   description="A local music player with foobar2000's control, an interface from this decade, and a shell you can make yours."
+  zoom
 >
-  <HomeLanding release={release}>
+  <HomeLanding release={release} blooms={blooms}>
     <Screenshot
       slot="hero"
       src={libraryHero}

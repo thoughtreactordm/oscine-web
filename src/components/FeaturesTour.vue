@@ -3,6 +3,7 @@ import type { ButtonProps } from '@nuxt/ui'
 import type { Release } from '../data/release'
 import { SHOT_ALTS } from '../data/learn-shots'
 import DownloadButtons from './DownloadButtons.vue'
+import ShotStack from './ShotStack.vue'
 import TourShot, { type TourShotAsset } from './TourShot.vue'
 
 defineProps<{
@@ -36,6 +37,9 @@ const alignStart = {
   links: 'justify-start'
 }
 
+/** Section headings carry the accent; the page header title stays plain. */
+const sectionUi = { ...alignStart, title: 'text-left section-title' }
+
 const heroLinks: ButtonProps[] = [
   { label: 'Download', to: '/download' },
   {
@@ -46,27 +50,31 @@ const heroLinks: ButtonProps[] = [
   }
 ]
 
+/** The shot behind an overlay is narrower than the column, so it asks for less. */
+const stacked = '(min-width: 1024px) 31rem, 100vw'
+const inset = '(min-width: 1024px) 20rem, 100vw'
 const half = '(min-width: 1024px) 36rem, 100vw'
 const trio = '(min-width: 640px) 22rem, 100vw'
 const full = '(min-width: 80rem) 72rem, 100vw'
+
+/** Overlays sit on top of another shot and need to read that way. */
+const lifted = 'shadow-2xl shadow-black/70'
 </script>
 
 <template>
-  <UContainer>
-    <UPageHeader
-      headline="Features"
-      title="Every surface."
-      description="A screenshot tour of Oscine. Each section is one screen and the facts that belong to it."
-      :links="heroLinks"
-    />
-  </UContainer>
+  <div class="relative isolate">
+    <div class="amber-glow amber-glow--top" aria-hidden="true" />
+    <UContainer>
+      <UPageHeader
+        headline="Features"
+        title="Every surface."
+        description="A screenshot tour of Oscine. Each section is one screen and the facts that belong to it."
+        :links="heroLinks"
+      />
+    </UContainer>
+  </div>
 
-  <UPageSection
-    title="Library"
-    orientation="horizontal"
-    class="border-t border-default"
-    :ui="alignStart"
-  >
+  <UPageSection title="Library" orientation="horizontal" class="section-rule" :ui="sectionUi">
     <template #description>
       <p>
         Point Oscine at folders you already have. It indexes those paths; the files stay where you
@@ -78,28 +86,34 @@ const full = '(min-width: 80rem) 72rem, 100vw'
       </p>
     </template>
 
-    <div class="flex min-w-0 flex-col gap-3">
-      <TourShot
-        :shot="shots.libraryHero"
-        :alt="SHOT_ALTS['library-hero']"
-        :sizes="half"
-        loading="eager"
-      />
-      <TourShot
-        :shot="shots.columnChooser"
-        :alt="SHOT_ALTS['column-chooser']"
-        :sizes="half"
-        variant="natural"
-      />
-    </div>
+    <!-- The column strip is a detail of the window it sits on, so it rides the edge. -->
+    <ShotStack pad="sm:pb-5" base="sm:w-full" overlay="sm:absolute sm:-inset-x-4 sm:bottom-0">
+      <template #base>
+        <TourShot
+          :shot="shots.libraryHero"
+          :alt="SHOT_ALTS['library-hero']"
+          :sizes="half"
+          loading="eager"
+        />
+      </template>
+      <template #overlay>
+        <TourShot
+          :shot="shots.columnChooser"
+          :alt="SHOT_ALTS['column-chooser']"
+          :sizes="half"
+          variant="natural"
+          :frame="lifted"
+        />
+      </template>
+    </ShotStack>
   </UPageSection>
 
   <UPageSection
     title="Tunedeck"
     orientation="horizontal"
     reverse
-    class="border-t border-default bg-elevated/40"
-    :ui="alignStart"
+    class="section-rule bg-elevated/40"
+    :ui="sectionUi"
   >
     <template #description>
       <p>
@@ -113,25 +127,26 @@ const full = '(min-width: 80rem) 72rem, 100vw'
       </p>
     </template>
 
-    <div class="flex min-w-0 flex-col gap-3">
-      <TourShot
-        :shot="shots.tunedeckArtist"
-        :alt="SHOT_ALTS['tunedeck-artist']"
-        :sizes="half"
-      />
-      <TourShot
-        :shot="shots.tunedeckRelated"
-        :alt="SHOT_ALTS['tunedeck-related']"
-        :sizes="half"
-      />
-    </div>
+    <ShotStack>
+      <template #base>
+        <TourShot
+          :shot="shots.tunedeckArtist"
+          :alt="SHOT_ALTS['tunedeck-artist']"
+          :sizes="stacked"
+        />
+      </template>
+      <template #overlay>
+        <TourShot
+          :shot="shots.tunedeckRelated"
+          :alt="SHOT_ALTS['tunedeck-related']"
+          :sizes="inset"
+          :frame="lifted"
+        />
+      </template>
+    </ShotStack>
   </UPageSection>
 
-  <UPageSection
-    title="Themes"
-    class="border-t border-default"
-    :ui="{ ...alignStart, body: 'mt-8' }"
-  >
+  <UPageSection title="Themes" class="section-rule" :ui="{ ...sectionUi, body: 'mt-8' }">
     <template #description>
       <p>
         Three themes, each in light and dark: Oscine, Nocturne, and High Contrast. The token editor
@@ -141,14 +156,15 @@ const full = '(min-width: 80rem) 72rem, 100vw'
     </template>
 
     <template #body>
-      <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <figure class="min-w-0">
+      <!-- Fanned rather than flush: three windows in a row is the flattest thing on the page. -->
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
+        <figure class="min-w-0 sm:mt-8">
           <TourShot
             :shot="shots.themeOscineDark"
             :alt="SHOT_ALTS['theme-oscine-dark']"
             :sizes="trio"
           />
-          <figcaption class="mt-2 text-sm text-muted">Oscine dark</figcaption>
+          <figcaption class="mt-2.5 text-sm text-muted">Oscine dark</figcaption>
         </figure>
         <figure class="min-w-0">
           <TourShot
@@ -156,23 +172,19 @@ const full = '(min-width: 80rem) 72rem, 100vw'
             :alt="SHOT_ALTS['theme-oscine-light']"
             :sizes="trio"
           />
-          <figcaption class="mt-2 text-sm text-muted">Oscine light</figcaption>
+          <figcaption class="mt-2.5 text-sm text-muted">Oscine light</figcaption>
         </figure>
-        <figure class="min-w-0">
+        <figure class="min-w-0 sm:mt-8">
           <TourShot
             :shot="shots.themeNocturne"
             :alt="SHOT_ALTS['theme-nocturne']"
             :sizes="trio"
           />
-          <figcaption class="mt-2 text-sm text-muted">Nocturne</figcaption>
+          <figcaption class="mt-2.5 text-sm text-muted">Nocturne</figcaption>
         </figure>
       </div>
-      <div class="mt-6">
-        <TourShot
-          :shot="shots.themeEditor"
-          :alt="SHOT_ALTS['theme-editor']"
-          :sizes="full"
-        />
+      <div class="mt-8">
+        <TourShot :shot="shots.themeEditor" :alt="SHOT_ALTS['theme-editor']" :sizes="full" />
       </div>
     </template>
   </UPageSection>
@@ -180,8 +192,8 @@ const full = '(min-width: 80rem) 72rem, 100vw'
   <UPageSection
     title="Curate & Discover"
     orientation="horizontal"
-    class="border-t border-default bg-elevated/40"
-    :ui="alignStart"
+    class="section-rule bg-elevated/40"
+    :ui="sectionUi"
   >
     <template #description>
       <p>
@@ -196,19 +208,15 @@ const full = '(min-width: 80rem) 72rem, 100vw'
       </p>
     </template>
 
-    <TourShot
-      :shot="shots.curateDiscover"
-      :alt="SHOT_ALTS['curate-discover']"
-      :sizes="half"
-    />
+    <TourShot :shot="shots.curateDiscover" :alt="SHOT_ALTS['curate-discover']" :sizes="half" />
   </UPageSection>
 
   <UPageSection
     title="Stage & Zen"
     orientation="horizontal"
     reverse
-    class="border-t border-default"
-    :ui="alignStart"
+    class="section-rule"
+    :ui="sectionUi"
   >
     <template #description>
       <p>
@@ -221,25 +229,21 @@ const full = '(min-width: 80rem) 72rem, 100vw'
       </p>
     </template>
 
-    <div class="flex min-w-0 flex-col gap-3">
-      <TourShot
-        :shot="shots.stage"
-        :alt="SHOT_ALTS.stage"
-        :sizes="half"
-      />
-      <TourShot
-        :shot="shots.zen"
-        :alt="SHOT_ALTS.zen"
-        :sizes="half"
-      />
-    </div>
+    <ShotStack>
+      <template #base>
+        <TourShot :shot="shots.stage" :alt="SHOT_ALTS.stage" :sizes="stacked" />
+      </template>
+      <template #overlay>
+        <TourShot :shot="shots.zen" :alt="SHOT_ALTS.zen" :sizes="inset" :frame="lifted" />
+      </template>
+    </ShotStack>
   </UPageSection>
 
   <UPageSection
     title="Playback"
     orientation="horizontal"
-    class="border-t border-default bg-elevated/40"
-    :ui="alignStart"
+    class="section-rule bg-elevated/40"
+    :ui="sectionUi"
   >
     <template #description>
       <p>
@@ -264,8 +268,8 @@ const full = '(min-width: 80rem) 72rem, 100vw'
     title="Stats"
     orientation="horizontal"
     reverse
-    class="border-t border-default"
-    :ui="alignStart"
+    class="section-rule"
+    :ui="sectionUi"
   >
     <template #description>
       <p>
@@ -275,18 +279,14 @@ const full = '(min-width: 80rem) 72rem, 100vw'
       </p>
     </template>
 
-    <TourShot
-      :shot="shots.stats"
-      :alt="SHOT_ALTS.stats"
-      :sizes="half"
-    />
+    <TourShot :shot="shots.stats" :alt="SHOT_ALTS.stats" :sizes="half" />
   </UPageSection>
 
   <UPageSection
     title="Podcasts"
     orientation="horizontal"
-    class="border-t border-default bg-elevated/40"
-    :ui="alignStart"
+    class="section-rule bg-elevated/40"
+    :ui="sectionUi"
   >
     <template #description>
       <p>
@@ -295,19 +295,15 @@ const full = '(min-width: 80rem) 72rem, 100vw'
       </p>
     </template>
 
-    <TourShot
-      :shot="shots.podcasts"
-      :alt="SHOT_ALTS.podcasts"
-      :sizes="half"
-    />
+    <TourShot :shot="shots.podcasts" :alt="SHOT_ALTS.podcasts" :sizes="half" />
   </UPageSection>
 
   <UPageSection
     title="Tools"
     orientation="horizontal"
     reverse
-    class="border-t border-default"
-    :ui="alignStart"
+    class="section-rule"
+    :ui="sectionUi"
   >
     <template #description>
       <p>
@@ -316,28 +312,24 @@ const full = '(min-width: 80rem) 72rem, 100vw'
       </p>
     </template>
 
-    <TourShot
-      :shot="shots.toolsWriteback"
-      :alt="SHOT_ALTS['tools-writeback']"
-      :sizes="half"
-    />
+    <TourShot :shot="shots.toolsWriteback" :alt="SHOT_ALTS['tools-writeback']" :sizes="half" />
   </UPageSection>
 
   <UPageSection
     title="Quick access"
     orientation="horizontal"
-    class="border-t border-default bg-elevated/40"
-    :ui="alignStart"
+    class="section-rule bg-elevated/40"
+    :ui="sectionUi"
   >
     <template #description>
       <p>
         <UKbd>Ctrl</UKbd>
         <UKbd class="ml-1">K</UKbd>
         opens the command palette from anywhere. Prefixes narrow it:
-        <code class="text-highlighted">&gt;</code> for actions,
-        <code class="text-highlighted">@</code> for artists,
-        <code class="text-highlighted">#</code> for playlists,
-        <code class="text-highlighted">/</code> for settings.
+        <code class="text-primary">&gt;</code> for actions,
+        <code class="text-primary">@</code> for artists,
+        <code class="text-primary">#</code> for playlists,
+        <code class="text-primary">/</code> for settings.
       </p>
       <p class="mt-4">
         The Quick Menu on Now Playing holds favorite playlists, recent additions, and favorite
@@ -345,29 +337,34 @@ const full = '(min-width: 80rem) 72rem, 100vw'
       </p>
     </template>
 
-    <div class="flex min-w-0 flex-col gap-3">
-      <TourShot
-        :shot="shots.palette"
-        :alt="SHOT_ALTS.palette"
-        :sizes="half"
-      />
-      <TourShot
-        :shot="shots.quickMenu"
-        :alt="SHOT_ALTS['quick-menu']"
-        :sizes="half"
-      />
-    </div>
+    <ShotStack>
+      <template #base>
+        <TourShot :shot="shots.palette" :alt="SHOT_ALTS.palette" :sizes="stacked" />
+      </template>
+      <template #overlay>
+        <TourShot
+          :shot="shots.quickMenu"
+          :alt="SHOT_ALTS['quick-menu']"
+          :sizes="inset"
+          :frame="lifted"
+        />
+      </template>
+    </ShotStack>
   </UPageSection>
 
-  <UPageSection title="Scrobbling" class="border-t border-default" :ui="alignStart">
+  <UPageSection title="Scrobbling" class="section-rule" :ui="sectionUi">
     <template #description>
-      <div class="flex flex-wrap items-center gap-8 text-highlighted">
-        <span class="inline-flex items-center gap-2.5">
-          <UIcon name="i-tabler-brand-lastfm" class="size-8" />
+      <div class="flex flex-wrap gap-3">
+        <span
+          class="inline-flex items-center gap-2.5 rounded-xl border border-default bg-elevated/60 px-4 py-2.5 text-highlighted"
+        >
+          <UIcon name="i-tabler-brand-lastfm" class="size-7 text-primary" />
           Last.fm
         </span>
-        <span class="inline-flex items-center gap-2.5">
-          <UIcon name="i-tabler-brain" class="size-8" />
+        <span
+          class="inline-flex items-center gap-2.5 rounded-xl border border-default bg-elevated/60 px-4 py-2.5 text-highlighted"
+        >
+          <UIcon name="i-tabler-brain" class="size-7 text-primary" />
           ListenBrainz
         </span>
       </div>
@@ -375,20 +372,23 @@ const full = '(min-width: 80rem) 72rem, 100vw'
     </template>
   </UPageSection>
 
-  <UPageCTA
-    variant="naked"
-    class="rounded-none border-t border-default"
-    title="Get Oscine."
-    description="Free for Windows and Linux."
-    :ui="alignStart"
-  >
-    <template #body>
-      <DownloadButtons :release="release" />
-    </template>
-    <template #footer>
-      <p class="text-sm text-dimmed">
-        <ULink to="/download">All downloads</ULink>
-      </p>
-    </template>
-  </UPageCTA>
+  <div class="relative isolate">
+    <div class="amber-glow amber-glow--bottom" aria-hidden="true" />
+    <UPageCTA
+      variant="naked"
+      class="section-rule rounded-none"
+      title="Get Oscine."
+      description="Free for Windows and Linux."
+      :ui="alignStart"
+    >
+      <template #body>
+        <DownloadButtons :release="release" />
+      </template>
+      <template #footer>
+        <p class="text-sm text-dimmed">
+          <ULink to="/download">All downloads</ULink>
+        </p>
+      </template>
+    </UPageCTA>
+  </div>
 </template>

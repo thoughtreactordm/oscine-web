@@ -10,9 +10,9 @@ labels:
 workstream: W3
 workstreamId: W3-5
 effort: medium
-order: 14
+order: 0
 created: '2026-08-29T19:59:11.668Z'
-updated: '2026-08-29T19:59:11.668Z'
+updated: '2026-08-30T18:41:02.223Z'
 ---
 Spec: `docs/1.0-site-release.md` §3.5 option (a). The Changelog page renders release bodies from GitHub; rc.1–rc.3 are auto-generated PR lists and stay as-is, but 1.0.0 should read like the site.
 

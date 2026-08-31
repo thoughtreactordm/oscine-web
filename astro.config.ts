@@ -1,7 +1,33 @@
 import vue from '@astrojs/vue'
 import ui from '@nuxt/ui/vite'
 import vercel from '@astrojs/vercel'
+import sharp from 'sharp'
 import { defineConfig } from 'astro/config'
+import type { Plugin } from 'vite'
+
+/**
+ * `import x from './shot.png?bloom'` gives a 32px WebP of that image as a data
+ * URI. Blown up and blurred behind a screenshot it becomes an ambient wash of
+ * the shot's own colors (see src/data/bloom.ts and .shot-bloom in global.css).
+ *
+ * `pre` so this beats astro:assets to the .png — the query alone is not enough.
+ */
+function bloom(): Plugin {
+  const SUFFIX = '?bloom'
+  return {
+    name: 'oscine:bloom',
+    enforce: 'pre',
+    async load(id) {
+      if (!id.endsWith(SUFFIX)) return null
+      const webp = await sharp(id.slice(0, -SUFFIX.length))
+        .resize(32, null, { fit: 'inside' })
+        .webp({ quality: 62 })
+        .toBuffer()
+      const uri = `data:image/webp;base64,${webp.toString('base64')}`
+      return `export default ${JSON.stringify(uri)}`
+    }
+  }
+}
 
 export default defineConfig({
   site: 'https://oscine.app',
@@ -18,6 +44,7 @@ export default defineConfig({
   ],
   vite: {
     plugins: [
+      bloom(),
       ui({
         router: false,
         colorMode: false,
@@ -66,6 +93,7 @@ export default defineConfig({
               'i-tabler-copy',
               'i-tabler-check',
               'i-tabler-arrow-right',
+              'i-tabler-arrows-diagonal',
               'i-tabler-external-link',
               'i-lucide-menu',
               'i-lucide-x'

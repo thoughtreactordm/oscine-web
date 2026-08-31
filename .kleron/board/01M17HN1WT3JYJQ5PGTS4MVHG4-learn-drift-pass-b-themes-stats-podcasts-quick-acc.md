@@ -1,7 +1,7 @@
 ---
 taskId: 01M17HN1WT3JYJQ5PGTS4MVHG4
 title: 'Learn drift pass B: Themes, Stats, Podcasts, Quick access + Learn index'
-status: todo
+status: in-progress
 priority: high
 labels:
   - docs
@@ -9,9 +9,9 @@ labels:
 workstream: W3
 workstreamId: W3-2
 effort: medium
-order: 11
+order: 1
 created: '2026-08-29T19:58:53.850Z'
-updated: '2026-08-29T19:58:53.850Z'
+updated: '2026-08-30T17:19:42.493Z'
 ---
 Spec: `docs/1.0-site-release.md` §3.3 table, voice §2. Same rules as drift pass A: verify against the app at rc.3, American spelling, `<!-- shot: key -->` slots.
 

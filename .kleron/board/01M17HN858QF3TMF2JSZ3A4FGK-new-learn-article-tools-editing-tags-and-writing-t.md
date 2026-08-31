@@ -1,7 +1,7 @@
 ---
 taskId: 01M17HN858QF3TMF2JSZ3A4FGK
 title: 'New Learn article: Tools — editing tags and writing them back'
-status: todo
+status: in-progress
 priority: high
 labels:
   - docs
@@ -10,9 +10,9 @@ labels:
 workstream: W3
 workstreamId: W3-3
 effort: medium
-order: 12
+order: 2
 created: '2026-08-29T19:59:00.263Z'
-updated: '2026-08-29T19:59:00.263Z'
+updated: '2026-08-30T18:33:42.448Z'
 ---
 Spec: `docs/1.0-site-release.md` §3.3 (new article row). Read the Tools implementation in the app (`src/renderer` Tools view, `src/main` write-back and backup code) before writing.
 

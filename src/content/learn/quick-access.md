@@ -36,4 +36,6 @@ Short lists, recomputed when you open it. A shortcut, not a second library.
 
 ## Keyboard
 
-Playback and navigation have a fixed default set. Rebinding is not in this release. Help in the app lists the bindings; **Ctrl+K** is the one to learn first.
+Playback and navigation have a fixed default set, and your keyboard's media keys (play/pause, next, previous) drive Oscine through the OS. Rebinding is not in this release. Help in the app lists the bindings; **Ctrl+K** is the one to learn first.
+
+The full set — global shortcuts, palette prefixes, double-click behavior, and media keys — is in [Keyboard & shortcuts](/learn/keyboard).

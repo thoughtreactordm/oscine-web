@@ -1,10 +1,20 @@
 <script setup lang="ts">
 import type { ButtonProps } from '@nuxt/ui'
 import type { Release } from '../data/release'
+import { SHOT_ALTS } from '../data/learn-shots'
 import DownloadButtons from './DownloadButtons.vue'
+import ShotFrame from './ShotFrame.vue'
 
 defineProps<{
   release: Release
+  /** Inlined 32px WebP washes, keyed to the shots passed in as slots. */
+  blooms: {
+    hero: string
+    pillarColumns: string
+    pillarStage: string
+    pillarThemePicker: string
+    tunedeckTrack: string
+  }
 }>()
 
 const alignStart = {
@@ -14,6 +24,9 @@ const alignStart = {
   leading: 'justify-start',
   links: 'justify-start'
 }
+
+/** Section headings carry the accent; the hero and CTA titles stay plain. */
+const sectionUi = { ...alignStart, title: 'text-left section-title' }
 
 const heroLinks: ButtonProps[] = [
   {
@@ -33,6 +46,8 @@ const pillars = [
   {
     title: 'Control',
     slot: 'pillar-columns',
+    bloom: 'pillarColumns',
+    alt: SHOT_ALTS['pillar-columns'],
     fit: '[&_img]:object-left',
     description:
       'You get a real queue, playlists you keep, ReplayGain, and gapless playback. Format readouts, tag editing, and the keyboard sit on the track list, the way they do in foobar2000 and fooyin.'
@@ -40,6 +55,8 @@ const pillars = [
   {
     title: 'Design',
     slot: 'pillar-stage',
+    bloom: 'pillarStage',
+    alt: SHOT_ALTS['pillar-stage'],
     fit: '[&_img]:object-center',
     description:
       'The interface is from this decade, made with care. The Stage fills the window with the cover, a waveform ribbon, and the track you are hearing.'
@@ -47,6 +64,8 @@ const pillars = [
   {
     title: 'Yours',
     slot: 'pillar-theme-picker',
+    bloom: 'pillarThemePicker',
+    alt: SHOT_ALTS['pillar-theme-picker'],
     fit: '[&_img]:object-top',
     description:
       'Three themes, each in light and dark, and a token editor for color, type, and motion. The accent can follow the current cover, and you can strip the shell down to what you use.'
@@ -55,18 +74,22 @@ const pillars = [
 </script>
 
 <template>
-  <UPageHero
-    title="Your library, taken seriously."
-    description="I made Oscine because I wanted a local player with foobar's control, an interface I actually enjoyed looking at, and quicker ways to get at everything I care about in the music I already own."
-    :links="heroLinks"
-    :ui="{ ...alignStart, description: 'text-left max-w-2xl' }"
-  >
-    <div class="overflow-hidden rounded-xl ring ring-default shadow-2xl shadow-black/40">
-      <slot name="hero" />
-    </div>
-  </UPageHero>
+  <div class="relative isolate">
+    <div class="amber-glow amber-glow--top" aria-hidden="true" />
 
-  <UPageSection class="border-t border-default" :ui="{ ...alignStart, body: 'mt-0' }">
+    <UPageHero
+      title="Your library, taken seriously."
+      description="I made Oscine because I wanted a local player with foobar's control, an interface I actually enjoyed looking at, and quicker ways to get at everything I care about in the music I already own."
+      :links="heroLinks"
+      :ui="{ ...alignStart, description: 'text-left max-w-2xl' }"
+    >
+      <ShotFrame :bloom="blooms.hero" :alt="SHOT_ALTS['library-hero']">
+        <slot name="hero" />
+      </ShotFrame>
+    </UPageHero>
+  </div>
+
+  <UPageSection class="section-rule" :ui="{ ...sectionUi, body: 'mt-0' }">
     <template #body>
       <UPageGrid>
         <UPageCard
@@ -75,13 +98,17 @@ const pillars = [
           :title="pillar.title"
           :description="pillar.description"
           variant="subtle"
+          class="transition-colors duration-300 hover:ring-primary/25"
         >
-          <div
-            class="aspect-[1280/820] overflow-hidden rounded-lg bg-elevated ring ring-default [&_picture]:block [&_picture]:size-full [&_img]:size-full [&_img]:object-cover"
+          <ShotFrame
+            :bloom="blooms[pillar.bloom]"
+            :alt="pillar.alt"
+            aspect
+            class="[&_picture]:block [&_picture]:size-full [&_img]:size-full [&_img]:object-cover"
             :class="pillar.fit"
           >
             <slot :name="pillar.slot" />
-          </div>
+          </ShotFrame>
         </UPageCard>
       </UPageGrid>
     </template>
@@ -90,8 +117,8 @@ const pillars = [
   <UPageSection
     title="Tunedeck"
     orientation="horizontal"
-    class="border-t border-default bg-elevated/40"
-    :ui="alignStart"
+    class="section-rule bg-elevated/40"
+    :ui="sectionUi"
   >
     <template #description>
       <p>
@@ -105,14 +132,16 @@ const pillars = [
       </p>
     </template>
 
-    <div class="overflow-hidden rounded-xl ring ring-default shadow-xl shadow-black/30">
+    <ShotFrame :bloom="blooms.tunedeckTrack" :alt="SHOT_ALTS['tunedeck-track']">
       <slot name="tunedeck-track" />
-    </div>
+    </ShotFrame>
   </UPageSection>
 
-  <UPageSection title="Why" class="border-t border-default" :ui="alignStart">
+  <UPageSection title="Why" class="section-rule" :ui="sectionUi">
     <template #body>
-      <div class="max-w-2xl space-y-4 text-muted">
+      <div
+        class="max-w-2xl space-y-4 border-l border-primary/25 pl-5 text-muted sm:pl-6"
+      >
         <p>
           I came from foobar2000 and fooyin, and I wanted that control in an interface I was happy
           to look at for hours.
@@ -134,20 +163,23 @@ const pillars = [
     </template>
   </UPageSection>
 
-  <UPageCTA
-    variant="naked"
-    class="rounded-none border-t border-default"
-    title="Get Oscine."
-    description="Free for Windows and Linux."
-    :ui="alignStart"
-  >
-    <template #body>
-      <DownloadButtons :release="release" />
-    </template>
-    <template #footer>
-      <p class="text-sm text-dimmed">
-        <ULink to="/download">All downloads</ULink>
-      </p>
-    </template>
-  </UPageCTA>
+  <div class="relative isolate">
+    <div class="amber-glow amber-glow--bottom" aria-hidden="true" />
+    <UPageCTA
+      variant="naked"
+      class="section-rule rounded-none"
+      title="Get Oscine."
+      description="Free for Windows and Linux."
+      :ui="alignStart"
+    >
+      <template #body>
+        <DownloadButtons :release="release" />
+      </template>
+      <template #footer>
+        <p class="text-sm text-dimmed">
+          <ULink to="/download">All downloads</ULink>
+        </p>
+      </template>
+    </UPageCTA>
+  </div>
 </template>

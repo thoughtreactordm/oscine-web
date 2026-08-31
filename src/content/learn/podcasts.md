@@ -11,13 +11,13 @@ Podcasts are their own tab. A show is a feed you subscribed to, not a folder Osc
 
 ## Subscribe
 
-Paste a feed URL, or use Discover to browse Apple’s catalogue (that path needs **Allow online lookups**). Subscribing is you naming a host; refreshing that feed does not wait on the lookups toggle.
+Paste a feed URL, or use Discover to browse Apple's catalog (that path needs **Allow online lookups**). Subscribing is you naming a host; refreshing that feed does not wait on the lookups toggle.
 
 ## Download, then play
 
 Oscine downloads an episode and plays the file. It does not stream the enclosure. One button on the episode: download, cancel while it runs, play when it is ready.
 
-Per show, you can auto-download new episodes and keep the last *N* (default 3). Manual downloads are not pruned.
+Per show, you can auto-download new episodes and keep the newest few (three by default, adjustable). Episodes you downloaded by hand are never pruned.
 
 ## Progress
 

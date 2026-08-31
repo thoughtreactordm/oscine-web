@@ -1,7 +1,7 @@
 ---
 taskId: 01M17HMX0JZHZAADZGB37P10JT
 title: 'Learn drift pass A: Getting started, Library, Curate, Tunedeck'
-status: todo
+status: in-progress
 priority: high
 labels:
   - docs
@@ -9,9 +9,9 @@ labels:
 workstream: W3
 workstreamId: W3-1
 effort: medium
-order: 10
+order: 0
 created: '2026-08-29T19:58:48.850Z'
-updated: '2026-08-29T19:58:48.850Z'
+updated: '2026-08-30T17:19:41.424Z'
 ---
 Spec: `docs/1.0-site-release.md` §3.3 table, voice §2. Source of truth is the app at rc.3 in `~/Projects/Web Dev/oscine` — read the renderer/main code and the app's own docs, not the current article, for every claim.
 

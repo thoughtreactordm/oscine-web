@@ -1,7 +1,7 @@
 ---
 taskId: 01M17HNDNM2EE0JE8D48EFRYJF
 title: 'New Learn article: Keyboard & shortcuts'
-status: todo
+status: in-progress
 priority: medium
 labels:
   - docs
@@ -10,9 +10,9 @@ labels:
 workstream: W3
 workstreamId: W3-4
 effort: medium
-order: 13
+order: 3
 created: '2026-08-29T19:59:05.908Z'
-updated: '2026-08-29T19:59:05.908Z'
+updated: '2026-08-30T18:40:58.929Z'
 ---
 Spec: `docs/1.0-site-release.md` §3.3 (new article row). Extract the real bindings from the app's shortcut registry (search `src/renderer` for the keymap / global shortcut registration in `src/main`) — do not invent any.
 

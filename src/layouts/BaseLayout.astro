@@ -3,6 +3,7 @@ import { getImage } from 'astro:assets'
 import type { ImageMetadata } from 'astro'
 import '../styles/global.css'
 import AppMain from '../components/AppMain.vue'
+import Lightbox from '../components/Lightbox.vue'
 import SiteFooter from '../components/SiteFooter.vue'
 import SiteHeader from '../components/SiteHeader.vue'
 import ogDefault from '../assets/screenshots/crops/og.png'
@@ -17,13 +18,16 @@ interface Props {
   description?: string
   ogImage?: ImageMetadata
   ogImageAlt?: string
+  /** Mount the Lightbox island. Only pages with `[data-zoom]` shots need it. */
+  zoom?: boolean
 }
 
 const {
   title = 'Oscine — a local music player',
   description = 'Oscine is a local music player for Windows and Linux. Power-user control, a modern interface, and a shell you can make yours.',
   ogImage = ogDefault,
-  ogImageAlt = shotAlt('og')
+  ogImageAlt = shotAlt('og'),
+  zoom = false
 } = Astro.props
 
 const canonical = new URL(Astro.url.pathname, Astro.site)
@@ -67,6 +71,7 @@ const ogHeight = String(og.attributes.height ?? 630)
         <slot />
       </AppMain>
       <SiteFooter />
+      {zoom && <Lightbox client:idle />}
     </div>
   </body>
 </html>
