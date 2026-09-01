@@ -58,7 +58,7 @@ const items: NavigationMenuItem[] = [
           Thought Reactor
         </p>
         <p>Created with ❤️ by Michael DeLally</p>
-        <p class="text-xs">Sotware code open source, MIT.</p>
+        <p class="text-xs">Software code open source, MIT.</p>
       </section>
     </template>
   </UFooter>

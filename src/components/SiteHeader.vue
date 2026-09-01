@@ -29,6 +29,24 @@ const items = computed<NavigationMenuItem[]>(() => [
     <UNavigationMenu :items="items" />
 
     <template #right>
+      <UButton
+        to="https://discord.gg/u3npX42WbP"
+        target="_blank"
+        icon="i-simple-icons-discord"
+        color="neutral"
+        variant="ghost"
+        size="sm"
+        aria-label="Oscine on Discord"
+      />
+      <UButton
+        to="https://github.com/thoughtreactordm/oscine"
+        target="_blank"
+        icon="i-simple-icons-github"
+        color="neutral"
+        variant="ghost"
+        size="sm"
+        aria-label="Oscine on GitHub"
+      />
       <UButton to="/download" color="primary" size="sm" class="hidden lg:inline-flex">
         Get Oscine
       </UButton>

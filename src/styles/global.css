@@ -10,6 +10,11 @@ html {
   color-scheme: dark;
   /* Reserved so opening the lightbox does not shift the page behind it. */
   scrollbar-gutter: stable;
+  /* Full-bleed blooms and glows are clipped here as well as on the body, so a
+   * pinch-zoom on touch devices can't pan the page sideways into the slop. */
+  overflow-x: clip;
+  /* No pull-to-refresh / bounce chaining past the top and bottom of the page. */
+  overscroll-behavior-y: none;
 }
 
 html.dark {
@@ -135,6 +140,15 @@ body {
   padding-inline: 1rem;
 }
 
+/* Headline + shot. This is the copy's sticky containing block, so the copy
+ * unpins at THIS box's bottom (the shot's trailing edge) rather than at the end
+ * of the hero — the copy then scrolls up and away with the shot's tail instead
+ * of staying pinned for the CTA to climb up under. Its auto bottom margin is
+ * what seats the CTA on the hero floor when the shot is short. */
+.hero-stage {
+  margin-bottom: auto;
+}
+
 /* Headline + byline, pinned to the crown. Its ::before is the light the shot
  * fades into: a wash of the page colour riding with the pinned copy, sitting
  * above the shot (the whole copy is its own stacking context over it) but
@@ -154,7 +168,7 @@ body {
   z-index: -1;
   left: 50%;
   top: calc(-1 * (var(--ui-header-height) + clamp(3.5rem, 11vh, 7rem)));
-  width: 100vw;
+  width: 100dvw;
   height: 24rem;
   transform: translateX(-50%);
   pointer-events: none;
@@ -167,14 +181,35 @@ body {
   );
 }
 
+/* A soft, blurred neutral-gray plate that rides directly behind the words —
+ * feathered to nothing at its edges so it never resolves into a box. Where the
+ * top-fade above only washes the crown, this hugs the copy itself, so the shot
+ * rising behind the headline and byline is more thoroughly obscured and the
+ * type keeps its contrast. */
+.hero-copy::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -1.75rem -2.5rem;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in oklab, var(--ui-bg-elevated) 88%, transparent) 0%,
+    color-mix(in oklab, var(--ui-bg-elevated) 66%, transparent) 42%,
+    color-mix(in oklab, var(--ui-bg-elevated) 30%, transparent) 66%,
+    transparent 82%
+  );
+  filter: blur(26px);
+}
+
 /* The whole app window and its bloom, in normal flow so its height drives the
- * scroll and the CTA below can trail it. The auto bottom margin pushes the CTA
- * to the floor when the shot is short; on a tall shot it collapses and the shot
- * itself provides the travel. */
+ * scroll. Its bottom is the stage's bottom, which is where the pinned copy
+ * releases. The stage's auto bottom margin (not this element's) seats the CTA
+ * on the floor. */
 .hero-shot-track {
   position: relative;
   z-index: 10;
-  margin: clamp(1.5rem, 5vh, 3rem) auto auto;
+  margin: clamp(1.5rem, 5vh, 3rem) auto 0;
   width: 100%;
   max-width: 64rem;
 }
@@ -212,9 +247,8 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  /* A tall, faded lead-in above the buttons. Doubles as the breathing room
-   * between the CTA and the byline once the shot has scrolled past and the two
-   * ride up together. */
+  /* A tall, faded lead-in above the buttons, keeping the type legible as the
+   * shot passes behind the CTA on its way up. */
   padding-top: clamp(7rem, 16vh, 10rem);
   padding-bottom: clamp(2.25rem, 4vh, 3rem);
   text-align: center;
@@ -244,7 +278,7 @@ body {
   position: absolute;
   left: 50%;
   z-index: -1;
-  width: min(150rem, 200vw);
+  width: min(150rem, 200dvw);
   transform: translateX(-50%);
   pointer-events: none;
   background: radial-gradient(
@@ -270,14 +304,17 @@ body {
 /* --- Lightbox ------------------------------------------------------------- */
 
 .lightbox {
-  width: 100vw;
-  max-width: 100vw;
+  width: 100dvw;
+  max-width: 100dvw;
   height: 100dvh;
   max-height: 100dvh;
   margin: 0;
   padding: 0;
   border: 0;
   overflow: hidden;
+  /* A modal in the top layer isn't clipped by the page; stop it from chaining
+   * a rubber-band scroll into the frozen page behind it on touch devices. */
+  overscroll-behavior: none;
   background: transparent;
   color: var(--ui-text);
   cursor: zoom-out;
