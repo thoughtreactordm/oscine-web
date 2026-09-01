@@ -134,7 +134,7 @@ const pillars = [
 
   <UPageSection class="section-rule" :ui="{ ...sectionUi, body: 'mt-0' }">
     <template #body>
-      <h2 class="text-3xl mb-12 text-center">
+      <h2 class="text-3xl mb-12 text-center wordmark text-primary">
         If music is what drives you. Oscine lets you take the wheel.
       </h2>
 
@@ -177,7 +177,7 @@ const pillars = [
     <template #description>
       <p class="font-semibold mb-3">Sometimes there is more to the music than just soundwaves.</p>
       <p class="text-dimmed">
-        For those who want to dig a little deeper into their favorite tracks and artists, Orcine
+        For those who want to dig a little deeper into their favorite tracks and artists, Oscine
         provides the <em>Tunedeck</em> - a sidekick that provides contextual information to whatever
         you're jamming to.
       </p>
@@ -188,46 +188,74 @@ const pillars = [
     </ShotFrame>
   </UPageSection>
 
-  <UPageSection title="Why Oscine? Why now?" class="section-rule" :ui="sectionUi">
+  <UPageSection title="A Better Harmony" class="section-rule" :ui="{ title: 'text-primary' }">
     <template #body>
-      <div class="max-w-2xl space-y-4 border-l border-primary/25 pl-5 text-muted sm:pl-6">
-        <p>There are many unique and truly wonderful desktop music players out there.</p>
-        <p>
-          Oscine doesn't really aim to replace or compete with them, but to provide an alternative
-          experience.
-          <em class="font-semibold"
-            >It might be driven by minor frustrations and idiosyncracies with various players - but
-            moreso by a philosophy to build an efficient and functional music player that is also
-            wonderful to look at.</em
-          >
-        </p>
-        <p>
-          Music streaming behemoths are jacking up their prices, stiffing artists and failing to
-          provide evolving value. Couple that greed with thier desire to flood catalogs with AI slop
-          music or finance the apartheid of the people of Palestine - there's no wonder people are
-          returning to CDs and digital collections.
-        </p>
-        <p>
-          Consumers are coming face-to-face with the damning reality that we don't own the things we
-          purchase. This reality where we trade ownership for convenience is avoidable and it serves
-          both us consumers and the talented artists who are getting the short end of the shit
-          stick, too.
-        </p>
-        <p class="pt-2">
-          <UButton
-            to="/features"
-            color="primary"
-            variant="link"
-            trailing-icon="i-tabler-arrow-right"
-          >
-            See features
-          </UButton>
-        </p>
-      </div>
+      <section class="grid grid-cols-1 md:grid-cols-2 items-center">
+        <div class="grid grid-cols-3 items-start text-center px-8 gap-2 mb-4 md:mb-0">
+          <div class="font-semibold flex flex-col items-center justify-start gap-3 py-4 text-muted">
+            <UIcon name="i-tabler-devices" class="size-12 text-primary" />
+            Vibrant & Responsive Interface
+          </div>
+          <div class="font-semibold flex flex-col items-center justify-start gap-3 py-4 text-muted">
+            <UIcon name="i-tabler-database" class="size-12 text-primary" />
+            Data-driven Library Management
+          </div>
+          <div class="font-semibold flex flex-col items-center justify-start gap-3 py-4 text-muted">
+            <UIcon name="i-tabler-adjustments" class="size-12 text-primary" />
+            Fully Customizable Configuration
+          </div>
+          <div class="font-semibold flex flex-col items-center justify-start gap-3 py-4 text-muted">
+            <UIcon name="i-tabler-rocket" class="size-12 text-primary" />
+            Future Forward & Evolving
+          </div>
+          <div class="font-semibold flex flex-col items-center justify-start gap-3 py-4 text-muted">
+            <UIcon name="i-tabler-microphone-2" class="size-12 text-primary" />
+            Artist-focused Philosophy
+          </div>
+          <div class="font-semibold flex flex-col items-center justify-start gap-3 py-4 text-muted">
+            <UIcon name="i-tabler-accessible" class="size-12 text-primary" />
+            First Class Accessibility
+          </div>
+        </div>
+        <div
+          class="max-w-2xl space-y-4 border-t md:border-t-0 md:border-l border-primary/25 px-8 text-dimmed pt-8"
+        >
+          <p class="mb-3 text-muted font-semibold">
+            Free yourself from the enshitification of music listening.
+          </p>
+          <p>
+            Everything these days is behind a subscription. You're renting your music and artists
+            get screwed in the process.
+          </p>
+          <p>
+            Ditching Spotify or Apple Music comes with a huge loss of access and cost barriers for
+            many; but for music nerds with a means to buy permanent media, why settle for a music
+            player that looks like it is from the Windows XP days or where customizing feels like a
+            coding task?
+          </p>
+          <p class="italic">
+            Supporting artists as directly as possible and using local players, like Oscine, is how
+            we turn the tides on these abusive industry practices.
+          </p>
+          <div class="pt-2 flex justify-end">
+            <UButton
+              to="/features"
+              color="primary"
+              variant="ghost"
+              trailing-icon="i-tabler-arrow-right"
+            >
+              See features in depth
+            </UButton>
+          </div>
+        </div>
+      </section>
     </template>
   </UPageSection>
 
-  <UPageSection title="FAQs">
+  <UPageSection
+    title="FAQs"
+    :ui="{ root: 'bg-muted/40 border-t border-muted/40', title: 'text-primary'}"
+  >
     <template #body> <slot name="faqs" /> </template>
   </UPageSection>
 
