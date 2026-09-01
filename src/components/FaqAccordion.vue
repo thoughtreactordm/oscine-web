@@ -11,17 +11,17 @@ const faqs: AccordionItem[] = [
   {
     label: "Is Oscine free?",
     content:
-      "Yes. Oscine is free to download and use on both Windows and Linux, and the source is available under the MIT license. No account, no subscription, no upsell.",
+      "Yes. Oscine is free to download and use on both Windows and Linux, and the source is available under the MIT license.",
   },
   {
     label: "Does Oscine stream music or host a catalog?",
     content:
-      "No. Oscine plays the music you already own — the files on your own drive. It builds a rich data layer around your collection so it feels as good to browse as any streaming app, but everything stays local to you.",
+      "No. Oscine plays the local music you already own. It builds a rich data layer around your collection so it feels as good to browse as any streaming app, but everything stays local to you.",
   },
   {
     label: "Which file formats does Oscine support?",
     content:
-      "Oscine handles the formats you'd expect from a local library — FLAC, MP3, AAC/M4A, OGG, and WAV among them. Point it at your music folder and it takes care of the rest.",
+      "Oscine handles the formats you'd expect from a local library: FLAC, MP3, AAC/M4A, OGG, and WAV among them. Point it at your music folder and it takes care of the rest.",
   },
   {
     label: "What is the Tunedeck?",
@@ -42,5 +42,5 @@ const faqs: AccordionItem[] = [
 </script>
 
 <template>
-  <UAccordion :items="faqs" />
+  <section class="max-w-128 mx-auto"><UAccordion :items="faqs" /></section>
 </template>
