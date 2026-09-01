@@ -77,29 +77,35 @@ const pillars = [
   <section class="hero relative isolate">
     <div class="amber-glow amber-glow--top" aria-hidden="true" />
 
-    <!-- Headline + byline, pinned to the crown; the shot rises up behind them
-         and dissolves into the light the copy's ::before lays over it. -->
-    <div class="hero-copy">
-      <h1
-        class="display text-balance text-4xl font-semibold tracking-tight text-highlighted sm:text-5xl lg:text-6xl"
-      >
-        A Future Forward Music Player
-      </h1>
-      <p class="mt-4 text-xl text-muted sm:text-2xl">Oscine is <slot name="hero-byline" /> </p>
-    </div>
+    <!-- Headline + shot share a stage: the copy is sticky WITHIN this stage, so
+         it pins only while the shot is rising behind it and then unpins and
+         scrolls away with the shot's tail — instead of staying pinned to the
+         end of the hero and letting the trailing CTA climb right up under it. -->
+    <div class="hero-stage">
+      <!-- Headline + byline, pinned to the crown; the shot rises up behind them
+           and dissolves into the light the copy's ::before lays over it. -->
+      <div class="hero-copy">
+        <h1
+          class="display text-balance text-4xl font-semibold tracking-tight text-highlighted sm:text-5xl lg:text-6xl"
+        >
+          A Future Forward Music Player
+        </h1>
+        <p class="mt-4 text-xl text-muted sm:text-2xl">Oscine is <slot name="hero-byline" /> </p>
+      </div>
 
-    <!-- The whole app window, in normal flow. It scrolls up behind the copy as
-         the page scrolls; the CTA below trails its bottom edge. -->
-    <div class="hero-shot-track">
-      <div
-        class="hero-bloom"
-        :style="{ backgroundImage: `url('${blooms.hero}')` }"
-        aria-hidden="true"
-      />
-      <div
-        class="hero-shot relative z-10 [&_img]:w-full [&_img]:rounded-xl [&_img]:ring-1 [&_img]:ring-default"
-      >
-        <slot name="hero" />
+      <!-- The whole app window, in normal flow. It scrolls up behind the copy as
+           the page scrolls, and its bottom edge marks where the copy unpins. -->
+      <div class="hero-shot-track">
+        <div
+          class="hero-bloom"
+          :style="{ backgroundImage: `url('${blooms.hero}')` }"
+          aria-hidden="true"
+        />
+        <div
+          class="hero-shot relative z-10 [&_img]:w-full [&_img]:rounded-xl [&_img]:ring-1 [&_img]:ring-default"
+        >
+          <slot name="hero" />
+        </div>
       </div>
     </div>
 
