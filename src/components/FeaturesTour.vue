@@ -1,64 +1,64 @@
 <script setup lang="ts">
-import type { ButtonProps } from '@nuxt/ui'
-import type { Release } from '../data/release'
-import { SHOT_ALTS } from '../data/learn-shots'
-import DownloadButtons from './DownloadButtons.vue'
-import ShotStack from './ShotStack.vue'
-import TourShot, { type TourShotAsset } from './TourShot.vue'
+import type { ButtonProps } from "@nuxt/ui";
+import type { Release } from "../data/release";
+import { SHOT_ALTS } from "../data/learn-shots";
+import DownloadButtons from "./DownloadButtons.vue";
+import ShotStack from "./ShotStack.vue";
+import TourShot, { type TourShotAsset } from "./TourShot.vue";
 
 defineProps<{
-  release: Release
+  release: Release;
   shots: {
-    libraryHero: TourShotAsset
-    columnChooser: TourShotAsset
-    tunedeckArtist: TourShotAsset
-    tunedeckRelated: TourShotAsset
-    themeOscineDark: TourShotAsset
-    themeOscineLight: TourShotAsset
-    themeNocturne: TourShotAsset
-    themeEditor: TourShotAsset
-    curateDiscover: TourShotAsset
-    stage: TourShotAsset
-    zen: TourShotAsset
-    trackInfo: TourShotAsset
-    stats: TourShotAsset
-    podcasts: TourShotAsset
-    toolsWriteback: TourShotAsset
-    palette: TourShotAsset
-    quickMenu: TourShotAsset
-  }
-}>()
+    libraryHero: TourShotAsset;
+    columnChooser: TourShotAsset;
+    tunedeckArtist: TourShotAsset;
+    tunedeckRelated: TourShotAsset;
+    themeOscineDark: TourShotAsset;
+    themeOscineLight: TourShotAsset;
+    themeNocturne: TourShotAsset;
+    themeEditor: TourShotAsset;
+    curateDiscover: TourShotAsset;
+    stage: TourShotAsset;
+    zen: TourShotAsset;
+    trackInfo: TourShotAsset;
+    stats: TourShotAsset;
+    podcasts: TourShotAsset;
+    toolsWriteback: TourShotAsset;
+    palette: TourShotAsset;
+    quickMenu: TourShotAsset;
+  };
+}>();
 
 const alignStart = {
-  title: 'text-left',
-  description: 'text-left',
-  headline: 'justify-start',
-  leading: 'justify-start',
-  links: 'justify-start'
-}
+  title: "text-left",
+  description: "text-left",
+  headline: "justify-start",
+  leading: "justify-start",
+  links: "justify-start",
+};
 
 /** Section headings carry the accent; the page header title stays plain. */
-const sectionUi = { ...alignStart, title: 'text-left section-title' }
+const sectionUi = { ...alignStart, title: "text-left section-title" };
 
 const heroLinks: ButtonProps[] = [
-  { label: 'Download', to: '/download' },
+  { label: "Download", to: "/download", color: "primary" },
   {
-    label: 'Learn',
-    to: '/learn',
-    color: 'neutral',
-    variant: 'subtle'
-  }
-]
+    label: "Learn",
+    to: "/learn",
+    color: "neutral",
+    variant: "subtle",
+  },
+];
 
 /** The shot behind an overlay is narrower than the column, so it asks for less. */
-const stacked = '(min-width: 1024px) 31rem, 100vw'
-const inset = '(min-width: 1024px) 20rem, 100vw'
-const half = '(min-width: 1024px) 36rem, 100vw'
-const trio = '(min-width: 640px) 22rem, 100vw'
-const full = '(min-width: 80rem) 72rem, 100vw'
+const stacked = "(min-width: 1024px) 31rem, 100vw";
+const inset = "(min-width: 1024px) 20rem, 100vw";
+const half = "(min-width: 1024px) 36rem, 100vw";
+const trio = "(min-width: 640px) 22rem, 100vw";
+const full = "(min-width: 80rem) 72rem, 100vw";
 
 /** Overlays sit on top of another shot and need to read that way. */
-const lifted = 'shadow-2xl shadow-black/70'
+const lifted = "shadow-2xl shadow-black/70";
 </script>
 
 <template>
@@ -68,7 +68,7 @@ const lifted = 'shadow-2xl shadow-black/70'
       <UPageHeader
         headline="Features"
         title="Every surface."
-        description="A screenshot tour of Oscine. Each section is one screen and the facts that belong to it."
+        description="A (non-exhaustive) look at what you can do with your music using Oscine."
         :links="heroLinks"
       />
     </UContainer>
@@ -77,12 +77,17 @@ const lifted = 'shadow-2xl shadow-black/70'
   <UPageSection title="Library" orientation="horizontal" class="section-rule" :ui="sectionUi">
     <template #description>
       <p>
-        Point Oscine at folders you already have. It indexes those paths; the files stay where you
-        put them. Browse by artist, album, or song. Search is instant over title, artist, and album.
+        Like any local music player, the app's experience is driven by the music library you've
+        cultivated. Add any number of folders to watch, browse them together or individually, and
+        search amongst them using an instant search function.
       </p>
       <p class="mt-4">
-        The song list is built for 100k tracks. Group by album, pick a density, and choose which
-        columns you want.
+        With source lists breaking tracks down by Genre/Tag, Artists, and Albums you can quickly
+        scour through your collection and find just the right tunes to queue up.
+      </p>
+      <p class="mt-4">
+        With the <strong>Songs</strong> list, take full control over which data columns you want to
+        display, sort by, their position in the table, and more.
       </p>
     </template>
 
@@ -96,7 +101,7 @@ const lifted = 'shadow-2xl shadow-black/70'
           loading="eager"
         />
       </template>
-      <template #overlay>
+      <!--<template #overlay>
         <TourShot
           :shot="shots.columnChooser"
           :alt="SHOT_ALTS['column-chooser']"
@@ -104,7 +109,7 @@ const lifted = 'shadow-2xl shadow-black/70'
           variant="natural"
           :frame="lifted"
         />
-      </template>
+      </template>-->
     </ShotStack>
   </UPageSection>
 
@@ -152,7 +157,9 @@ const lifted = 'shadow-2xl shadow-black/70'
         Three themes, each in light and dark: Oscine, Nocturne, and High Contrast. The token editor
         covers color, type, and motion, and a contrast warning sits on the row that caused it.
       </p>
-      <p class="mt-4">The accent can follow the current cover. An accent you set in the editor still wins.</p>
+      <p class="mt-4">
+        The accent can follow the current cover. An accent you set in the editor still wins.
+      </p>
     </template>
 
     <template #body>
@@ -175,11 +182,7 @@ const lifted = 'shadow-2xl shadow-black/70'
           <figcaption class="mt-2.5 text-sm text-muted">Oscine light</figcaption>
         </figure>
         <figure class="min-w-0 sm:mt-8">
-          <TourShot
-            :shot="shots.themeNocturne"
-            :alt="SHOT_ALTS['theme-nocturne']"
-            :sizes="trio"
-          />
+          <TourShot :shot="shots.themeNocturne" :alt="SHOT_ALTS['theme-nocturne']" :sizes="trio" />
           <figcaption class="mt-2.5 text-sm text-muted">Nocturne</figcaption>
         </figure>
       </div>
@@ -264,13 +267,7 @@ const lifted = 'shadow-2xl shadow-black/70'
     />
   </UPageSection>
 
-  <UPageSection
-    title="Stats"
-    orientation="horizontal"
-    reverse
-    class="section-rule"
-    :ui="sectionUi"
-  >
+  <UPageSection title="Stats" orientation="horizontal" reverse class="section-rule" :ui="sectionUi">
     <template #description>
       <p>
         Stats is the listening log: top artists, albums, and tracks for a range you pick. Totals
@@ -298,13 +295,7 @@ const lifted = 'shadow-2xl shadow-black/70'
     <TourShot :shot="shots.podcasts" :alt="SHOT_ALTS.podcasts" :sizes="half" />
   </UPageSection>
 
-  <UPageSection
-    title="Tools"
-    orientation="horizontal"
-    reverse
-    class="section-rule"
-    :ui="sectionUi"
-  >
+  <UPageSection title="Tools" orientation="horizontal" reverse class="section-rule" :ui="sectionUi">
     <template #description>
       <p>
         Tag edits are staged. You review the before and after, then write. A backup of the original
@@ -326,10 +317,14 @@ const lifted = 'shadow-2xl shadow-black/70'
         <UKbd>Ctrl</UKbd>
         <UKbd class="ml-1">K</UKbd>
         opens the command palette from anywhere. Prefixes narrow it:
-        <code class="text-primary">&gt;</code> for actions,
-        <code class="text-primary">@</code> for artists,
-        <code class="text-primary">#</code> for playlists,
-        <code class="text-primary">/</code> for settings.
+        <code class="text-primary">&gt;</code>
+        for actions,
+        <code class="text-primary">@</code>
+        for artists,
+        <code class="text-primary">#</code>
+        for playlists,
+        <code class="text-primary">/</code>
+        for settings.
       </p>
       <p class="mt-4">
         The Quick Menu on Now Playing holds favorite playlists, recent additions, and favorite
@@ -352,9 +347,9 @@ const lifted = 'shadow-2xl shadow-black/70'
     </ShotStack>
   </UPageSection>
 
-  <UPageSection title="Scrobbling" class="section-rule" :ui="sectionUi">
+  <UPageSection title="Scrobbling" class="section-rule">
     <template #description>
-      <div class="flex flex-wrap gap-3">
+      <div class="flex flex-wrap gap-3 justify-center items-center">
         <span
           class="inline-flex items-center gap-2.5 rounded-xl border border-default bg-elevated/60 px-4 py-2.5 text-highlighted"
         >
@@ -368,7 +363,10 @@ const lifted = 'shadow-2xl shadow-black/70'
           ListenBrainz
         </span>
       </div>
-      <p class="mt-4">An outbox holds listens while you are offline, then sends them in order.</p>
+      <p class="mt-4">
+        Choose one or both services. Oscine will keep track offline and update once connected to the
+        net.
+      </p>
     </template>
   </UPageSection>
 
@@ -379,15 +377,10 @@ const lifted = 'shadow-2xl shadow-black/70'
       class="section-rule rounded-none"
       title="Get Oscine."
       description="Free for Windows and Linux."
-      :ui="alignStart"
     >
-      <template #body>
-        <DownloadButtons :release="release" />
-      </template>
+      <template #body> <DownloadButtons :release="release" /> </template>
       <template #footer>
-        <p class="text-sm text-dimmed">
-          <ULink to="/download">All downloads</ULink>
-        </p>
+        <p class="text-sm text-dimmed text-center"><ULink to="/download">All downloads</ULink></p>
       </template>
     </UPageCTA>
   </div>

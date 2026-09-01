@@ -24,14 +24,14 @@ const faqs: AccordionItem[] = [
       "Oscine handles the formats you'd expect from a local library: FLAC, MP3, AAC/M4A, OGG, and WAV among them. Point it at your music folder and it takes care of the rest.",
   },
   {
-    label: "What is the Tunedeck?",
-    content:
-      "The Tunedeck is a sidekick panel that surfaces contextual details about whatever you're playing — the story behind the track and artist, without pulling you out of your library.",
-  },
-  {
     label: "Can I make it look the way I want?",
     content:
-      "That's the whole idea. Themes and style customization let you tune the look and feel of the player, and Oscine checks color combinations against WCAG 2.1 AA contrast guidance so your choices stay readable.",
+      "Themes and style customization let you tune the look and feel of the player, and Oscine checks color combinations against WCAG 2.1 AA contrast guidance so your choices stay readable.",
+  },
+  {
+    label: "Does Oscine use AI or have an AI disclosure?",
+    content:
+      "The software application is developed with the assistance of agentic/AI coding tools to aid in speed of development or solve pressing issues. Oscine does not currently include support for any AI or LLM technologies and does not support the generation of music, art, and literature using these tools. For more information about how the developer uses these tools, please view our <a href='/disclosure' class='text-primary underline'>AI Disclosure</a> page.",
   },
   {
     label: "Is there a macOS version?",
@@ -42,5 +42,9 @@ const faqs: AccordionItem[] = [
 </script>
 
 <template>
-  <section class="max-w-128 mx-auto"><UAccordion :items="faqs" /></section>
+  <section class="max-w-128 mx-auto">
+    <UAccordion :items="faqs" :ui="{ trailingIcon: 'text-primary' }">
+      <template #body="{ item }"> <p v-html="item.content" /> </template>
+    </UAccordion>
+  </section>
 </template>
