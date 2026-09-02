@@ -1,6 +1,7 @@
 ---
 import { getImage } from 'astro:assets'
 import type { ImageMetadata } from 'astro'
+import SpeedInsights from '@vercel/speed-insights/astro'
 import '../styles/global.css'
 import AppMain from '../components/AppMain.vue'
 import Lightbox from '../components/Lightbox.vue'
@@ -73,5 +74,6 @@ const ogHeight = String(og.attributes.height ?? 630)
       <SiteFooter />
       {zoom && <Lightbox client:idle />}
     </div>
+    <SpeedInsights />
   </body>
 </html>
