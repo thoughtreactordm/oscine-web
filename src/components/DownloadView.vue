@@ -216,9 +216,17 @@ function sizeLabel(size: number | null): string | null {
 
         <div class="mt-6 flex flex-col gap-2 text-sm text-muted">
           <p>
-            Updates are manual: grab a new build from the
-            <ULink to="/changelog" class="text-primary hover:underline">changelog</ULink>
-            whenever you like.
+            Oscine 1.0.3 and later can update itself. Open
+            <span class="text-toned">Settings → About</span> and click
+            <span class="text-toned">Check for updates</span>. The Windows installer and the
+            AppImage download the new version and install it when you restart. The .deb can check
+            too, but it cannot replace itself, so grab the new package here and install it with apt
+            the same way you did the first time. Oscine only checks when you ask.
+          </p>
+          <p>
+            On an older version? Install the latest build from this page once, and updates work
+            from then on. Every release is written up on the
+            <ULink to="/changelog" class="text-primary hover:underline">changelog</ULink>.
           </p>
           <p>macOS is not a target.</p>
         </div>

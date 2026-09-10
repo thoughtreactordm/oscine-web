@@ -49,4 +49,10 @@ The Library tab is artist, album, and song. Double-click a song to play it (that
 - **Last.fm and ListenBrainz** — scrobble to either or both. Last.fm signs you in through your browser; ListenBrainz takes a user token you paste from your account. See [Stats](/learn/stats) for what gets sent.
 - **Podcasts** if you want shows next to the library. They download, then play, and are not mixed into your music list.
 
+## Updating
+
+Open **Settings → About** and click **Check for updates**. With the Windows installer or the AppImage, Oscine downloads the new version and installs it when you restart. The `.deb` can check too, but it cannot replace itself: it points you to the new release, and you install that package the same way you installed the first one. Oscine only checks when you ask.
+
+In-app updates arrived in 1.0.3. If you are on an earlier version, install the latest build from the [download page](/download) once, and updates work from Settings after that.
+
 More in [Library](/learn/library), [Tunedeck](/learn/tunedeck), and [Themes](/learn/themes).
