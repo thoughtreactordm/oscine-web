@@ -57,26 +57,26 @@ export class UnmatchedReleaseAssetsError extends Error {
 }
 
 const FALLBACK: Release = {
-  version: '1.0.1',
-  tag: 'v1.0.1',
-  htmlUrl: `${GITHUB_URL}/releases/tag/v1.0.1`,
+  version: '1.0.3',
+  tag: 'v1.0.3',
+  htmlUrl: `${GITHUB_URL}/releases/tag/v1.0.3`,
   windows: {
-    name: 'Oscine.Setup.1.0.1.exe',
-    url: `${GITHUB_URL}/releases/download/v1.0.1/Oscine.Setup.1.0.1.exe`,
+    name: 'Oscine.Setup.1.0.3.exe',
+    url: `${GITHUB_URL}/releases/download/v1.0.3/Oscine.Setup.1.0.3.exe`,
     size: null,
     sha256: null
   },
   linux: {
     kind: 'packages',
     appImage: {
-      name: 'Oscine-1.0.1.AppImage',
-      url: `${GITHUB_URL}/releases/download/v1.0.1/Oscine-1.0.1.AppImage`,
+      name: 'Oscine-1.0.3.AppImage',
+      url: `${GITHUB_URL}/releases/download/v1.0.3/Oscine-1.0.3.AppImage`,
       size: null,
       sha256: null
     },
     deb: {
-      name: 'oscine_1.0.1_amd64.deb',
-      url: `${GITHUB_URL}/releases/download/v1.0.1/oscine_1.0.1_amd64.deb`,
+      name: 'oscine_1.0.3_amd64.deb',
+      url: `${GITHUB_URL}/releases/download/v1.0.3/oscine_1.0.3_amd64.deb`,
       size: null,
       sha256: null
     }
