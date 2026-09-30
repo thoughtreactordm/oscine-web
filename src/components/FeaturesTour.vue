@@ -24,6 +24,9 @@ defineProps<{
     stats: TourShotAsset;
     podcasts: TourShotAsset;
     toolsWriteback: TourShotAsset;
+    tagEditor: TourShotAsset;
+    toolsEqualizer: TourShotAsset;
+    toolsCdrip: TourShotAsset;
     palette: TourShotAsset;
     quickMenu: TourShotAsset;
   };
@@ -114,6 +117,60 @@ const lifted = "shadow-2xl shadow-black/70";
   </UPageSection>
 
   <UPageSection
+    id="equalizer"
+    headline="New in 1.1"
+    title="Equalizer"
+    orientation="horizontal"
+    reverse
+    class="section-rule bg-elevated/40"
+    :ui="sectionUi"
+  >
+    <template #description>
+      <p>
+        Oscine now has a full parametric equalizer in the Tools tab. Drag bands around right on the
+        curve or type exact values into the table below it, with up to twelve bands of peaking,
+        shelf, pass, and notch filters. A live spectrum runs behind the curve so you can see what
+        you're shaping.
+      </p>
+      <p class="mt-4">
+        Save the curves you like as presets and assign them to an album, artist, or playlist, and
+        they'll switch in on their own when that music plays. If you already have a curve, import
+        it from AutoEq or Equalizer APO, or pick your headphones from the 736 oratory1990 profiles
+        that come bundled with the app.
+      </p>
+      <p class="mt-4">
+        A preamp with auto-gain and a clip indicator help keep the bolder curves from distorting.
+      </p>
+    </template>
+
+    <TourShot :shot="shots.toolsEqualizer" :alt="SHOT_ALTS['tools-equalizer']" :sizes="half" />
+  </UPageSection>
+
+  <UPageSection
+    id="cd-ripping"
+    headline="New in 1.1"
+    title="CD Ripping"
+    orientation="horizontal"
+    class="section-rule"
+    :ui="sectionUi"
+  >
+    <template #description>
+      <p>
+        Pop in a CD and rip it straight into your library from the Tools tab. Oscine identifies the
+        disc, looks it up on MusicBrainz, and lets you choose the right release when there are a
+        few pressings to pick from. The cover art comes along from the Cover Art Archive.
+      </p>
+      <p class="mt-4">
+        Each track is encoded to FLAC, tagged, named with a template you control, and added to your
+        library as soon as it's done. Turn on verify to rip every track twice and compare, and if a
+        rip gets interrupted you can pick it back up where it stopped.
+      </p>
+    </template>
+
+    <TourShot :shot="shots.toolsCdrip" :alt="SHOT_ALTS['tools-cdrip']" :sizes="half" />
+  </UPageSection>
+
+  <UPageSection
     title="Tunedeck"
     orientation="horizontal"
     reverse
@@ -122,13 +179,14 @@ const lifted = "shadow-2xl shadow-black/70";
   >
     <template #description>
       <p>
-        A drawer on the right that stays open while you browse. Four tabs: Artist, Track, Related,
-        and Playing. Related is the rest of the album, then looser matches on genre, year, or
-        folder, all from your library.
+        The Tunedeck is a drawer on the right side of the app that stays open while you browse.
+        Its four tabs (Artist, Track, Related, and Playing) each give you a different look at
+        whatever you're listening to.
       </p>
       <p class="mt-4">
-        Turn on online lookups and it adds a biography and line-ups; leave them off and everything
-        local still works.
+        Related picks up the rest of the album first, then looser matches from your library by
+        genre, year, or folder. Turn on online lookups and the Artist tab fills in with a biography
+        and band line-ups. Leave them off and everything from your own library still works.
       </p>
     </template>
 
@@ -154,11 +212,14 @@ const lifted = "shadow-2xl shadow-black/70";
   <UPageSection title="Themes" class="section-rule" :ui="{ ...sectionUi, body: 'mt-8' }">
     <template #description>
       <p>
-        Three themes, each in light and dark: Oscine, Nocturne, and High Contrast. The token editor
-        covers color, type, and motion, and a contrast warning sits on the row that caused it.
+        Oscine comes with three themes, Oscine, Nocturne, and High Contrast, and each one has a
+        light and a dark variant. If you want to take it further, the theme editor lets you adjust
+        color, type, and motion right down to the individual tokens. When a color pairing gets hard
+        to read, a contrast warning shows up on the row that caused it.
       </p>
       <p class="mt-4">
-        The accent can follow the current cover. An accent you set in the editor still wins.
+        You can also let the accent color follow the album art of whatever's playing. An accent you
+        set by hand in the editor always takes priority.
       </p>
     </template>
 
@@ -200,14 +261,18 @@ const lifted = "shadow-2xl shadow-black/70";
   >
     <template #description>
       <p>
-        Playlists live on a rail, with My Favorites at the top. Export to .m3u8 when you need the
-        list somewhere else. The queue is two layers: tracks you queued by hand sit above the rest
-        of the session. Shuffle reorders the session and leaves those hand-queued tracks alone.
+        Your playlists live on a rail along the left with My Favorites pinned to the top, and any of
+        them can be exported to .m3u8 when you want to take a list somewhere else.
       </p>
       <p class="mt-4">
-        Discover is nine recipes over your files and your listening log. Sitting unplayed, Forgotten
-        favorites, and Almost finished are three of them. Every card has a one-line reason, and a
-        shelf becomes a playlist when you save it.
+        The queue works in two layers. Tracks you add by hand sit above the rest of your session,
+        so shuffling mixes up everything else and leaves the songs you picked out right where you
+        put them.
+      </p>
+      <p class="mt-4">
+        Discover builds shelves out of your own files and listening history using nine recipes,
+        like Sitting unplayed, Forgotten favorites, and Almost finished. Every card tells you why
+        it's there, and you can save any shelf you like as a playlist.
       </p>
     </template>
 
@@ -215,6 +280,7 @@ const lifted = "shadow-2xl shadow-black/70";
   </UPageSection>
 
   <UPageSection
+    id="lyrics"
     title="Stage & Zen"
     orientation="horizontal"
     reverse
@@ -223,12 +289,17 @@ const lifted = "shadow-2xl shadow-black/70";
   >
     <template #description>
       <p>
-        The Stage is Now Playing at full window: the cover, a waveform ribbon, and the track you are
-        hearing.
+        The Stage gives Now Playing the whole window, with the album art front and center and a
+        waveform ribbon for the track you're hearing.
       </p>
       <p class="mt-4">
-        Zen drops the title bar, the tabs, and the transport chrome and goes fullscreen. It is for a
-        TV or a second screen.
+        As of 1.1 it shows lyrics too, and synced lyrics scroll along with the song. Oscine reads
+        them from a .lrc file next to the track or from the file's own tags, and with online
+        lookups on it can find them on LRCLIB.
+      </p>
+      <p class="mt-4">
+        Zen mode drops the title bar, the tabs, and the transport controls and goes fullscreen. Put
+        it up on a TV or a second monitor and leave it running.
       </p>
     </template>
 
@@ -250,12 +321,12 @@ const lifted = "shadow-2xl shadow-black/70";
   >
     <template #description>
       <p>
-        Gapless is the default. A crossfade duration of zero is gapless; raise it and you get a fade
-        at the boundary.
+        Playback is gapless by default. If you'd rather have a crossfade between tracks, set a
+        duration and Oscine blends each song into the next.
       </p>
       <p class="mt-4">
-        ReplayGain comes from tags when they exist. Untagged tracks can be measured in the
-        background. Oscine plays FLAC, MP3, Ogg Vorbis, Opus, AAC, and WAV.
+        ReplayGain is read from your tags when it's there, and untagged tracks can be measured in
+        the background. Oscine plays FLAC, MP3, Ogg Vorbis, Opus, AAC, and WAV.
       </p>
     </template>
 
@@ -267,12 +338,18 @@ const lifted = "shadow-2xl shadow-black/70";
     />
   </UPageSection>
 
-  <UPageSection title="Stats" orientation="horizontal" reverse class="section-rule" :ui="sectionUi">
+  <UPageSection
+    title="Stats"
+    orientation="horizontal"
+    reverse
+    class="section-rule"
+    :ui="sectionUi"
+  >
     <template #description>
       <p>
-        Stats is the listening log: top artists, albums, and tracks for a range you pick. Totals
-        follow the tags as they were when you listened, so a later rename or a folder reorganize
-        does not rewrite last year. Favorites are local.
+        Stats is your listening log, with your top artists, albums, and tracks over whatever time
+        range you pick. Every listen is recorded with the tags it had at the time, so renaming a
+        track or reorganizing your folders later won't rewrite last year's numbers.
       </p>
     </template>
 
@@ -287,23 +364,49 @@ const lifted = "shadow-2xl shadow-black/70";
   >
     <template #description>
       <p>
-        Subscribe, download, then play. Shows stay on their own tab. Episodes are not mixed into the
-        music library, search, or ReplayGain.
+        Subscribe to your shows, download episodes, and listen, all from their own tab. Podcasts
+        are kept apart from your music, so episodes never turn up in your library, your searches,
+        or your ReplayGain.
       </p>
     </template>
 
     <TourShot :shot="shots.podcasts" :alt="SHOT_ALTS.podcasts" :sizes="half" />
   </UPageSection>
 
-  <UPageSection title="Tools" orientation="horizontal" reverse class="section-rule" :ui="sectionUi">
+  <UPageSection
+    id="tag-editing"
+    title="Tag Editing"
+    orientation="horizontal"
+    reverse
+    class="section-rule"
+    :ui="sectionUi"
+  >
     <template #description>
       <p>
-        Tag edits are staged. You review the before and after, then write. A backup of the original
-        sits beside the file until the write stands.
+        Clean up your tags without leaving the app. With 1.1 the editor covers nearly every field a
+        file can carry, from album artist and composers to sort names, ISRCs, and MusicBrainz IDs.
+      </p>
+      <p class="mt-4">
+        Your edits don't touch the files right away. They're staged in the Tools tab, where you can
+        look over every change side by side and pick exactly what gets written. Oscine keeps a
+        backup of each original until the write checks out, and puts it back if anything doesn't
+        match.
       </p>
     </template>
 
-    <TourShot :shot="shots.toolsWriteback" :alt="SHOT_ALTS['tools-writeback']" :sizes="half" />
+    <ShotStack>
+      <template #base>
+        <TourShot :shot="shots.tagEditor" :alt="SHOT_ALTS['tag-editor']" :sizes="stacked" />
+      </template>
+      <template #overlay>
+        <TourShot
+          :shot="shots.toolsWriteback"
+          :alt="SHOT_ALTS['tools-writeback']"
+          :sizes="inset"
+          :frame="lifted"
+        />
+      </template>
+    </ShotStack>
   </UPageSection>
 
   <UPageSection
@@ -314,21 +417,23 @@ const lifted = "shadow-2xl shadow-black/70";
   >
     <template #description>
       <p>
+        Press
         <UKbd>Ctrl</UKbd>
         <UKbd class="ml-1">K</UKbd>
-        opens the command palette from anywhere. Prefixes narrow it:
+        from anywhere to open the command palette. Start with a prefix to narrow it down:
         <code class="text-primary">&gt;</code>
         for actions,
         <code class="text-primary">@</code>
         for artists,
         <code class="text-primary">#</code>
-        for playlists,
+        for playlists, and
         <code class="text-primary">/</code>
-        for settings.
+        for settings. You can start an artist playing or shuffle your whole library right from the
+        palette.
       </p>
       <p class="mt-4">
-        The Quick Menu on Now Playing holds favorite playlists, recent additions, and favorite
-        artists. Playback and navigation have a fixed set of global shortcuts.
+        The Quick Menu on Now Playing keeps your favorite playlists, recent additions, and favorite
+        artists a click away, and a set of global shortcuts covers playback and navigation.
       </p>
     </template>
 
@@ -347,7 +452,7 @@ const lifted = "shadow-2xl shadow-black/70";
     </ShotStack>
   </UPageSection>
 
-  <UPageSection title="Scrobbling" class="section-rule">
+  <UPageSection id="discord" title="Scrobbling & Discord" class="section-rule">
     <template #description>
       <div class="flex flex-wrap gap-3 justify-center items-center">
         <span
@@ -362,10 +467,20 @@ const lifted = "shadow-2xl shadow-black/70";
           <UIcon name="i-tabler-brain" class="size-7 text-primary" />
           ListenBrainz
         </span>
+        <span
+          class="inline-flex items-center gap-2.5 rounded-xl border border-default bg-elevated/60 px-4 py-2.5 text-highlighted"
+        >
+          <UIcon name="i-tabler-brand-discord" class="size-7 text-primary" />
+          Discord
+        </span>
       </div>
       <p class="mt-4">
-        Choose one or both services. Oscine will keep track offline and update once connected to the
-        net.
+        Choose one or both scrobbling services. Oscine will keep track offline and update once
+        connected to the net.
+      </p>
+      <p class="mt-2">
+        New in 1.1, Discord presence shows what you're listening to on your profile, with the album
+        art and a status line you can word however you like.
       </p>
     </template>
   </UPageSection>

@@ -9,9 +9,22 @@ Fixing a tag in Oscine changes nothing on disk. Right-click a track, choose **Ed
 
 <!-- shot: tools-writeback -->
 
+## Every field, not just the basics
+
+The editor opens on the fields you'll reach for most: title, artist, album artist, album, track and disc numbers, year, and genre. As of 1.1, open **All fields** below them for just about everything else a file can carry:
+
+- **Credits:** composers, conductor, and remixer
+- **Numbering:** track and disc totals
+- **Release:** subtitle, grouping, publisher, copyright, ISRC, and the compilation flag
+- **Content:** comment, description, lyrics, BPM, and initial key
+- **Sorting:** sort names for the title, artist, album artist, album, and composer
+- **Advanced:** MusicBrainz IDs, plus release status, type, and country
+
+ReplayGain values are shown too, but they're read-only. Setting an album artist is also how you pull a compilation that's split across several "albums" back into one. The same fields show up in **Track Info**, so you can see everything a file holds without opening the editor.
+
 ## Staged, then reviewed
 
-Every unwritten correction collects in **Tools → Tag write-back**. It's a table, one row per track: title, artist, album, track and disc numbers, year, genre, and cover art, each shown as the old value struck through and the new value beside it. Nothing here has touched your files yet.
+Every unwritten correction collects in **Tools → Tag write-back**. It's a table, one row per track and a column for each field you've changed, with the old value struck through and the new value beside it. Nothing here has touched your files yet.
 
 You choose what actually gets written. Tick a whole row, or a single field within it — **Select all**, **Clear**, and per-cell checkboxes all work — and the header keeps a running count of tracks and fields selected. **Discard all** throws the pending edits away (it asks first). When you're ready, **Write** commits only what you've ticked.
 
@@ -27,4 +40,4 @@ No file is edited in place. For each track Oscine copies the original alongside 
 
 ## What never happens on its own
 
-Oscine never writes a tag to disk on its own — the only path from an edit to your files is the write you confirm. It never touches the audio, only the tag region. It never renames or moves your files. And it leaves alone everything it doesn't show you: album artist, ReplayGain, any custom frames, and every embedded image except the front cover all survive a write untouched.
+Oscine never writes a tag to disk on its own — the only path from an edit to your files is the write you confirm. It never touches the audio, only the tag region. It never renames or moves your files. And it leaves alone everything you didn't change: ReplayGain, any custom tags it doesn't know about, and every embedded image except the front cover all survive a write untouched.

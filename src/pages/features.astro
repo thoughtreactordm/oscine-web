@@ -21,6 +21,9 @@ import trackInfo from '../assets/screenshots/crops/track-info.png'
 import stats from '../assets/screenshots/stats.png'
 import podcasts from '../assets/screenshots/podcasts.png'
 import toolsWriteback from '../assets/screenshots/tools-writeback.png'
+import toolsEqualizer from '../assets/screenshots/tools-equalizer.png'
+import toolsCdrip from '../assets/screenshots/tools-cdrip.png'
+import tagEditor from '../assets/screenshots/tag-editor.png'
 import palette from '../assets/screenshots/palette.png'
 import quickMenu from '../assets/screenshots/quick-menu.png'
 
@@ -59,6 +62,9 @@ const shots = {
   stats: await tourShot(stats, 'stats'),
   podcasts: await tourShot(podcasts, 'podcasts'),
   toolsWriteback: await tourShot(toolsWriteback, 'tools-writeback'),
+  toolsEqualizer: await tourShot(toolsEqualizer, 'tools-equalizer'),
+  toolsCdrip: await tourShot(toolsCdrip, 'tools-cdrip'),
+  tagEditor: await tourShot(tagEditor, 'tag-editor'),
   palette: await tourShot(palette, 'palette'),
   quickMenu: await tourShot(quickMenu, 'quick-menu')
 }
@@ -66,7 +72,7 @@ const shots = {
 
 <BaseLayout
   title="Features · Oscine"
-  description="A screenshot tour of Oscine: library, Tunedeck, themes, Discover, Stage, playback, and the rest of the surfaces."
+  description="A look through Oscine with screenshots of the library, Tunedeck, themes, Discover, synced lyrics, the parametric equalizer, CD ripping, and more."
   zoom
 >
   <FeaturesTour release={release} shots={shots} />

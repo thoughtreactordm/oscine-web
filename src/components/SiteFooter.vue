@@ -40,7 +40,7 @@ const items: NavigationMenuItem[] = [
           <span class="wordmark text-highlighted">oscine</span>
         </ULink>
         <p class="text-xs text-muted max-w-64">
-          Future forward & customizeable desktop music player for enthusiasts and collectors.
+          Future forward & customizable desktop music player for enthusiasts and collectors.
         </p>
       </div>
     </template>
