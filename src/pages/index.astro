@@ -12,6 +12,9 @@ import tunedeckTrack from '../assets/screenshots/tunedeck-track.png'
 import pillarColumns from '../assets/screenshots/crops/pillar-columns.png'
 import pillarStage from '../assets/screenshots/crops/pillar-stage.png'
 import pillarThemePicker from '../assets/screenshots/crops/pillar-theme-picker.png'
+import toolsEqualizer from '../assets/screenshots/tools-equalizer.png'
+import toolsCdrip from '../assets/screenshots/tools-cdrip.png'
+import stage from '../assets/screenshots/stage.png'
 
 const release = await getLatestRelease()
 const blooms = {
@@ -19,13 +22,16 @@ const blooms = {
   pillarColumns: bloom('crops/pillar-columns'),
   pillarStage: bloom('crops/pillar-stage'),
   pillarThemePicker: bloom('crops/pillar-theme-picker'),
-  tunedeckTrack: bloom('tunedeck-track')
+  tunedeckTrack: bloom('tunedeck-track'),
+  newEqualizer: bloom('tools-equalizer'),
+  newCdrip: bloom('tools-cdrip'),
+  newLyrics: bloom('stage')
 }
 ---
 
 <BaseLayout
   title="A Future Forward Music Player · Oscine"
-  description="A local music player with foobar2000's control, an interface from this decade, and a shell you can make yours."
+  description="Oscine is a free, customizable music player for Windows and Linux that plays the library you already own. Version 1.1 adds a parametric equalizer, CD ripping, and synced lyrics."
   zoom
 >
   <HomeLanding release={release} blooms={blooms}>
@@ -53,6 +59,24 @@ const blooms = {
       slot="pillar-theme-picker"
       src={pillarThemePicker}
       alt={shotAlt('pillar-theme-picker')}
+      sizes="(min-width: 1024px) 22rem, 100vw"
+    />
+    <Screenshot
+      slot="new-equalizer"
+      src={toolsEqualizer}
+      alt={shotAlt('tools-equalizer')}
+      sizes="(min-width: 1024px) 22rem, 100vw"
+    />
+    <Screenshot
+      slot="new-cdrip"
+      src={toolsCdrip}
+      alt={shotAlt('tools-cdrip')}
+      sizes="(min-width: 1024px) 22rem, 100vw"
+    />
+    <Screenshot
+      slot="new-lyrics"
+      src={stage}
+      alt={shotAlt('stage')}
       sizes="(min-width: 1024px) 22rem, 100vw"
     />
     <Screenshot

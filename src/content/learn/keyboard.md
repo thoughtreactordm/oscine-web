@@ -1,7 +1,7 @@
 ---
 title: Keyboard & shortcuts
 description: The command palette and its prefixes, playback and navigation keys, media keys, and what a double-click does.
-order: 10
+order: 12
 section: App
 ---
 

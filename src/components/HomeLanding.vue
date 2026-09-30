@@ -14,6 +14,9 @@ defineProps<{
     pillarStage: string;
     pillarThemePicker: string;
     tunedeckTrack: string;
+    newEqualizer: string;
+    newCdrip: string;
+    newLyrics: string;
   };
 }>();
 
@@ -69,6 +72,40 @@ const pillars = [
     fit: "[&_img]:object-top",
     description:
       "Themes and style customization make Oscine <strong>yours</strong>. Tune the look and feel of your player with a robust set of configurations and accessibility friendly colorization¹.",
+  },
+] as const;
+
+/** The 1.1 headliners. Each card links to its section on the Features page. */
+const newInRelease = [
+  {
+    title: "Equalizer",
+    slot: "new-equalizer",
+    bloom: "newEqualizer",
+    alt: SHOT_ALTS["tools-equalizer"],
+    to: "/features#equalizer",
+    fit: "[&_img]:object-right-top",
+    description:
+      "Shape your sound with a twelve-band parametric EQ, save presets for your favorite albums and artists, or load a profile made for your headphones.",
+  },
+  {
+    title: "CD Ripping",
+    slot: "new-cdrip",
+    bloom: "newCdrip",
+    alt: SHOT_ALTS["tools-cdrip"],
+    to: "/features#cd-ripping",
+    fit: "[&_img]:object-right-top",
+    description:
+      "Rip your CDs straight to FLAC with MusicBrainz matching, cover art, and file names laid out just the way you like them.",
+  },
+  {
+    title: "Lyrics",
+    slot: "new-lyrics",
+    bloom: "newLyrics",
+    alt: SHOT_ALTS.stage,
+    to: "/features#lyrics",
+    fit: "[&_img]:object-center",
+    description:
+      "Follow along with synced lyrics on the Stage, read from your .lrc files and tags or found on LRCLIB.",
   },
 ] as const;
 </script>
@@ -164,6 +201,56 @@ const pillars = [
         ¹: Oscine monitors color combinations against the WCAG 2.1 AA standards of web accessibility
         to help ensure readability for all persons. Our tool cannot guarantee 100% readability for
         all color combinations.
+      </p>
+    </template>
+  </UPageSection>
+
+  <UPageSection
+    id="new-in-1-1"
+    headline="Oscine 1.1"
+    title="New in 1.1"
+    class="section-rule"
+    :ui="{ ...sectionUi, body: 'mt-10' }"
+  >
+    <template #description>
+      <p>
+        This release is all about tools. Oscine 1.1 brings a full parametric equalizer and CD
+        ripping into the app, puts synced lyrics on the Stage, and hooks into Discord so your
+        friends can see what you're listening to.
+      </p>
+    </template>
+
+    <template #body>
+      <UPageGrid>
+        <UPageCard
+          v-for="feature in newInRelease"
+          :key="feature.title"
+          :title="feature.title"
+          :to="feature.to"
+          variant="subtle"
+          class="transition-all duration-300 hover:ring-primary/25 hover:-translate-y-2"
+          :ui="{ title: 'text-xl' }"
+        >
+          <template #description>{{ feature.description }}</template>
+          <!-- The card is the link, so the shot inside it doesn't zoom. -->
+          <ShotFrame
+            :bloom="blooms[feature.bloom]"
+            :alt="feature.alt"
+            :zoom="false"
+            aspect
+            class="[&_picture]:block [&_picture]:size-full [&_img]:size-full [&_img]:object-cover"
+            :class="feature.fit"
+          >
+            <slot :name="feature.slot" />
+          </ShotFrame>
+        </UPageCard>
+      </UPageGrid>
+
+      <p class="mt-8 text-muted">
+        Plus a tag editor that covers just about every field, and plenty of fixes and quality of
+        life changes along the way. The
+        <ULink to="/changelog" class="text-primary underline">changelog</ULink>
+        has the full list.
       </p>
     </template>
   </UPageSection>

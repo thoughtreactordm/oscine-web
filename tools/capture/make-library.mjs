@@ -225,6 +225,14 @@ function tracksOf(album) {
   return out
 }
 
+/** A synced .lrc sidecar beside the audio, which the app resolves before embedded tags. */
+async function writeLyrics(file, track) {
+  if (!Array.isArray(track.lyrics) || DRY) return
+  const stamp = (sec) => `${pad2(Math.floor(sec / 60))}:${(sec % 60).toFixed(2).padStart(5, '0')}`
+  const lines = [`[ti:${track.title}]`, ...track.lyrics.map(([sec, line]) => `[${stamp(sec)}]${line}`)]
+  await writeFile(file.replace(/\.[^.]+$/, '.lrc'), lines.join('\n') + '\n')
+}
+
 async function encodeTrack({ artist, album, track, dir, coverPath, coverRefreshed }) {
   const fmt = album.format || 'flac'
   const hires = !!album.hires
@@ -232,6 +240,7 @@ async function encodeTrack({ artist, album, track, dir, coverPath, coverRefreshe
   const ext = { flac: 'flac', mp3: 'mp3', opus: 'opus', ogg: 'ogg' }[fmt]
   const prefix = track.discs > 1 ? `${track.disc}-${pad2(track.n)}` : pad2(track.n)
   const file = join(dir, `${prefix} ${safe(track.title)}.${ext}`)
+  await writeLyrics(file, track)
   if (!FORCE && await exists(file)) {
     if (coverRefreshed && !DRY && (fmt === 'flac' || fmt === 'mp3')) {
       await reembedCover(file, coverPath, fmt)

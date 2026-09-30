@@ -11,22 +11,27 @@ const faqs: AccordionItem[] = [
   {
     label: "Is Oscine free?",
     content:
-      "Yes. Oscine is free to download and use on both Windows and Linux, and the source is available under the MIT license.",
+      "Yes. Oscine is free on Windows and Linux, and the source code is on GitHub under the MIT license.",
   },
   {
     label: "Does Oscine stream music or host a catalog?",
     content:
-      "No. Oscine plays the local music you already own. It builds a rich data layer around your collection so it feels as good to browse as any streaming app, but everything stays local to you.",
+      "No. Oscine plays the music you already own, right from the folders on your own drives. It builds a rich data layer around your collection so browsing it feels as good as any streaming app, and all of it stays on your machine.",
   },
   {
     label: "Which file formats does Oscine support?",
     content:
-      "Oscine handles the formats you'd expect from a local library: FLAC, MP3, AAC/M4A, OGG, and WAV among them. Point it at your music folder and it takes care of the rest.",
+      "FLAC, MP3, AAC/M4A, Ogg Vorbis, Opus, and WAV. Point Oscine at your music folders and it takes it from there. CDs you rip in the app are saved as FLAC.",
   },
   {
     label: "Can I make it look the way I want?",
     content:
-      "Themes and style customization let you tune the look and feel of the player, and Oscine checks color combinations against WCAG 2.1 AA contrast guidance so your choices stay readable.",
+      "Yes. Pick from three themes, each with a light and dark variant, then fine-tune color, type, and motion in the theme editor. Oscine checks your color combinations against WCAG 2.1 AA contrast guidance so everything stays readable.",
+  },
+  {
+    label: "Can I rip CDs with Oscine?",
+    content:
+      "Yes, as of 1.1. Pop a disc in, open Rip CD in the Tools tab, and Oscine matches it on MusicBrainz, grabs the cover art, and saves each track to your library as FLAC.",
   },
   {
     label: "Does Oscine use AI or have an AI disclosure?",
@@ -36,7 +41,7 @@ const faqs: AccordionItem[] = [
   {
     label: "Is there a macOS version?",
     content:
-      "Not yet. Oscine ships for Windows and Linux today. macOS isn't available right now, but it's on our radar.",
+      "Not yet. Oscine is available for Windows and Linux today, and macOS is on the radar.",
   },
 ];
 </script>

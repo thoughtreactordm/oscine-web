@@ -1,5 +1,5 @@
 {
-  "$comment": "Fictional capture library for oscine.app screenshots. Names are invented and rib streaming-service tropes (see docs/1.0-site-release.md §5.1). No real bands, services, or trademarks. Formats: flac (default), mp3, opus, ogg. `hires` = 48 kHz / 24-bit. `replaygain` = tag with metaflac (FLAC only); untagged albums exercise the app's own scanner. Every album cover is a 1000×1000 crop from covers/sources.json (photographic Unsplash), falling back to a generated abstract only if a download fails. Tracks may be strings or { title, artist, duration }; the one 100-second capture lead supports the agreed 1:10 playhead while ordinary tracks remain 20–40 seconds. `discs` splits tracks across discs.",
+  "$comment": "Fictional capture library for oscine.app screenshots. Names are invented and rib streaming-service tropes (see docs/1.0-site-release.md §5.1). No real bands, services, or trademarks. Formats: flac (default), mp3, opus, ogg. `hires` = 48 kHz / 24-bit. `replaygain` = tag with metaflac (FLAC only); untagged albums exercise the app's own scanner. Every album cover is a 1000×1000 crop from covers/sources.json (photographic Unsplash), falling back to a generated abstract only if a download fails. Tracks may be strings or { title, artist, duration, lyrics }; the one 100-second capture lead supports the agreed 1:10 playhead while ordinary tracks remain 20–40 seconds, and its `lyrics` ([seconds, line] pairs) become a synced .lrc sidecar for the Stage and Lyrics shots. `discs` splits tracks across discs.",
   "artists": [
     {
       "name": "Residual Royalty",
@@ -10,7 +10,28 @@
           "year": 2019,
           "replaygain": true,
           "tracks": [
-            { "title": "Now Playing (For Now)", "duration": 100 },
+            {
+              "title": "Now Playing (For Now)",
+              "duration": 100,
+              "lyrics": [
+                [2, "Put the needle on the playlist"],
+                [8.5, "Hit play before it goes"],
+                [15, "You were here on Tuesday morning"],
+                [21.5, "Now there's grey where you used to glow"],
+                [28, "Now playing, for now"],
+                [33.5, "Till the license runs out"],
+                [39, "I had you saved, I had you starred"],
+                [45.5, "I had you in my heart somehow"],
+                [52, "Now playing, for now"],
+                [58, "(for now)"],
+                [64, "So I bought you on a Sunday"],
+                [70, "Put you on a drive I own"],
+                [76, "Every song I keep in folders"],
+                [82, "Is a song that finds its way home"],
+                [88, "Now playing, and staying"],
+                [94, "Now playing, for good"]
+              ]
+            },
             "Licensed, Not Sold",
             "Read-Only Heart",
             "Buy Button (Greyed Out)",

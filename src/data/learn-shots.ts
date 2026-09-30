@@ -22,11 +22,17 @@ export const SHOT_ALTS: Record<string, string> = {
   'theme-editor':
     'A Theme tokens window listing color-role ramps, with a WCAG check at the foot.',
   'curate-discover': 'Playlists on a left rail and Discover shelves of album cards.',
-  stage: 'Now Playing filling the window with album art and a waveform ribbon.',
+  stage: 'Now Playing filling the window with album art, a waveform ribbon, and synced lyrics.',
   zen: 'Fullscreen Now Playing with the title bar and transport dropped.',
   stats: 'A listening dashboard of totals, ranges, and ranked artists.',
   podcasts: 'A shows list with episode downloads beside an empty player.',
   'tools-writeback': 'A review table of staged tag edits before writing them to files.',
+  'tools-equalizer':
+    'An equalizer with a six-band curve over a live spectrum, above a table of band settings.',
+  'tools-cdrip':
+    'A CD rip screen with the matched release, its cover, a file naming template, and the track list.',
+  'tag-editor':
+    'A tag editor window open on a track, with the Release fields expanded under All fields.',
   palette: 'A command palette over the library, opened with Ctrl+K.',
   'quick-menu': 'A left-hand menu from Now Playing with recent additions.',
   onboarding: 'A first-run dialog over an empty library, asking to add a music folder.',
