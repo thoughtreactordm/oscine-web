@@ -65,8 +65,24 @@ const SHOT_KEYS = Object.freeze([
   'palette',
   'quick-menu',
   'onboarding',
-  'track-info'
+  'track-info',
+  'tag-editor',
+  'tools-equalizer',
+  'tools-cdrip'
 ])
+
+/** The album the CD rip shot stages as the disc in the drive. */
+const RIP_ALBUM = 'A Catalogue of Absences'
+
+/** A gentle warm-and-bright curve: something a listener would actually keep. */
+const EQ_CURVE = [
+  { type: 'lowshelf', frequencyHz: 105, gainDb: 3.5, q: 0.71 },
+  { type: 'peaking', frequencyHz: 240, gainDb: -2, q: 1.1 },
+  { type: 'peaking', frequencyHz: 1200, gainDb: -1, q: 1.4 },
+  { type: 'peaking', frequencyHz: 3200, gainDb: 2, q: 1.6 },
+  { type: 'peaking', frequencyHz: 6500, gainDb: -2.5, q: 3.5 },
+  { type: 'highshelf', frequencyHz: 10500, gainDb: 3, q: 0.71 }
+]
 
 const { values, positionals } = parseArgs({
   allowPositionals: true,
@@ -446,6 +462,8 @@ async function setBaseState(cdp) {
     const capture = window.__oscineCapture;
     await capture.closeOverlays();
     await capture.setTheme('oscine', 'dark');
+    // The EQ shot turns the equalizer on; every other shot is taken with it off.
+    await capture.unwrap(window.oscine.settings.set({ key: 'audio.eq.enabled', value: false }));
     await capture.route('library');
     return true;
   `)
@@ -638,7 +656,123 @@ async function prepareShot(cdp, key, manifest) {
         const capture = window.__oscineCapture;
         capture.store('trackInfo').show(capture.store('playback').nowPlaying);
         await capture.nextFrames(5);
+        // 1.1 mirrors the editor's fields here, so the dialog scrolls. Lead with
+        // Format and ReplayGain, which is what the Playback section talks about.
+        const heading = [...document.querySelectorAll('[role="dialog"] *')].find(
+          (node) => node.children.length === 0 && node.textContent?.trim().toLowerCase() === 'format'
+        );
+        if (!heading) throw new Error('Track info has no Format heading to scroll to.');
+        heading.scrollIntoView({ block: 'start' });
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        await capture.nextFrames(4);
       `)
+      return
+    case 'tag-editor':
+      await cdp.evaluate(`
+        const capture = window.__oscineCapture;
+        const track = capture.store('playback').nowPlaying;
+        await capture.store('trackEdit').edit(track.title, async () => [track.id]);
+        await new Promise((resolve) => setTimeout(resolve, 400));
+        await capture.nextFrames(3);
+        // 1.1's editor covers every registered tag; open that section and bring
+        // it into view so the shot shows more than the familiar core fields.
+        capture.click('All fields');
+        await capture.nextFrames(4);
+        // Open one group so real fields show, not just seven collapsed headings.
+        capture.click('Release');
+        await capture.nextFrames(4);
+        const section = [...document.querySelectorAll('button, [role="button"]')]
+          .find((node) => node.textContent?.trim() === 'All fields');
+        section?.scrollIntoView({ block: 'start' });
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        await capture.nextFrames(4);
+      `, 30_000)
+      return
+    case 'tools-equalizer':
+      await cdp.evaluate(`
+        const capture = window.__oscineCapture;
+        await capture.route('tools');
+        capture.store('tools').select('equalizer');
+        await capture.nextFrames(4);
+        const eq = capture.store('equalizer');
+        await capture.unwrap(window.oscine.settings.set({ key: 'audio.eq.enabled', value: true }));
+        eq.enabled = true;
+        eq.active = {
+          enabled: true,
+          preampDb: -3.5,
+          bands: ${JSON.stringify(EQ_CURVE)}.map((band, index) => ({
+            id: 'capture-band-' + index, enabled: true, ...band
+          }))
+        };
+        const name = 'Late night, warm';
+        const existing = eq.presets.find((preset) => preset.name === name);
+        const id = existing ? (eq.updatePreset(existing.id), existing.id) : eq.savePreset(name);
+        // Assign the preset to an album that is not playing, so the list has a
+        // row without pulling an override onto the capture lead.
+        const page = await capture.unwrap(window.oscine.library.listTracks({
+          sort: 'album', direction: 'asc', offset: 0, limit: 500
+        }));
+        const other = page.tracks.find((track) => track.album === ${JSON.stringify(RIP_ALBUM)});
+        if (other?.albumId) await eq.assign({ kind: 'album', id: other.albumId }, id);
+        await capture.nextFrames(4);
+        capture.click('Spectrum');
+        await new Promise((resolve) => setTimeout(resolve, 900));
+        await capture.nextFrames(4);
+      `, 60_000)
+      return
+    case 'tools-cdrip':
+      await cdp.evaluate(`
+        const capture = window.__oscineCapture;
+        await capture.route('tools');
+        capture.store('tools').select('cd-rip');
+        await capture.nextFrames(4);
+        // Let the pane's first real poll and destination check land, then stop
+        // polling so the staged disc below is not cleared by an empty drive.
+        await new Promise((resolve) => setTimeout(resolve, 800));
+        const rip = capture.store('cdRip');
+        rip.stopPolling();
+
+        const page = await capture.unwrap(window.oscine.library.listTracks({
+          sort: 'album', direction: 'asc', offset: 0, limit: 500
+        }));
+        const disc = page.tracks
+          .filter((track) => track.album === ${JSON.stringify(RIP_ALBUM)})
+          .sort((a, b) => (a.trackNo ?? 0) - (b.trackNo ?? 0));
+        if (disc.length === 0) throw new Error('Rip album not found: ${RIP_ALBUM}');
+
+        let sector = 0;
+        const entries = disc.map((track, index) => {
+          const sectorCount = Math.round((track.durationSec ?? 30) * 75);
+          const entry = { number: index + 1, startSector: sector, sectorCount, isAudio: true, preEmphasis: false };
+          sector += sectorCount;
+          return entry;
+        });
+        const hash = JSON.stringify(disc[0]).match(/[0-9a-f]{64}/)?.[0] ?? null;
+
+        rip.drives = [{ id: 'capture-drive', label: 'HL-DT-ST DVDRAM GP65NB60', vendor: 'HL-DT-ST', product: 'DVDRAM GP65NB60' }];
+        rip.driveId = 'capture-drive';
+        rip.toc = { entries, leadOutSector: sector, firstTrack: 1, lastTrack: entries.length };
+        rip.discId = 'Qd7pWm2Rk9sHn4vLx0cT3yJbF8g-';
+        const proposal = {
+          source: 'musicbrainz',
+          albumArtist: disc[0].albumArtist ?? disc[0].artist,
+          album: disc[0].album,
+          year: disc[0].year,
+          country: 'US',
+          format: 'CD',
+          tracks: disc.map((track, index) => ({ number: index + 1, title: track.title, artist: track.artist }))
+        };
+        rip.candidates = [proposal];
+        rip.selectedCandidate = 0;
+        rip.pickerSettled = true;
+        rip.album = proposal.album;
+        rip.albumArtist = proposal.albumArtist;
+        rip.year = proposal.year;
+        rip.tracks = proposal.tracks.map((track) => ({ ...track, included: true }));
+        if (hash) rip.artwork = { present: true, hash, mime: 'image/jpeg' };
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        await capture.nextFrames(5);
+      `, 60_000)
       return
     default:
       throw new Error(`No recipe for ${key}.`)

@@ -54,10 +54,12 @@ const CROPS = Object.freeze([
   {
     key: 'pillar-stage',
     source: 'stage',
-    x: 720,
-    y: 180,
-    w: 1200,
-    h: 1180,
+    // 1.1 moved the record cluster left to make room for lyrics; stay on the
+    // cover and title, clear of the drawer tab on the left edge.
+    x: 64,
+    y: 240,
+    w: 946,
+    h: 1120,
     usedBy: 'Home Design pillar — the Stage'
   },
   {
