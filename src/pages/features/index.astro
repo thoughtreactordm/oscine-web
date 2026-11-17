@@ -1,0 +1,36 @@
+---
+/**
+ * /features was one long page; now it is five tabs. Send visitors to the first
+ * tab, and send old in-page links (/features#equalizer, from the home page,
+ * Learn and other sites) to the tab that holds that section now.
+ */
+import { DEFAULT_TAB, featureAnchorMap, featureTabHref } from '../../data/features'
+
+const anchors = featureAnchorMap()
+const fallback = featureTabHref(DEFAULT_TAB)
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#0c0a09" />
+    <link rel="canonical" href={new URL(fallback, Astro.site).href} />
+    <title>Features · Oscine</title>
+    <script is:inline define:vars={{ anchors, fallback }}>
+      let anchor = location.hash.slice(1)
+      try {
+        anchor = decodeURIComponent(anchor)
+      } catch {}
+      const href = anchors[anchor]
+      const [path, id] = href ? href.split('#') : [fallback, '']
+      location.replace(path + location.search + (id ? `#${id}` : ''))
+    </script>
+    <noscript><meta http-equiv="refresh" content={`0; url=${fallback}`} /></noscript>
+  </head>
+  <body style="background:#0c0a09;color:#e7e5e4;font-family:sans-serif">
+    <p><a href={fallback} style="color:inherit">Oscine features</a></p>
+  </body>
+</html>
