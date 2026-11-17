@@ -58,9 +58,14 @@ export const FLOWS = {
     }
   },
 
-  /** Storyboard 6 (first half): drag a band on the EQ curve over a live spectrum. */
+  /**
+   * Storyboard 6 (first half): drag bands on the EQ curve. The spectrum
+   * backdrop is off: in 1.2 its curve-shaped layer drops out while a band is
+   * dragged and returns ~0.3 s after release, which reads as the fill flipping
+   * colour on video. Turn it back on once the app keeps that layer up.
+   */
   'eq-drag': {
-    description: 'Tools → Equalizer: drag a peaking band up and across over the live spectrum',
+    description: 'Tools → Equalizer: drag a peaking band up and across, then another down',
     at: 12,
     poster: 0,
     async setup(app) {
@@ -82,7 +87,7 @@ export const FLOWS = {
         // The toggle is pane-local state, so it survives a previous flow.
         const spectrum = [...document.querySelectorAll('button[aria-pressed]')]
           .find((button) => button.textContent?.trim() === 'Spectrum');
-        if (spectrum?.getAttribute('aria-pressed') !== 'true') capture.click('Spectrum');
+        if (spectrum?.getAttribute('aria-pressed') === 'true') capture.click('Spectrum');
         await new Promise((resolve) => setTimeout(resolve, 900));
         return true;
       `)
