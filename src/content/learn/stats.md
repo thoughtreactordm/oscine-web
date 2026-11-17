@@ -27,6 +27,6 @@ Last.fm signs you in through your browser once; ListenBrainz takes a user token 
 
 ## Discord
 
-As of 1.1, Oscine can show what you're listening to on your Discord profile. Turn on **Show what you're playing on Discord** in Settings → Network, with the Discord app running on the same computer.
+Oscine can show what you're listening to on your Discord profile. Turn on **Show what you're playing on Discord** in Settings → Network, with the Discord app running on the same computer.
 
 **Detail to broadcast** controls how much people see: the title and artist, just the title, or simply "Listening to music". **Status line template** lets you word the status yourself with `{title}`, `{artist}`, `{album}`, and `{albumArtist}`. You can also add a progress bar, choose whether to hide your status or show "Paused" while the music is paused, and turn on **Show album art** to show the release's cover, looked up on the Cover Art Archive. That last one needs online lookups turned on.

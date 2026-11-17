@@ -5,7 +5,7 @@ order: 10
 section: App
 ---
 
-Oscine 1.1 adds a parametric equalizer. You'll find it under **Tools → Equalizer**, and the switch at the top left turns it on and off. Switching it off leaves your curve in place, so you can flip back and forth to hear the difference.
+Oscine has a parametric equalizer. You'll find it under **Tools → Equalizer**, and the switch at the top left turns it on and off. Switching it off leaves your curve in place, so you can flip back and forth to hear the difference.
 
 <!-- shot: tools-equalizer -->
 

@@ -31,7 +31,7 @@ const blooms = {
 
 <BaseLayout
   title="A Future Forward Music Player · Oscine"
-  description="Oscine is a free, customizable music player for Windows and Linux that plays the library you already own. Version 1.1 adds a parametric equalizer, CD ripping, and synced lyrics."
+  description="Oscine is a free, customizable music player for Windows and Linux that plays the library you already own. It has a parametric equalizer, CD ripping, and synced lyrics."
   zoom
 >
   <HomeLanding release={release} blooms={blooms}>
@@ -102,11 +102,20 @@ const blooms = {
   const shot = hero?.querySelector('.hero-shot-track') as HTMLElement | null
   const header = document.querySelector('header')
 
+  // With reduced motion the stylesheet unpins the headline and the hero scrolls
+  // as an ordinary page, so the follow-the-shot lift is switched off too. The
+  // query is watched so flipping the OS setting mid-visit takes effect at once.
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)')
+
   if (hero && copy && shot) {
     let ticking = false
 
     const sync = () => {
       ticking = false
+      if (reduceMotion.matches) {
+        copy.style.transform = ''
+        return
+      }
       // The line the shot fades into: the bottom of the sticky header.
       const line = header ? header.getBoundingClientRect().bottom : 64
       const lift = Math.max(0, line - shot.getBoundingClientRect().bottom)
@@ -114,7 +123,7 @@ const blooms = {
     }
 
     const onScroll = () => {
-      if (!ticking) {
+      if (!ticking && !reduceMotion.matches) {
         ticking = true
         requestAnimationFrame(sync)
       }
@@ -122,6 +131,7 @@ const blooms = {
 
     addEventListener('scroll', onScroll, { passive: true })
     addEventListener('resize', onScroll, { passive: true })
+    reduceMotion.addEventListener('change', sync)
     sync()
   }
 </script>

@@ -5,10 +5,11 @@ import Mark from "./Mark.vue";
 const year = new Date().getFullYear();
 
 const items: NavigationMenuItem[] = [
-  // { label: "Features", to: "/features" },
-  // { label: "Learn", to: "/learn" },
-  // { label: "Download", to: "/download" },
+  { label: "Features", to: "/features" },
+  { label: "Learn", to: "/learn" },
+  { label: "Download", to: "/download" },
   { label: "Changelog", to: "/changelog" },
+  { label: "Disclosure", to: "/disclosure" },
   {
     label: "Source",
     to: "https://github.com/thoughtreactordm/oscine",
