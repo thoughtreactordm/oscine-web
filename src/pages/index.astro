@@ -2,12 +2,16 @@
 import FaqAccordion from '../components/FaqAccordion.vue'
 import HeroByline from '../components/HeroByline.vue'
 import HomeLanding from '../components/HomeLanding.vue'
+import { getImage } from 'astro:assets'
 import Screenshot from '../components/Screenshot.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { getLatestRelease } from '../data/release'
 import { shotAlt } from '../data/learn-shots'
 import { bloom } from '../data/bloom'
 import libraryHero from '../assets/screenshots/library-hero.png'
+// Built by tools/capture/hero.mjs from the record.mjs flows.
+import heroWebm from '../assets/video/hero.webm'
+import heroMp4 from '../assets/video/hero.mp4'
 import tunedeckTrack from '../assets/screenshots/tunedeck-track.png'
 import pillarColumns from '../assets/screenshots/crops/pillar-columns.png'
 import pillarStage from '../assets/screenshots/crops/pillar-stage.png'
@@ -25,6 +29,11 @@ const blooms = {
   exploreDiscover: bloom('crops/explore-discover'),
   exploreStats: bloom('crops/explore-stats')
 }
+
+// The still is the video's poster, so it's also what reduced-motion visitors
+// (and anyone before the first frame decodes) see. It matches the video's
+// opening frame, so playback starting doesn't jump.
+const heroPoster = await getImage({ src: libraryHero, width: 1920, format: 'webp' })
 ---
 
 <BaseLayout
@@ -37,13 +46,24 @@ const blooms = {
         itself reaches the client but not the server render, and Vue reports
         the difference as a hydration mismatch. */}
     <Fragment slot="hero-byline"><HeroByline client:load /></Fragment>
-    <Screenshot
+    {/* Started by the script below, not `autoplay`, so reduced-motion
+        visitors never download it unless they press play. */}
+    <video
       slot="hero"
-      src={libraryHero}
-      alt={shotAlt('library-hero')}
-      loading="eager"
-      fetchpriority="high"
-    />
+      class="hero-video"
+      width="1920"
+      height="1230"
+      muted
+      loop
+      playsinline
+      preload="none"
+      poster={heroPoster.src}
+      aria-label="Oscine scrolling and searching a library, then the Stage cover growing into a visualizer with synced lyrics, then an equalizer band dragged over a live spectrum."
+    >
+      {/* Main profile, level 5.0, 10-bit: what SVT-AV1 signals here. */}
+      <source src={heroWebm} type='video/webm; codecs="av01.0.12M.10"' />
+      <source src={heroMp4} type="video/mp4" />
+    </video>
     <Screenshot
       slot="pillar-columns"
       src={pillarColumns}
@@ -130,5 +150,44 @@ const blooms = {
     addEventListener('resize', onScroll, { passive: true })
     reduceMotion.addEventListener('change', sync)
     sync()
+  }
+
+  // The hero video plays while it's on screen, unless the visitor prefers
+  // reduced motion or has paused it themselves. The toggle works either way, so
+  // a reduced-motion visitor can still choose to watch it.
+  const video = hero?.querySelector('.hero-video') as HTMLVideoElement | null
+  const toggle = hero?.querySelector('[data-hero-toggle]') as HTMLButtonElement | null
+
+  if (video && toggle) {
+    let userChoice: 'play' | 'pause' | null = null
+    let onScreen = true
+
+    const reflect = () => {
+      const playing = !video.paused
+      toggle.dataset.playing = String(playing)
+      toggle.setAttribute('aria-label', playing ? 'Pause video' : 'Play video')
+    }
+
+    const update = () => {
+      const wanted = userChoice ? userChoice === 'play' : !reduceMotion.matches
+      if (wanted && onScreen) video.play().catch(() => {})
+      else video.pause()
+    }
+
+    video.addEventListener('play', reflect)
+    video.addEventListener('pause', reflect)
+    toggle.addEventListener('click', () => {
+      userChoice = video.paused ? 'play' : 'pause'
+      update()
+    })
+    reduceMotion.addEventListener('change', update)
+    new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting
+      update()
+    }).observe(video)
+
+    toggle.hidden = false
+    reflect()
+    update()
   }
 </script>

@@ -10,6 +10,7 @@ notes for the screenshot half are in `docs/1.0-site-release.md` §5.
 | `shoot.mjs <key>\|--all` | Launches Oscine in a throwaway profile and captures the 2× PNG masters into `src/assets/screenshots/` |
 | `crops.mjs` | Cuts the page crops from the masters |
 | `record.mjs <flow>\|--all` | Records scripted flows as smooth 60 fps video into `src/assets/video/` |
+| `hero.mjs` | Joins recorded flows into the home page's looping hero (`src/assets/video/hero.*`), with crossfades between clips and at the loop point. Re-run it after re-recording any of its flows |
 
 `shoot.mjs` and `record.mjs` share `lib/oscine.mjs`: the launch, the CDP
 session, the renderer helpers and the library/state setup. Both start from the
