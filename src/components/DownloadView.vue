@@ -228,7 +228,7 @@ function sizeLabel(size: number | null): string | null {
             from then on. Every release is written up on the
             <ULink to="/changelog" class="text-primary hover:underline">changelog</ULink>.
           </p>
-          <p>macOS is not a target.</p>
+          <p>There's no macOS version yet, but it's on the radar.</p>
         </div>
       </UPageBody>
     </UContainer>

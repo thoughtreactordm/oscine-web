@@ -19,6 +19,9 @@ const bylines = [
   "for music lovers",
 ] as const;
 
+/** Every word, read once to screen readers in place of the rotation. */
+const srList = `${bylines.slice(0, -1).join(", ")}, and ${bylines.at(-1)}.`;
+
 const index = ref(0);
 let timer: ReturnType<typeof setInterval> | undefined;
 
@@ -42,7 +45,7 @@ onUnmounted(() => {
     </Transition>
 
     <span class="sr-only">
-      open source, ad-free, privacy first, customizable, and artist-focused.
+      {{ srList }}
     </span>
   </span>
 </template>

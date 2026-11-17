@@ -202,6 +202,15 @@ body {
   filter: blur(26px);
 }
 
+/* Reduced motion: no pinned headline with the shot sliding up behind it. The
+ * copy stays in normal flow and the hero scrolls like the rest of the page. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy {
+    position: relative;
+    top: auto;
+  }
+}
+
 /* The whole app window and its bloom, in normal flow so its height drives the
  * scroll. Its bottom is the stage's bottom, which is where the pinned copy
  * releases. The stage's auto bottom margin (not this element's) seats the CTA

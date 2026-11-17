@@ -11,7 +11,7 @@ Fixing a tag in Oscine changes nothing on disk. Right-click a track, choose **Ed
 
 ## Every field, not just the basics
 
-The editor opens on the fields you'll reach for most: title, artist, album artist, album, track and disc numbers, year, and genre. As of 1.1, open **All fields** below them for just about everything else a file can carry:
+The editor opens on the fields you'll reach for most: title, artist, album artist, album, track and disc numbers, year, and genre. Open **All fields** below them for just about everything else a file can carry:
 
 - **Credits:** composers, conductor, and remixer
 - **Numbering:** track and disc totals

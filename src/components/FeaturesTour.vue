@@ -118,7 +118,6 @@ const lifted = "shadow-2xl shadow-black/70";
 
   <UPageSection
     id="equalizer"
-    headline="New in 1.1"
     title="Equalizer"
     orientation="horizontal"
     reverse
@@ -127,7 +126,7 @@ const lifted = "shadow-2xl shadow-black/70";
   >
     <template #description>
       <p>
-        Oscine now has a full parametric equalizer in the Tools tab. Drag bands around right on the
+        Oscine has a full parametric equalizer in the Tools tab. Drag bands around right on the
         curve or type exact values into the table below it, with up to twelve bands of peaking,
         shelf, pass, and notch filters. A live spectrum runs behind the curve so you can see what
         you're shaping.
@@ -148,7 +147,6 @@ const lifted = "shadow-2xl shadow-black/70";
 
   <UPageSection
     id="cd-ripping"
-    headline="New in 1.1"
     title="CD Ripping"
     orientation="horizontal"
     class="section-rule"
@@ -293,7 +291,7 @@ const lifted = "shadow-2xl shadow-black/70";
         waveform ribbon for the track you're hearing.
       </p>
       <p class="mt-4">
-        As of 1.1 it shows lyrics too, and synced lyrics scroll along with the song. Oscine reads
+        It shows lyrics too, and synced lyrics scroll along with the song. Oscine reads
         them from a .lrc file next to the track or from the file's own tags, and with online
         lookups on it can find them on LRCLIB.
       </p>
@@ -383,7 +381,7 @@ const lifted = "shadow-2xl shadow-black/70";
   >
     <template #description>
       <p>
-        Clean up your tags without leaving the app. With 1.1 the editor covers nearly every field a
+        Clean up your tags without leaving the app. The editor covers nearly every field a
         file can carry, from album artist and composers to sort names, ISRCs, and MusicBrainz IDs.
       </p>
       <p class="mt-4">
@@ -479,7 +477,7 @@ const lifted = "shadow-2xl shadow-black/70";
         connected to the net.
       </p>
       <p class="mt-2">
-        New in 1.1, Discord presence shows what you're listening to on your profile, with the album
+        Discord presence shows what you're listening to on your profile, with the album
         art and a status line you can word however you like.
       </p>
     </template>

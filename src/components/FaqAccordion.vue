@@ -31,12 +31,12 @@ const faqs: AccordionItem[] = [
   {
     label: "Can I rip CDs with Oscine?",
     content:
-      "Yes, as of 1.1. Pop a disc in, open Rip CD in the Tools tab, and Oscine matches it on MusicBrainz, grabs the cover art, and saves each track to your library as FLAC.",
+      "Yes. Pop a disc in, open Rip CD in the Tools tab, and Oscine matches it on MusicBrainz, grabs the cover art, and saves each track to your library as FLAC.",
   },
   {
     label: "Does Oscine use AI or have an AI disclosure?",
     content:
-      "The software application is developed with the assistance of agentic/AI coding tools to aid in speed of development or solve pressing issues. Oscine does not currently include support for any AI or LLM technologies and does not support the generation of music, art, and literature using these tools. For more information about how the developer uses these tools, please view our <a href='/disclosure' class='text-primary underline'>AI Disclosure</a> page.",
+      "The software application is developed with the assistance of agentic/AI coding tools to aid in speed of development or solve pressing issues. Oscine has no AI built in and never calls an AI service, and it doesn't generate music, art, or writing. If you want to, you can turn on an optional local connection (it's off by default) that lets your own agent work with your library. For more information about how the developer uses these tools, please view our <a href='/disclosure' class='text-primary underline'>AI Disclosure</a> page.",
   },
   {
     label: "Is there a macOS version?",

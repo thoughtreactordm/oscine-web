@@ -5,7 +5,7 @@ order: 11
 section: App
 ---
 
-Oscine 1.1 can rip CDs on Windows and Linux. Open **Tools → Rip CD** with a disc in the drive, and a few moments later you'll see the album ready to go. Each track is saved as FLAC, tagged, and added to your library as soon as it's done.
+Oscine can rip CDs on Windows and Linux. Open **Tools → Rip CD** with a disc in the drive, and a few moments later you'll see the album ready to go. Each track is saved as FLAC, tagged, and added to your library as soon as it's done.
 
 <!-- shot: tools-cdrip -->
 
