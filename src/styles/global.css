@@ -69,6 +69,25 @@ body {
   color: var(--ui-primary);
 }
 
+/* --- Features tabs -------------------------------------------------------
+ *
+ * The tab bar sticks under the site header, so an anchor jump has to clear
+ * both or the section title lands underneath them.
+ */
+
+:root {
+  --feature-tabs-height: 3rem;
+}
+
+.feature-sections > section {
+  scroll-margin-top: calc(var(--ui-header-height) + var(--feature-tabs-height));
+}
+
+/* Every other section takes the tint, whichever sections a tab composes. */
+.feature-sections > section:nth-child(even) {
+  background-color: color-mix(in oklab, var(--ui-bg-elevated) 40%, transparent);
+}
+
 /* --- Screenshots ---------------------------------------------------------
  *
  * Every framed shot gets a wash of its own colors behind it, from a 32px WebP

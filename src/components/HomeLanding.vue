@@ -40,7 +40,7 @@ const heroLinks: ButtonProps[] = [
   },
   {
     label: "See features",
-    to: "/features",
+    to: "/features/library",
     color: "neutral",
     variant: "subtle",
     trailingIcon: "i-tabler-arrow-right",
@@ -86,28 +86,28 @@ const tools = [
   {
     title: "Equalizer",
     icon: "i-tabler-adjustments-horizontal",
-    to: "/features#equalizer",
+    to: "/features/listening#equalizer",
     description:
       "A parametric EQ with up to twelve bands and 736 bundled headphone profiles. Presets can switch in on their own for an album or artist.",
   },
   {
     title: "CD ripping",
     icon: "i-tabler-disc",
-    to: "/features#cd-ripping",
+    to: "/features/tools#cd-ripping",
     description:
       "Rip a CD straight to FLAC. Oscine finds the release on MusicBrainz and names each file with a template you set.",
   },
   {
     title: "Tag editing",
     icon: "i-tabler-tags",
-    to: "/features#tag-editing",
+    to: "/features/tools#tag-editing",
     description:
       "Edit nearly every field a file can carry. Your changes wait for review, and Oscine backs up each file before writing to it.",
   },
   {
     title: "ReplayGain",
     icon: "i-tabler-volume",
-    to: "/features#replaygain",
+    to: "/features/tools#replaygain",
     description:
       "Measure loudness on your own computer to keep your library at an even volume. You review the values before anything is written to your files.",
   },
@@ -355,7 +355,7 @@ const exploreShots = [
           </p>
           <div class="pt-2 flex justify-end">
             <UButton
-              to="/features"
+              to="/features/library"
               color="primary"
               variant="ghost"
               trailing-icon="i-tabler-arrow-right"

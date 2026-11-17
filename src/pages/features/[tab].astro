@@ -1,0 +1,29 @@
+---
+import type { GetStaticPaths } from 'astro'
+import FeaturesPage from '../../components/features/FeaturesPage.vue'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { FEATURE_TABS, type FeatureTab } from '../../data/features'
+import { getLatestRelease } from '../../data/release'
+import { loadTourShots } from '../../data/tour-shots'
+
+export const getStaticPaths = (() =>
+  FEATURE_TABS.map((tab) => ({ params: { tab: tab.slug }, props: { tab } }))) satisfies GetStaticPaths
+
+const { tab } = Astro.props as { tab: FeatureTab }
+const [release, shots] = await Promise.all([getLatestRelease(), loadTourShots(tab.sections)])
+---
+
+<BaseLayout title={`${tab.label} · Features · Oscine`} description={tab.meta} zoom>
+  <FeaturesPage release={release} tab={tab} shots={shots} />
+</BaseLayout>
+
+<script>
+  // On a phone the tab strip is wider than the screen; bring the current tab
+  // into view. Sideways only, so an anchor jump down the page is left alone.
+  const strip = document.querySelector<HTMLElement>('[data-feature-tabs]')
+  const current = strip?.querySelector<HTMLElement>('[aria-current="page"]')
+  if (strip && current) {
+    const overflow = current.getBoundingClientRect().right - strip.getBoundingClientRect().right
+    if (overflow > 0) strip.scrollLeft += overflow + 16
+  }
+</script>

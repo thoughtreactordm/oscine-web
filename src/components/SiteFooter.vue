@@ -5,7 +5,7 @@ import Mark from "./Mark.vue";
 const year = new Date().getFullYear();
 
 const items: NavigationMenuItem[] = [
-  { label: "Features", to: "/features" },
+  { label: "Features", to: "/features/library" },
   { label: "Learn", to: "/learn" },
   { label: "Download", to: "/download" },
   { label: "Changelog", to: "/changelog" },
