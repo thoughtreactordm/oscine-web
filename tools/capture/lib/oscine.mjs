@@ -515,6 +515,11 @@ export async function setBaseState(cdp) {
     // profile remembers: Stage shots show the cover unless a recipe says so.
     const visualizer = capture.store('visualizer');
     if (visualizer.wanted) visualizer.toggle();
+    // And the library's browse state: the library-flythrough flow selects an
+    // artist, which would otherwise filter every later Library shot.
+    const browse = capture.store('browse');
+    for (const facet of [browse.genres, browse.artists, browse.albums]) facet?.clearSelection?.();
+    browse.searchInput = '';
     await capture.route('library');
     return true;
   `)
