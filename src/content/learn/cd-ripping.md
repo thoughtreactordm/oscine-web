@@ -5,7 +5,7 @@ order: 11
 section: App
 ---
 
-Oscine can rip CDs on Windows and Linux. Open **Tools → Rip CD** with a disc in the drive, and a few moments later you'll see the album ready to go. Each track is saved as FLAC, tagged, and added to your library as soon as it's done.
+Oscine can rip CDs on Windows and Linux. Put a disc in the drive and open **Rip CD**, either from the Tools tab or from the **Tools** menu in the title bar (the arrow beside the Tools tab opens the same menu). A few moments later you'll see the album ready to go. Each track is saved as FLAC, tagged, and added to your library as soon as it's done.
 
 <!-- shot: tools-cdrip -->
 
@@ -15,11 +15,11 @@ When you put a disc in, Oscine reads its table of contents and works out the dis
 
 If the disc isn't on MusicBrainz, or online lookups are off, Oscine falls back to any CD-Text stored on the disc. You can also choose **Enter titles yourself** and fill everything in by hand.
 
-Either way, the album, album artist, year, and every track title stay editable right up until you rip. Untick a track to skip it, or use **Include every track** to bring them all back.
+Either way, the album, album artist, year, and every track title stay editable right up until you rip. Untick a track to skip it, or tick the checkbox at the top of the track list to bring them all back.
 
 ## Album art
 
-Once you've picked a release, Oscine fetches its front cover from the Cover Art Archive and shows it under **Album art**. Keep it, choose your own image with **Choose album art**, or remove it altogether. The cover is embedded in every track.
+Once you've picked a release, Oscine fetches its front cover from the Cover Art Archive and shows it under **Album art**. Keep it, use **Choose…** (or **Replace…** if there's already a cover) to pick your own image, or remove it altogether. The cover is embedded in every track.
 
 ## Where the files go
 
@@ -33,8 +33,8 @@ A preview under the template shows exactly what the paths will be. The disc numb
 
 ## Ripping
 
-Hit **Rip** and Oscine works through the disc one track at a time, showing progress for each track and for the whole album. **Cancel** stops it almost right away, not just between tracks. When it's finished, **Show in library** takes you straight to the new album.
+Hit **Rip** and Oscine works through the disc one track at a time, showing progress for each track and for the whole album. **Cancel** stops it within a few seconds, without waiting for the track to finish. When it's done, **Show in library** takes you straight to the new album.
 
-For extra peace of mind, turn on **Verify CD rips** in Settings. Oscine then reads every track twice and flags any track where the two reads don't match. It takes about twice as long.
+For extra peace of mind, turn on **Verify CD rips** in the advanced Library settings. Oscine then reads every track twice and compares the two reads. If they don't match, the track is still saved, and it's flagged so you know to check it. Ripping takes about twice as long with this on.
 
 If a rip gets interrupted, whether you closed the app or the power went out, Oscine remembers where it stopped and offers to **Resume**. Just make sure the same disc is in the drive.

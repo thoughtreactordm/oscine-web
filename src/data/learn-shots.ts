@@ -23,12 +23,12 @@ export const SHOT_ALTS: Record<string, string> = {
     'A Theme tokens window listing color-role ramps, with a WCAG check at the foot.',
   'curate-discover': 'Playlists on a left rail and Discover shelves of album cards.',
   stage: 'Now Playing filling the window with album art, a waveform ribbon, and synced lyrics.',
-  zen: 'Fullscreen Now Playing with the title bar and transport dropped.',
+  zen: 'Fullscreen Now Playing with the title bar and tabs gone and play controls on the stage.',
   stats: 'A listening dashboard of totals, ranges, and ranked artists.',
   podcasts: 'A shows list with episode downloads beside an empty player.',
   'tools-writeback': 'A review table of staged tag edits before writing them to files.',
   'tools-equalizer':
-    'An equalizer with a six-band curve over a live spectrum, above a table of band settings.',
+    'An equalizer with a six-band curve over the spectrum display, above a table of band settings.',
   'tools-cdrip':
     'A CD rip screen with the matched release, its cover, a file naming template, and the track list.',
   'tag-editor':
