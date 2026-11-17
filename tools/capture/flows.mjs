@@ -18,9 +18,15 @@
 import { EQ_CURVE } from './lib/oscine.mjs'
 
 export const FLOWS = {
-  /** Storyboard 1: fly through a large library, then search as you type. */
+  /**
+   * Storyboard 1: fly through a large library, then open an artist. Selecting
+   * one artist sorts the list by album, so their albums show as runs under
+   * album headings beneath the artist header. Autoplay is near the top of the
+   * Artists pane (no scrolling to reach it) and its three covers look nothing
+   * alike.
+   */
   'library-flythrough': {
-    description: 'Library songs list: a fast scroll down and back, then search as you type',
+    description: 'Library songs list: a fast scroll down and back, then open an artist and their albums',
     at: 12,
     poster: 0,
     async setup(app) {
@@ -32,8 +38,10 @@ export const FLOWS = {
       await r.hold(0.35)
       await r.scroll('auto', { to: 0, seconds: 1.1, ease: 'inOut' })
       await r.hold(0.3)
-      await r.type({ placeholder: 'Search title, artist, album' }, 'shuffle', { cps: 9 })
-      await r.hold(1.6)
+      await r.click({ text: 'Autoplay', within: '[role="listbox"][aria-label="Artists"]' })
+      await r.hold(1.4)
+      await r.scroll('auto', { to: 520, seconds: 1.6, ease: 'inOut' })
+      await r.hold(1)
     }
   },
 
