@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { ButtonProps } from "@nuxt/ui";
-import type { Release } from "../data/release";
+import { releaseLine, type Release } from "../data/release";
 import { SHOT_ALTS } from "../data/learn-shots";
 import DownloadButtons from "./DownloadButtons.vue";
 import ShotFrame from "./ShotFrame.vue";
 
-defineProps<{
+const props = defineProps<{
   release: Release;
   /** Inlined 32px WebP washes, keyed to the shots passed in as slots. */
   blooms: {
@@ -14,11 +14,13 @@ defineProps<{
     pillarStage: string;
     pillarThemePicker: string;
     tunedeckTrack: string;
-    newEqualizer: string;
-    newCdrip: string;
-    newLyrics: string;
+    exploreDiscover: string;
+    exploreStats: string;
   };
 }>();
+
+/** The page's only version reference, read from the live release so it can't go stale. */
+const releaseNote = `Oscine ${releaseLine(props.release.version)} is out`;
 
 const alignStart = {
   title: "text-left",
@@ -75,38 +77,46 @@ const pillars = [
   },
 ] as const;
 
-/** The 1.1 headliners. Each card links to its section on the Features page. */
-const newInRelease = [
+/**
+ * The tools strip. Each card links to its section on the Features page.
+ * ReplayGain stops at measuring and review: writing gains to files is held
+ * until the app's Windows run passes (see the oscine-site-1-2 gating table).
+ */
+const tools = [
   {
     title: "Equalizer",
-    slot: "new-equalizer",
-    bloom: "newEqualizer",
-    alt: SHOT_ALTS["tools-equalizer"],
+    icon: "i-tabler-adjustments-horizontal",
     to: "/features#equalizer",
-    fit: "[&_img]:object-right-top",
     description:
-      "Shape your sound with a twelve-band parametric EQ, save presets for your favorite albums and artists, or load a profile made for your headphones.",
+      "A parametric EQ with up to twelve bands and 736 bundled headphone profiles. Presets can switch in on their own for an album or artist.",
   },
   {
-    title: "CD Ripping",
-    slot: "new-cdrip",
-    bloom: "newCdrip",
-    alt: SHOT_ALTS["tools-cdrip"],
+    title: "CD ripping",
+    icon: "i-tabler-disc",
     to: "/features#cd-ripping",
-    fit: "[&_img]:object-right-top",
     description:
-      "Rip your CDs straight to FLAC with MusicBrainz matching, cover art, and file names laid out just the way you like them.",
+      "Rip a CD straight to FLAC. Oscine finds the release on MusicBrainz and names each file with a template you set.",
   },
   {
-    title: "Lyrics",
-    slot: "new-lyrics",
-    bloom: "newLyrics",
-    alt: SHOT_ALTS.stage,
-    to: "/features#lyrics",
-    fit: "[&_img]:object-center",
+    title: "Tag editing",
+    icon: "i-tabler-tags",
+    to: "/features#tag-editing",
     description:
-      "Follow along with synced lyrics on the Stage, read from your .lrc files and tags or found on LRCLIB.",
+      "Edit nearly every field a file can carry. Your changes wait for review, and Oscine backs up each file before writing to it.",
   },
+  {
+    title: "ReplayGain",
+    icon: "i-tabler-volume",
+    to: "/features#replaygain",
+    description:
+      "Measure loudness on your own computer to keep your library at an even volume. You review the values before anything is written to your files.",
+  },
+] as const;
+
+/** Smaller crops under the Tunedeck shot in the explore section. */
+const exploreShots = [
+  { label: "Discover", slot: "explore-discover", bloom: "exploreDiscover", alt: SHOT_ALTS["explore-discover"] },
+  { label: "Stats", slot: "explore-stats", bloom: "exploreStats", alt: SHOT_ALTS["explore-stats"] },
 ] as const;
 </script>
 
@@ -122,6 +132,15 @@ const newInRelease = [
       <!-- Headline + byline, pinned to the crown; the shot rises up behind them
            and dissolves into the light the copy's ::before lays over it. -->
       <div class="hero-copy">
+        <UButton
+          to="/changelog"
+          :label="releaseNote"
+          trailing-icon="i-tabler-arrow-right"
+          color="primary"
+          variant="subtle"
+          size="sm"
+          class="mb-5 rounded-full px-3.5"
+        />
         <h1
           class="display text-balance text-4xl font-semibold tracking-tight text-highlighted sm:text-5xl lg:text-6xl"
         >
@@ -206,56 +225,31 @@ const newInRelease = [
   </UPageSection>
 
   <UPageSection
-    id="new-in-1-1"
-    headline="Oscine 1.1"
-    title="New in 1.1"
+    id="tools"
+    title="Tools for your collection"
+    description="The jobs that usually send you off to a separate program are built into Oscine."
     class="section-rule"
     :ui="{ ...sectionUi, body: 'mt-10' }"
   >
-    <template #description>
-      <p>
-        This release is all about tools. Oscine 1.1 brings a full parametric equalizer and CD
-        ripping into the app, puts synced lyrics on the Stage, and hooks into Discord so your
-        friends can see what you're listening to.
-      </p>
-    </template>
-
     <template #body>
-      <UPageGrid>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <UPageCard
-          v-for="feature in newInRelease"
-          :key="feature.title"
-          :title="feature.title"
-          :to="feature.to"
+          v-for="tool in tools"
+          :key="tool.title"
+          :title="tool.title"
+          :description="tool.description"
+          :icon="tool.icon"
+          :to="tool.to"
           variant="subtle"
-          class="transition-all duration-300 hover:ring-primary/25 hover:-translate-y-2"
-          :ui="{ title: 'text-xl' }"
-        >
-          <template #description>{{ feature.description }}</template>
-          <!-- The card is the link, so the shot inside it doesn't zoom. -->
-          <ShotFrame
-            :bloom="blooms[feature.bloom]"
-            :alt="feature.alt"
-            :zoom="false"
-            aspect
-            class="[&_picture]:block [&_picture]:size-full [&_img]:size-full [&_img]:object-cover"
-            :class="feature.fit"
-          >
-            <slot :name="feature.slot" />
-          </ShotFrame>
-        </UPageCard>
-      </UPageGrid>
-
-      <p class="mt-8 text-muted">
-        Plus a tag editor that covers just about every field, and plenty of fixes and quality of
-        life changes along the way. The
-        <ULink to="/changelog" class="text-primary underline">changelog</ULink>
-        has the full list.
-      </p>
+          class="transition-all duration-300 hover:ring-primary/25 hover:-translate-y-1"
+          :ui="{ leadingIcon: 'size-7 text-primary', title: 'text-lg' }"
+        />
+      </div>
     </template>
   </UPageSection>
 
   <UPageSection
+    id="explore"
     title="Dive into your tunes"
     orientation="horizontal"
     class="section-rule bg-elevated/40"
@@ -268,11 +262,34 @@ const newInRelease = [
         provides the <em>Tunedeck</em> - a sidekick that provides contextual information to whatever
         you're jamming to.
       </p>
+      <p class="text-dimmed mt-3">
+        <em>Discover</em> turns your own library and listening history into shelves like Sitting
+        unplayed and Forgotten favorites, and any shelf you like can be saved as a playlist.
+      </p>
+      <p class="text-dimmed mt-3">
+        <em>Stats</em> keeps a log of what you've played, with your top artists, albums, and tracks
+        for the range you pick.
+      </p>
     </template>
 
-    <ShotFrame :bloom="blooms.tunedeckTrack" :alt="SHOT_ALTS['tunedeck-track']">
-      <slot name="tunedeck-track" />
-    </ShotFrame>
+    <div class="space-y-5">
+      <ShotFrame :bloom="blooms.tunedeckTrack" :alt="SHOT_ALTS['tunedeck-track']">
+        <slot name="tunedeck-track" />
+      </ShotFrame>
+
+      <div class="grid grid-cols-2 gap-4 sm:gap-5">
+        <figure v-for="shot in exploreShots" :key="shot.slot" class="min-w-0">
+          <ShotFrame
+            :bloom="blooms[shot.bloom]"
+            :alt="shot.alt"
+            class="[&_picture]:block [&_img]:w-full"
+          >
+            <slot :name="shot.slot" />
+          </ShotFrame>
+          <figcaption class="mt-2.5 text-sm font-semibold text-muted">{{ shot.label }}</figcaption>
+        </figure>
+      </div>
+    </div>
   </UPageSection>
 
   <UPageSection title="A Better Harmony" class="section-rule" :ui="{ title: 'text-primary' }">

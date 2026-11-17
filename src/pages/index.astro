@@ -12,9 +12,8 @@ import tunedeckTrack from '../assets/screenshots/tunedeck-track.png'
 import pillarColumns from '../assets/screenshots/crops/pillar-columns.png'
 import pillarStage from '../assets/screenshots/crops/pillar-stage.png'
 import pillarThemePicker from '../assets/screenshots/crops/pillar-theme-picker.png'
-import toolsEqualizer from '../assets/screenshots/tools-equalizer.png'
-import toolsCdrip from '../assets/screenshots/tools-cdrip.png'
-import stage from '../assets/screenshots/stage.png'
+import exploreDiscover from '../assets/screenshots/crops/explore-discover.png'
+import exploreStats from '../assets/screenshots/crops/explore-stats.png'
 
 const release = await getLatestRelease()
 const blooms = {
@@ -23,19 +22,21 @@ const blooms = {
   pillarStage: bloom('crops/pillar-stage'),
   pillarThemePicker: bloom('crops/pillar-theme-picker'),
   tunedeckTrack: bloom('tunedeck-track'),
-  newEqualizer: bloom('tools-equalizer'),
-  newCdrip: bloom('tools-cdrip'),
-  newLyrics: bloom('stage')
+  exploreDiscover: bloom('crops/explore-discover'),
+  exploreStats: bloom('crops/explore-stats')
 }
 ---
 
 <BaseLayout
   title="A Future Forward Music Player · Oscine"
-  description="Oscine is a free, customizable music player for Windows and Linux that plays the library you already own. It has a parametric equalizer, CD ripping, and synced lyrics."
+  description="Oscine is a free, customizable music player for Windows and Linux that plays the library you already own. It has a parametric equalizer, CD ripping, tag editing, and ReplayGain measurement built in."
   zoom
 >
   <HomeLanding release={release} blooms={blooms}>
-    <HeroByline slot="hero-byline" client:load />
+    {/* Islands take their slot from a Fragment: a `slot` prop on the island
+        itself reaches the client but not the server render, and Vue reports
+        the difference as a hydration mismatch. */}
+    <Fragment slot="hero-byline"><HeroByline client:load /></Fragment>
     <Screenshot
       slot="hero"
       src={libraryHero}
@@ -62,30 +63,26 @@ const blooms = {
       sizes="(min-width: 1024px) 22rem, 100vw"
     />
     <Screenshot
-      slot="new-equalizer"
-      src={toolsEqualizer}
-      alt={shotAlt('tools-equalizer')}
-      sizes="(min-width: 1024px) 22rem, 100vw"
-    />
-    <Screenshot
-      slot="new-cdrip"
-      src={toolsCdrip}
-      alt={shotAlt('tools-cdrip')}
-      sizes="(min-width: 1024px) 22rem, 100vw"
-    />
-    <Screenshot
-      slot="new-lyrics"
-      src={stage}
-      alt={shotAlt('stage')}
-      sizes="(min-width: 1024px) 22rem, 100vw"
-    />
-    <Screenshot
       slot="tunedeck-track"
       src={tunedeckTrack}
       alt={shotAlt('tunedeck-track')}
       sizes="(min-width: 1024px) 36rem, 100vw"
     />
-    <FaqAccordion slot="faqs" client:visible />
+    <Screenshot
+      slot="explore-discover"
+      src={exploreDiscover}
+      alt={shotAlt('explore-discover')}
+      widths={[640, 1280]}
+      sizes="(min-width: 1024px) 18rem, 50vw"
+    />
+    <Screenshot
+      slot="explore-stats"
+      src={exploreStats}
+      alt={shotAlt('explore-stats')}
+      widths={[640, 1280]}
+      sizes="(min-width: 1024px) 18rem, 50vw"
+    />
+    <Fragment slot="faqs"><FaqAccordion client:visible /></Fragment>
   </HomeLanding>
 </BaseLayout>
 

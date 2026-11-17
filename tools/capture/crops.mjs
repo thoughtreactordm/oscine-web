@@ -72,6 +72,26 @@ const CROPS = Object.freeze([
     usedBy: 'Home Yours pillar — token editor (theme picker lives in settings behind this)'
   },
   {
+    key: 'explore-discover',
+    source: 'curate-discover',
+    // The Discover heading and the first shelf, clear of the playlist rail.
+    x: 656,
+    y: 144,
+    w: 1600,
+    h: 1000,
+    usedBy: 'Home Explore — Discover shelves beside the Tunedeck'
+  },
+  {
+    key: 'explore-stats',
+    source: 'stats',
+    // Range picker, headline tiles, the chart, and the top of the ranked lists.
+    x: 0,
+    y: 144,
+    w: 1600,
+    h: 1000,
+    usedBy: 'Home Explore — Stats beside the Tunedeck'
+  },
+  {
     key: 'column-chooser',
     source: 'library-hero',
     x: 656,

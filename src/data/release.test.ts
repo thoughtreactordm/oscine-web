@@ -6,6 +6,7 @@ import {
   formatBytes,
   matchReleaseAssets,
   parseSha256,
+  releaseLine,
   type GithubAsset
 } from './release.ts'
 
@@ -168,5 +169,22 @@ describe('formatBytes', () => {
   it('formats the rc.3 installer and tarball sizes', () => {
     assert.equal(formatBytes(123031881), '117 MB')
     assert.equal(formatBytes(274632086), '262 MB')
+  })
+})
+
+describe('releaseLine', () => {
+  it('drops the patch number', () => {
+    assert.equal(releaseLine('1.2.0'), '1.2')
+    assert.equal(releaseLine('1.2.3'), '1.2')
+    assert.equal(releaseLine('10.11.12'), '10.11')
+  })
+
+  it('handles a leading v and pre-release suffixes', () => {
+    assert.equal(releaseLine('v1.2.0'), '1.2')
+    assert.equal(releaseLine('1.0.0-rc.3'), '1.0')
+  })
+
+  it('passes through a version it cannot read', () => {
+    assert.equal(releaseLine('nightly'), 'nightly')
   })
 })
