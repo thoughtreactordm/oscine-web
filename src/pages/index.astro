@@ -60,8 +60,8 @@ const heroPoster = await getImage({ src: libraryHero, width: 1920, format: 'webp
       poster={heroPoster.src}
       aria-label="Oscine scrolling and searching a library, then the Stage cover growing into a visualizer with synced lyrics, then an equalizer band dragged over a live spectrum."
     >
-      {/* Main profile, level 5.0, 10-bit: what SVT-AV1 signals here. */}
-      <source src={heroWebm} type='video/webm; codecs="av01.0.12M.10"' />
+      {/* Main profile, level 5.0, 8-bit: what SVT-AV1 signals here. */}
+      <source src={heroWebm} type='video/webm; codecs="av01.0.12M.08"' />
       <source src={heroMp4} type="video/mp4" />
     </video>
     <Screenshot

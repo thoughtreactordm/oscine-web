@@ -37,7 +37,7 @@ Each flow produces:
 | File | What |
 |---|---|
 | `~/oscine-capture/video/<flow>.mkv` | Lossless FFV1 master, 2560×1640 RGB. Every deliverable comes from this, so a size or quality change is `--reencode`, not a re-record |
-| `src/assets/video/<flow>.webm` | AV1 (SVT-AV1, CRF 34), 10-bit 4:2:0. 10-bit keeps dark gradients and visualizer washes from banding |
+| `src/assets/video/<flow>.webm` | AV1 (SVT-AV1, CRF 34), 8-bit 4:2:0. Not 10-bit: hardware AV1 decoders on Linux render 10-bit as a black frame, though software decode (and so headless Chromium) plays it |
 | `src/assets/video/<flow>.mp4` | H.264 High (CRF 21), 8-bit, `+faststart`. The fallback for browsers without AV1, which is most Safari |
 | `src/assets/video/<flow>.poster.jpg` | The frame at the flow's `poster` time |
 
@@ -54,8 +54,8 @@ import mp4 from '../assets/video/stage-visualizer.mp4'
 import poster from '../assets/video/stage-visualizer.poster.jpg'
 ---
 <video autoplay muted loop playsinline poster={poster.src}>
-  <!-- Main profile, level 5.0 (what SVT-AV1 signals here), 10-bit -->
-  <source src={webm} type='video/webm; codecs="av01.0.12M.10"' />
+  <!-- Main profile, level 5.0 (what SVT-AV1 signals here), 8-bit -->
+  <source src={webm} type='video/webm; codecs="av01.0.12M.08"' />
   <source src={mp4} type="video/mp4" />
 </video>
 ```
