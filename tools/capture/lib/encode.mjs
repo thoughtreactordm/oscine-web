@@ -7,8 +7,11 @@
  * different size or quality is a re-encode (`record.mjs --reencode`), not a
  * re-record:
  *
- *   <flow>.webm        AV1 (SVT-AV1), 10-bit 4:2:0 — 10-bit keeps the dark
- *                      gradients and visualizer washes from banding
+ *   <flow>.webm        AV1 (SVT-AV1), 8-bit 4:2:0. Not 10-bit: hardware AV1
+ *                      decoders on Linux (Chromium/Electron with VA-API)
+ *                      render 10-bit streams as a black frame while software
+ *                      decode plays them, so 10-bit looked fine in headless
+ *                      tests and black in real browsers
  *   <flow>.mp4         H.264 High, 8-bit 4:2:0, +faststart — the fallback for
  *                      browsers without AV1 (most Safari)
  *   <flow>.poster.jpg  one frame, for <video poster> and reduced motion
@@ -95,7 +98,7 @@ const scale = (width, pixFmt) =>
 export async function encodeDeliverables(master, outBase, { width = 1920, posterAt = 0, av1Crf = 34, h264Crf = 21 } = {}) {
   const av1 = ffmpeg([
     '-i', master,
-    '-vf', scale(width, 'yuv420p10le'),
+    '-vf', scale(width, 'yuv420p'),
     '-c:v', 'libsvtav1', '-preset', '5', '-crf', String(av1Crf),
     '-g', '240', '-svtav1-params', 'tune=0',
     ...COLOUR_TAGS,
