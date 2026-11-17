@@ -40,6 +40,8 @@ export const SHOT_ALTS: Record<string, string> = {
   'pillar-columns': 'The song list showing sortable Title, Artist, Album, and Time columns.',
   'pillar-stage': 'Now Playing filling the window with album art and a waveform ribbon.',
   'pillar-theme-picker': 'The Theme tokens window with color-role ramps.',
+  'explore-discover': 'Discover shelves of album cards, starting with Built for you.',
+  'explore-stats': 'A listening range picker above play totals, a daily chart, and top tracks.',
   'column-chooser':
     'The Songs toolbar with Title, Artist, Album, and Time headers above the track list.',
   og: "Oscine's library with the sidebar, a song list, and the now-playing bar.",

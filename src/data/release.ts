@@ -198,6 +198,16 @@ export function debPackageName(version: string): string {
   return `oscine_${version}_amd64.deb`
 }
 
+/**
+ * The release line a version belongs to: "1.2.3" and "1.2.0-rc.1" are both
+ * "1.2". The home page announces the line, so a patch release doesn't change
+ * the wording.
+ */
+export function releaseLine(version: string): string {
+  const match = /^v?(\d+)\.(\d+)/.exec(version)
+  return match ? `${match[1]}.${match[2]}` : version
+}
+
 function failOrFallback(assets: GithubAsset[]): Release {
   const names = assets.map((asset) => asset.name)
   const message = new UnmatchedReleaseAssetsError(names).message

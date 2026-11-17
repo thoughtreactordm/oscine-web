@@ -322,7 +322,7 @@ const lifted = "shadow-2xl shadow-black/70";
         Playback is gapless by default. If you'd rather have a crossfade between tracks, set a
         duration and Oscine blends each song into the next.
       </p>
-      <p class="mt-4">
+      <p id="replaygain" class="mt-4 scroll-mt-24">
         ReplayGain is read from your tags when it's there, and untagged tracks can be measured in
         the background. Oscine plays FLAC, MP3, Ogg Vorbis, Opus, AAC, and WAV.
       </p>
