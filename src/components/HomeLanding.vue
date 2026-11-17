@@ -158,9 +158,21 @@ const exploreShots = [
           aria-hidden="true"
         />
         <div
-          class="hero-shot relative z-10 [&_img]:w-full [&_img]:rounded-xl [&_img]:ring-1 [&_img]:ring-default"
+          class="hero-shot relative z-10 [&_img]:w-full [&_img]:rounded-xl [&_img]:ring-1 [&_img]:ring-default [&_video]:block [&_video]:h-auto [&_video]:w-full [&_video]:rounded-xl [&_video]:ring-1 [&_video]:ring-default"
         >
           <slot name="hero" />
+          <!-- Pause/play for the looping hero video (WCAG 2.2.2). The page
+               script unhides it; without JS the poster just sits still. -->
+          <button
+            type="button"
+            data-hero-toggle
+            hidden
+            aria-label="Pause video"
+            class="group absolute right-3 bottom-3 z-20 flex size-9 items-center justify-center rounded-full bg-default/70 text-highlighted ring-1 ring-default backdrop-blur transition hover:bg-default/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            <UIcon name="i-tabler-player-pause-filled" class="hidden size-4 group-data-[playing=true]:block" />
+            <UIcon name="i-tabler-player-play-filled" class="block size-4 group-data-[playing=true]:hidden" />
+          </button>
         </div>
       </div>
     </div>
